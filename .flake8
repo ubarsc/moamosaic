@@ -1,0 +1,4 @@
+[flake8]
+exclude = .git,__pycache__,build,dist
+# E128 continuation line under-indented for visual indent
+ignore = E128
