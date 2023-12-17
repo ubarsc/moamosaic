@@ -150,16 +150,13 @@ class TimeStampSet():
         pcntList = []
         for group in groupList:
             stampList = []
-            groupStampList = []
             for name in group:
                 startStamp = self.stamps[(name, TS_START)]
                 stampList.append((startStamp, TS_START))
                 endStamp = self.stamps[(name, TS_END)]
                 stampList.append((endStamp, TS_END))
-                groupStampList.append((startStamp, endStamp))
             # Sort the events into chronological order
             stampList = sorted(stampList)
-            print("groupStamps", sorted(groupStampList))
 
             # Count when we were in more than one action, i.e. there was some
             # overlap going on.
