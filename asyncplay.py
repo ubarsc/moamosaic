@@ -32,6 +32,7 @@ def main():
 
     timestamps = utils.TimeStampSet()
 
+    timestamps.stamp(utils.TS_WHOLEPROGRAM, utils.TS_START)
     inDs = gdal.Open(cmdargs.infile)
     inBand = inDs.GetRasterBand(1)
     (nrows, ncols) = (inDs.RasterYSize, inDs.RasterXSize)
@@ -53,11 +54,14 @@ def main():
     del inDs
     del outBand
     del outDs
+    timestamps.stamp(utils.TS_WHOLEPROGRAM, utils.TS_END)
 
     print("Total reading", timestamps.timeSpentByPrefix("readblock"))
     print("Total elapsed reading", timestamps.timeElapsedByPrefix("readblock"))
+    print("Avg reading/block", timestamps.avgTimeByPrefix("readblock"))
     print("Total writing", timestamps.timeSpentByPrefix("writeblock"))
     print("Total elapsed writing", timestamps.timeElapsedByPrefix("writeblock"))
+    print("Whole program", timestamps.timeSpentByPrefix(utils.TS_WHOLEPROGRAM))
 
     utils.checkOutput(cmdargs.infile, cmdargs.outfile)
 
