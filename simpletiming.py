@@ -11,7 +11,7 @@ import utils
 
 
 gdal.UseExceptions()
-DFLT_BLOCKSIZE = 1024
+DFLT_BLOCKSIZE = 2048
 
 
 def getCmdargs():
@@ -72,7 +72,9 @@ def main():
     timestamps.stamp(utils.TS_CLOSEOUTFILE, utils.TS_END)
 
     print("Total reading", timestamps.timeSpentByPrefix("readblock"))
+    print("Total elapsed reading", timestamps.timeElapsedByPrefix("readblock"))
     print("Total writing", timestamps.timeSpentByPrefix("writeblock"))
+    print("Total elapsed writing", timestamps.timeElapsedByPrefix("writeblock"))
     print("Total opening", timestamps.timeSpentByPrefix("open"))
     print("Total closing", timestamps.timeSpentByPrefix("close"))
 
