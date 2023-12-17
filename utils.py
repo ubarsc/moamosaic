@@ -83,11 +83,44 @@ class TimeStampSet():
         prefix
         """
         tot = 0
-        nameList = list(set([name for (name, startEnd) in self.stamps]))
+        nameList = list(set([name for (name, startEnd) in self.stamps
+            if name.startswith(prefix)]))
         for name in nameList:
-            if name.startswith(prefix):
-                startTime = self.stamps[(name, TS_START)]
-                endTime = self.stamps[(name, TS_END)]
-                diff = endTime - startTime
-                tot += diff
+            startTime = self.stamps[(name, TS_START)]
+            endTime = self.stamps[(name, TS_END)]
+            diff = endTime - startTime
+            tot += diff
+        return tot
+
+    def timeElapsedByPrefix(self, prefix):
+        """
+        Find the elapsed wall time spent doing anything matching
+        prefix. This is the time difference between the earliest
+        and latest time stamps.
+        """
+        nameList = list(set([name for (name, startEnd) in self.stamps
+            if name.startswith(prefix)]))
+        stampList = []
+        for name in nameList:
+            stamp = self.stamps[(name, TS_START)]
+            stampList.append((stamp, TS_START))
+            stamp = self.stamps[(name, TS_END)]
+            stampList.append((stamp, TS_END))
+        # Sort the events into chronological order
+        stampList = sorted(stampList)
+        # Count when we were in at least one action
+        tot = 0
+        count = 0
+        prevStamp = stampList[0][0]
+        for (stamp, flag) in stampList:
+            if count > 0:
+                # There is at least one 'prefix' action still going, so
+                # this time period counts, add it to the total
+                tot += (stamp - prevStamp)
+            prevStamp = stamp
+
+            if flag == TS_START:
+                count += 1
+            else:
+                count -= 1
         return tot
