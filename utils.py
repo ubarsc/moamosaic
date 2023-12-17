@@ -13,6 +13,7 @@ TS_READBLOCK = "readblock_{}"
 TS_WRITEBLOCK = "writeblock_{}"
 TS_CLOSEINFILE = "closeinfile"
 TS_CLOSEOUTFILE = "closeoutfile"
+TS_WHOLEPROGRAM = "program"
 
 
 def makeBlockList(nrows, ncols, blocksize):
@@ -124,3 +125,19 @@ class TimeStampSet():
             else:
                 count -= 1
         return tot
+
+    def avgTimeByPrefix(self, prefix):
+        """
+        Over all start/end pairs matching the given prefix, find the
+        average time taken from start to end.
+        """
+        nameList = list(set([name for (name, startEnd) in self.stamps
+            if name.startswith(prefix)]))
+        durationList = []
+        for name in nameList:
+            startTime = self.stamps[(name, TS_START)]
+            endTime = self.stamps[(name, TS_END)]
+            duration = endTime - startTime
+            durationList.append(duration)
+        avgTime = sum(durationList) / len(durationList)
+        return avgTime
