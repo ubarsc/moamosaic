@@ -91,7 +91,7 @@ class TimeStampSet():
             endTime = self.stamps[(name, TS_END)]
             diff = endTime - startTime
             tot += diff
-        return tot
+        return round(tot, 2)
 
     def timeElapsedByPrefix(self, prefix):
         """
@@ -124,7 +124,7 @@ class TimeStampSet():
                 count += 1
             else:
                 count -= 1
-        return tot
+        return round(tot, 2)
 
     def avgTimeByPrefix(self, prefix):
         """
@@ -140,4 +140,45 @@ class TimeStampSet():
             duration = endTime - startTime
             durationList.append(duration)
         avgTime = sum(durationList) / len(durationList)
-        return avgTime
+        return round(avgTime, 3)
+
+    def pcntOverlapByGroup(self, groupList):
+        """
+        Percentage overlapping calculations within each group of
+        the list. Return array of percentages, one for each group.
+        """
+        pcntList = []
+        for group in groupList:
+            stampList = []
+            groupStampList = []
+            for name in group:
+                startStamp = self.stamps[(name, TS_START)]
+                stampList.append((startStamp, TS_START))
+                endStamp = self.stamps[(name, TS_END)]
+                stampList.append((endStamp, TS_END))
+                groupStampList.append((startStamp, endStamp))
+            # Sort the events into chronological order
+            stampList = sorted(stampList)
+            print("groupStamps", sorted(groupStampList))
+
+            # Count when we were in more than one action, i.e. there was some
+            # overlap going on.
+            totInOverlap = 0
+            count = 0
+            prevStamp = stampList[0][0]
+            for (stamp, flag) in stampList:
+                if count > 1:
+                    # There is more than one action still going, so
+                    # this time period counts, add it to the total
+                    totInOverlap += (stamp - prevStamp)
+                prevStamp = stamp
+
+                if flag == TS_START:
+                    count += 1
+                else:
+                    count -= 1
+
+            totElapsed = stampList[-1][0] - stampList[0][0]
+            pcnt = 100 * totInOverlap / totElapsed
+            pcntList.append(pcnt)
+        return numpy.array(pcntList)
