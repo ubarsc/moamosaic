@@ -12,7 +12,7 @@ import utils
 
 
 gdal.UseExceptions()
-DFLT_BLOCKSIZE = 1024
+DFLT_BLOCKSIZE = 2048
 
 
 def getCmdargs():
@@ -48,7 +48,8 @@ def main():
     outDs.SetGeoTransform(inDs.GetGeoTransform())
 
     blockList = utils.makeBlockList(nrows, ncols, cmdargs.blocksize)
-    asyncio.run(mainAsync(blockList, inBand, outBand, cmdargs, timestamps))
+    groupList = asyncio.run(mainAsync(blockList, inBand, outBand, cmdargs,
+        timestamps))
 
     del inBand
     del inDs
@@ -62,6 +63,8 @@ def main():
     print("Total writing", timestamps.timeSpentByPrefix("writeblock"))
     print("Total elapsed writing", timestamps.timeElapsedByPrefix("writeblock"))
     print("Whole program", timestamps.timeSpentByPrefix(utils.TS_WHOLEPROGRAM))
+    pcntOverlap = timestamps.pcntOverlapByGroup(groupList)
+    print("Mean pcnt overlap", round(pcntOverlap.mean(), 2))
 
     utils.checkOutput(cmdargs.infile, cmdargs.outfile)
 
@@ -72,16 +75,21 @@ async def mainAsync(blockList, inBand, outBand, cmdargs, timestamps):
     """
     numBlocks = len(blockList)
     i = 0
+    groupList = []
     while i < numBlocks:
         subList = blockList[i:i + cmdargs.threads]
 
         taskList = []
+        blocksInGroup = set()
         for block in subList:
             blockId = "{}_{}".format(block.left, block.top)
+            tsNameRead = utils.TS_READBLOCK.format(blockId)
+            blocksInGroup.add(tsNameRead)
 
             task = asyncio.create_task(readBlock(inBand, block, timestamps,
-                blockId))
+                tsNameRead))
             taskList.append(task)
+        groupList.append(blocksInGroup)
         await asyncio.gather(*taskList)
 
         for j in range(len(taskList)):
@@ -96,12 +104,13 @@ async def mainAsync(blockList, inBand, outBand, cmdargs, timestamps):
 
         i += len(subList)
 
+    return groupList
 
-async def readBlock(inBand, block, timestamps, blockId):
+
+async def readBlock(inBand, block, timestamps, tsNameRead):
     """
     Read a single block, asynchronously, and record timestamps
     """
-    tsNameRead = utils.TS_READBLOCK.format(blockId)
     timestamps.stamp(tsNameRead, utils.TS_START)
     arr = inBand.ReadAsArray(block.left, block.top, block.xsize,
         block.ysize)
