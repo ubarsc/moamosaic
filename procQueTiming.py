@@ -37,12 +37,12 @@ def main():
 
     timestamps.stamp("que", utils.TS_START)
     poolClass = futures.ProcessPoolExecutor
-    with poolClass(max_workers=2) as procPool:
+    with poolClass(max_workers=1) as procPool:
         senderProc = procPool.submit(senderFunc, que, cmdargs.blocksize,
             cmdargs.numblocks)
-        receiverProc = procPool.submit(receiverFunc, que)
 
-    futures.wait([senderProc, receiverProc])
+    receiverFunc(que)
+
     timestamps.stamp("que", utils.TS_END)
 
     print("tot", timestamps.timeSpentByPrefix("que"))
@@ -52,6 +52,7 @@ def senderFunc(que, blocksize, numblocks):
     for blocknum in range(numblocks):
         arr = numpy.zeros((blocksize, blocksize), dtype=numpy.uint8)
         que.put(arr)
+    que.put(None)
 
 
 def receiverFunc(que):
@@ -59,7 +60,7 @@ def receiverFunc(que):
     numblocks = 0
     while arr is not None:
         numblocks += 1
-        que.get(arr)
+        arr = que.get()
 
     print("numblocks", numblocks)
 
