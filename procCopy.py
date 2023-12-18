@@ -78,6 +78,8 @@ def writeBlocks(imginfo, outfile, que, blockList):
     numBlocks = len(blockList)
     print("Num blocks to write", numBlocks)
     i = 0
+    maxCacheSize = 0
+    maxQueueSize = 0
     while i < numBlocks:
         # Get another block from the que (if available), and cache it
         try:
@@ -88,7 +90,9 @@ def writeBlocks(imginfo, outfile, que, blockList):
             blockSpec = None
             arr = None
 
-        print("i, Cache size", i, len(blockCache))
+        maxCacheSize = max(maxCacheSize, len(blockCache))
+        maxQueueSize = max(maxQueueSize, que.qsize())
+
         # If the i-th block is ready in the cache, write it out,
         # remove it from cache, and increment i
         block = blockList[i]
@@ -98,6 +102,9 @@ def writeBlocks(imginfo, outfile, que, blockList):
             band.WriteArray(arr, block.left, block.top)
             blockCache.pop(key)
             i += 1
+
+    print("Max que size", maxQueueSize)
+    print("Max cache size", maxCacheSize)
 
 
 def makeBlockKey(block):
