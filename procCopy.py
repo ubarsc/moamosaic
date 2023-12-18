@@ -63,6 +63,8 @@ def main():
 
     print("whole", timestamps.timeSpentByPrefix("whole"))
 
+    utils.checkOutput(cmdargs.infile, cmdargs.outfile)
+
 
 def readFunc(infile, que, blockList):
     ds = gdal.Open(infile)
