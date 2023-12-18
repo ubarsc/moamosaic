@@ -79,28 +79,43 @@ def writeBlocks(imginfo, outfile, que, blockList):
 
     # Cache of blocks available to write. Keyed by BlockSpec object.
     blockCache = {}
+    print("Que size at start of writeFunc", que.qsize())
 
     numBlocks = len(blockList)
+    print("Num blocks to write", numBlocks)
     i = 0
     while i < numBlocks:
         # Get another block from the que (if available), and cache it
         try:
             (blockSpec, arr) = que.get_nowait()
-            key = "{}_{}".format(blockSpec.top, blockSpec.left)
+            key = makeBlockKey(blockSpec)
             blockCache[key] = arr
         except queue.Empty:
             blockSpec = None
             arr = None
 
+        print("i, Cache size", i, len(blockCache))
         # If the i-th block is ready in the cache, write it out,
         # remove it from cache, and increment i
         block = blockList[i]
-        key = "{}_{}".format(block.top, block.left)
+        key = makeBlockKey(block)
         if key in blockCache:
             arr = blockCache[key]
             band.WriteArray(arr, block.left, block.top)
             blockCache.pop(key)
             i += 1
+
+
+def makeBlockKey(block):
+    """
+    Make a key value for the given BlockSpec object.
+
+    I should have been able to do this using a __hash__ on the class
+    itself, but for some reason identical hashes appear distinct to Python,
+    so it was useless. No idea why.
+
+    """
+    return "{}_{}".format(block.top, block.left)
 
 
 class ImageInfo:
