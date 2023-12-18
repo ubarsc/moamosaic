@@ -23,6 +23,8 @@ def getCmdargs():
         help="Blocksize (default=%(default)s)")
     p.add_argument("-n", "--numproc", type=int, default=5,
         help="Number of processes for reading (default=%(default)s)")
+    p.add_argument("--usethreads", default=False, action="store_true",
+        help="Use threads. Default will use separate subprocesses")
     cmdargs = p.parse_args()
     return cmdargs
 
@@ -31,8 +33,11 @@ def main():
     cmdargs = getCmdargs()
 
     # Make a suitable Queue
-    manager = Manager()
-    que = manager.Queue()
+    if cmdargs.usethreads:
+        que = queue.Queue()
+    else:
+        manager = Manager()
+        que = manager.Queue()
 
     timestamps = utils.TimeStampSet()
 
@@ -42,7 +47,11 @@ def main():
 
     timestamps.stamp("whole", utils.TS_START)
     numproc = cmdargs.numproc
-    with futures.ProcessPoolExecutor(max_workers=numproc) as procPool:
+    if cmdargs.usethreads:
+        poolClass = futures.ThreadPoolExecutor
+    else:
+        poolClass = futures.ProcessPoolExecutor
+    with poolClass(max_workers=numproc) as procPool:
         procList = []
         for i in range(numproc):
             blockSubset = blockList[i::numproc]
@@ -73,10 +82,8 @@ def writeBlocks(imginfo, outfile, que, blockList):
 
     # Cache of blocks available to write. Keyed by BlockSpec object.
     blockCache = {}
-    print("Que size at start of writeFunc", que.qsize())
 
     numBlocks = len(blockList)
-    print("Num blocks to write", numBlocks)
     i = 0
     maxCacheSize = 0
     maxQueueSize = 0
