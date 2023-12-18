@@ -51,7 +51,7 @@ def main():
         senderProc = procPool.submit(senderFunc, que, cmdargs.blocksize,
             cmdargs.numblocks)
 
-    receiverFunc(que)
+        receiverFunc(que)
 
     timestamps.stamp("que", utils.TS_END)
 
