@@ -10,6 +10,7 @@ arrays for a whole Sentinel-2 band (10m), which suggests it is negligible.
 import argparse
 from concurrent import futures
 from multiprocessing import Manager
+import queue
 
 import numpy
 
@@ -22,6 +23,9 @@ def getCmdargs():
         help="Blocksize (default=%(default)s)")
     p.add_argument("-n", "--numblocks", type=int, default=30,
         help="Number of blocks (default=%(default)s)")
+    p.add_argument("--usethreads", default=False, action="store_true",
+        help="Use threads. Default will use separate subprocesses")
+
     cmdargs = p.parse_args()
     return cmdargs
 
@@ -30,13 +34,19 @@ def main():
     cmdargs = getCmdargs()
 
     # Make a suitable Queue
-    manager = Manager()
-    que = manager.Queue()
+    if cmdargs.usethreads:
+        que = queue.Queue()
+    else:
+        manager = Manager()
+        que = manager.Queue()
 
     timestamps = utils.TimeStampSet()
 
     timestamps.stamp("que", utils.TS_START)
-    poolClass = futures.ProcessPoolExecutor
+    if cmdargs.usethreads:
+        poolClass = futures.ThreadPoolExecutor
+    else:
+        poolClass = futures.ProcessPoolExecutor
     with poolClass(max_workers=1) as procPool:
         senderProc = procPool.submit(senderFunc, que, cmdargs.blocksize,
             cmdargs.numblocks)
