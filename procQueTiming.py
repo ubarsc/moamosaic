@@ -4,7 +4,7 @@ Simple timings on the use of a Queue to send arrays between
 processes in a ProcessPool. Does it really add much overhead? No
 idea, so measuring it to find out.
 
-Turns out it only takes about 0.25 second (on Sam's VM) to send enough
+Turns out it only takes about 0.35 second (on Sam's VM) to send enough
 arrays for a whole Sentinel-2 band (10m), which suggests it is negligible.
 """
 import argparse
