@@ -68,11 +68,14 @@ def senderFunc(que, blocksize, numblocks):
 def receiverFunc(que):
     arr = que.get()
     numblocks = 0
+    maxQueueSize = que.qsize()
     while arr is not None:
         numblocks += 1
+        maxQueueSize = max(maxQueueSize, que.qsize())
         arr = que.get()
 
     print("numblocks", numblocks)
+    print("max queue size", maxQueueSize)
 
 
 if __name__ == "__main__":
