@@ -89,11 +89,11 @@ def writeBlocks(imginfo, outfile, que, blockList):
     maxQueueSize = 0
     while i < numBlocks:
         # Get another block from the que (if available), and cache it
-        try:
+        if not que.empty():
             (blockSpec, arr) = que.get_nowait()
             key = makeBlockKey(blockSpec)
             blockCache[key] = arr
-        except queue.Empty:
+        else:
             blockSpec = None
             arr = None
 
