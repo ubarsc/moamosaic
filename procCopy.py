@@ -41,7 +41,6 @@ def main():
         cmdargs.blocksize)
 
     timestamps.stamp("whole", utils.TS_START)
-    timestamps.stamp("read", utils.TS_START)
     numproc = cmdargs.numproc
     with futures.ProcessPoolExecutor(max_workers=numproc) as procPool:
         procList = []
@@ -49,16 +48,11 @@ def main():
             blockSubset = blockList[i::numproc]
             proc = procPool.submit(readFunc, cmdargs.infile, que, blockSubset)
             procList.append(proc)
-    timestamps.stamp("read", utils.TS_END)
 
-    timestamps.stamp("write", utils.TS_START)
-    writeBlocks(imginfo, cmdargs.outfile, que, blockList)
-    timestamps.stamp("write", utils.TS_END)
+        writeBlocks(imginfo, cmdargs.outfile, que, blockList)
     timestamps.stamp("whole", utils.TS_END)
 
     print("whole", timestamps.timeSpentByPrefix("whole"))
-    print("read", timestamps.timeSpentByPrefix("read"))
-    print("write", timestamps.timeSpentByPrefix("write"))
 
 
 def readFunc(infile, que, blockList):
