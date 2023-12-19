@@ -1,0 +1,30 @@
+Notes on the scheme for a parallel mosaicing tool.
+
+- Similar in spirit to procCopy.py. More complicated, because of
+  multiple input files, which only overlap in some areas.
+- Over all inputs, work out the pixel grid of the output raster
+  (i.e. geoTransform, nrows, ncols)
+- Divide this into blocks, and make a blockList
+- For each block in list, work out which input files it intersects,
+  and for each of those files, work out the block of data corresponding
+  to the current block of output. Keep this as the block list annotated
+  with input blocks
+- Turn this into a much longer list of blocks which need to be read. Keep
+  the order so that input blocks for the same output block are grouped
+  together, and these groups are then in the order in which we would
+  write the output blocks.
+- Spin off <n> read workers, each running the same readFunc. Pass in a
+  subset of the big block list (every n-th block, similar to procCopy.py),
+  where, as a block is read, it is placed in the main queue, along with
+  its output and input block specification.
+- In main thread, run the writeFunc. Takes the original block list with
+  annotated input blocks. Its main loop is similar to procCopy.py.
+  - start at output block 0
+  - while not finished:
+      - check for anything to get from the queue, and put it
+        into local cache, keyed by output block spec, and also the filename
+        it came from.
+      - check local cache for all input blocks for the current output
+        block. If all inputs are present in cache, then combine as desired,
+        and write output block to outfile. Remove input blocks from cache,
+        and go to next output block.
