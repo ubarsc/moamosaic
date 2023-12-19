@@ -16,6 +16,9 @@ gdal.UseExceptions()
 
 
 def getCmdargs():
+    """
+    Get command line arguments
+    """
     p = argparse.ArgumentParser()
     p.add_argument("infile")
     p.add_argument("outfile")
@@ -30,6 +33,9 @@ def getCmdargs():
 
 
 def main():
+    """
+    Main routine
+    """
     cmdargs = getCmdargs()
 
     # Make a suitable Queue
@@ -67,6 +73,11 @@ def main():
 
 
 def readFunc(infile, que, blockList):
+    """
+    Each read worker is running this function. For each block specification
+    in the given list, read that block from the file, and put it into the
+    queue, along with its block specification.
+    """
     ds = gdal.Open(infile)
     band = ds.GetRasterBand(1)
 
@@ -76,6 +87,17 @@ def readFunc(infile, que, blockList):
 
 
 def writeBlocks(imginfo, outfile, que, blockList):
+    """
+    Write all the blocks. Read each block (and its block specification) from
+    the queue (as put there by the read workers). Because there are multiple
+    read workers, the blocks could arrive in the queue in any order, so
+    each block is read, place it in the local block cache, keyed by its
+    specification.
+
+    The blocks in the blockList are to be written, in that order. For each
+    block in the list, when it becomes available in the blockCache, write
+    it to the outfile, remove it from the cache.
+    """
     drvr = gdal.GetDriverByName("GTiff")
     options = ["COMPRESS=DEFLATE", "TILED=YES"]
     ds = drvr.Create(outfile, imginfo.ncols, imginfo.nrows, 1,
@@ -129,6 +151,9 @@ def makeBlockKey(block):
 
 
 class ImageInfo:
+    """
+    Just the critical information about the given GDAL raster file.
+    """
     def __init__(self, filename):
         ds = gdal.Open(str(filename), gdal.GA_ReadOnly)
 
