@@ -38,12 +38,14 @@ def main():
     """
     cmdargs = getCmdargs()
 
-    # Make a suitable Queue
+    # Make a suitable Queue and poolClass
     if cmdargs.usethreads:
         que = queue.Queue()
+        poolClass = futures.ThreadPoolExecutor
     else:
         manager = Manager()
         que = manager.Queue()
+        poolClass = futures.ProcessPoolExecutor
 
     timestamps = utils.TimeStampSet()
 
@@ -53,10 +55,6 @@ def main():
 
     timestamps.stamp("whole", utils.TS_START)
     numproc = cmdargs.numproc
-    if cmdargs.usethreads:
-        poolClass = futures.ThreadPoolExecutor
-    else:
-        poolClass = futures.ProcessPoolExecutor
     with poolClass(max_workers=numproc) as procPool:
         procList = []
         for i in range(numproc):
