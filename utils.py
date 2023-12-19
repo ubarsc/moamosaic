@@ -69,6 +69,11 @@ class ImageInfo:
         self.projection = ds.GetProjection()
         self.dataType = ds.GetRasterBand(1).DataType
 
+    def __str__(self):
+        s = "(nrows, ncols): ({}, {}); geotransform: {}".format(
+            self.nrows, self.ncols, self.transform)
+        return s
+
 
 class BlockSpec:
     def __init__(self, top, left, xsize, ysize):
