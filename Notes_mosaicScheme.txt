@@ -3,8 +3,11 @@ Notes on the scheme for a parallel mosaicing tool.
 - Similar in spirit to procCopy.py. More complicated, because of
   multiple input files, which only overlap in some areas.
 - Over all inputs, work out the pixel grid of the output raster
-  (i.e. geoTransform, nrows, ncols)
-- Divide this into blocks, and make a blockList
+  (i.e. projection, geoTransform, nrows, ncols)
+  - Note that this involves opening every input to get basic raster info.
+    In principle, this could be done in parallel, creating something like
+    a dictionary of ImageInfo objects, keyed by filename
+- Divide this output grid into blocks, and make a blockList
 - For each block in list, work out which input files it intersects,
   and for each of those files, work out the block of data corresponding
   to the current block of output. Keep this as the block list annotated
