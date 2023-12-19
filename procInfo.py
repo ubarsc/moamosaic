@@ -49,9 +49,7 @@ def main():
         infolist = [utils.ImageInfo(fn) for fn in filelist]
     timestamps.stamp("info", utils.TS_END)
 
-    for i in range(len(filelist)):
-        print(filelist[i], infolist[i])
-
+    print("Read {} info objects".format(len(infolist)))
     print("read time", timestamps.timeElapsedByPrefix("info"))
 
 
