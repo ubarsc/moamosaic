@@ -57,6 +57,19 @@ class ComparisonError(Exception):
     pass
 
 
+class ImageInfo:
+    """
+    Just the critical information about the given GDAL raster file.
+    """
+    def __init__(self, filename):
+        ds = gdal.Open(str(filename), gdal.GA_ReadOnly)
+
+        (self.ncols, self.nrows) = (ds.RasterXSize, ds.RasterYSize)
+        self.transform = ds.GetGeoTransform()
+        self.projection = ds.GetProjection()
+        self.dataType = ds.GetRasterBand(1).DataType
+
+
 class BlockSpec:
     def __init__(self, top, left, xsize, ysize):
         self.top = top

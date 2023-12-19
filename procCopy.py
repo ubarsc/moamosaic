@@ -47,7 +47,7 @@ def main():
 
     timestamps = utils.TimeStampSet()
 
-    imginfo = ImageInfo(cmdargs.infile)
+    imginfo = utils.ImageInfo(cmdargs.infile)
     blockList = utils.makeBlockList(imginfo.nrows, imginfo.ncols,
         cmdargs.blocksize)
 
@@ -148,19 +148,6 @@ def makeBlockKey(block):
 
     """
     return "{}_{}".format(block.top, block.left)
-
-
-class ImageInfo:
-    """
-    Just the critical information about the given GDAL raster file.
-    """
-    def __init__(self, filename):
-        ds = gdal.Open(str(filename), gdal.GA_ReadOnly)
-
-        (self.ncols, self.nrows) = (ds.RasterXSize, ds.RasterYSize)
-        self.transform = ds.GetGeoTransform()
-        self.projection = ds.GetProjection()
-        self.dataType = ds.GetRasterBand(1).DataType
 
 
 if __name__ == "__main__":
