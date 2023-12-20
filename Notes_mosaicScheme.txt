@@ -7,6 +7,8 @@ Notes on the scheme for a parallel mosaicing tool.
   - Note that this involves opening every input to get basic raster info.
     In principle, this could be done in parallel, creating something like
     a dictionary of ImageInfo objects, keyed by filename
+  - Should we cope with different input projections? We could generate
+    on-the-fly VRT files to reproject into the output grid.
 - Divide this output grid into blocks, and make a blockList
 - For each block in list, work out which input files it intersects,
   and for each of those files, work out the block of data corresponding
