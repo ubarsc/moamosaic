@@ -67,6 +67,18 @@ def main():
 
     print("whole", timestamps.timeSpentByPrefix("whole"))
 
+    # Merge all the individual read timestamps objects, so we can look
+    # at overlap timings
+    readStampsList = [proc.result() for proc in procList]
+    readStamps = readStampsList[0]
+    for rds in readStampsList[1:]:
+        readStamps.merge(rds)
+    # Just use one big group of all readblock entries
+    readGroupNames = [set([name for (name, startEnd) in readStamps.stamps
+            if name.startswith("readblock")])]
+    pcntOverlap = readStamps.pcntOverlapByGroup(readGroupNames)[0]
+    print("pcnt overlap", round(pcntOverlap, 2))
+
     utils.checkOutput(cmdargs.infile, cmdargs.outfile)
 
 
@@ -78,10 +90,16 @@ def readFunc(infile, que, blockList):
     """
     ds = gdal.Open(infile)
     band = ds.GetRasterBand(1)
+    timestamps = utils.TimeStampSet()
 
     for block in blockList:
+        tsName = utils.TS_READBLOCK.format("{}_{}".format(block.left, block.top))
+        timestamps.stamp(tsName, utils.TS_START)
         arr = band.ReadAsArray(block.left, block.top, block.xsize, block.ysize)
+        timestamps.stamp(tsName, utils.TS_END)
         que.put((block, arr))
+
+    return timestamps
 
 
 def writeBlocks(imginfo, outfile, que, blockList):
