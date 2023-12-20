@@ -62,7 +62,7 @@ def main():
             proc = procPool.submit(readFunc, cmdargs.infile, que, blockSubset)
             procList.append(proc)
 
-        writeBlocks(imginfo, cmdargs.outfile, que, blockList)
+        writeBlocks(imginfo, cmdargs.outfile, que, blockList, procList)
     timestamps.stamp("whole", utils.TS_END)
 
     print("whole", timestamps.timeSpentByPrefix("whole"))
@@ -102,7 +102,7 @@ def readFunc(infile, que, blockList):
     return timestamps
 
 
-def writeBlocks(imginfo, outfile, que, blockList):
+def writeBlocks(imginfo, outfile, que, blockList, procList):
     """
     Write all the blocks. Read each block (and its block specification) from
     the queue (as put there by the read workers). Because there are multiple
@@ -113,6 +113,10 @@ def writeBlocks(imginfo, outfile, que, blockList):
     The blocks in the blockList are to be written, in that order. For each
     block in the list, when it becomes available in the blockCache, write
     it to the outfile, remove it from the cache.
+
+    We also take the procList of read worker processes (futures). This is
+    so we can check on them periodically, in case one has raised an
+    exception. If so, we re-raise it and thus exit.
     """
     drvr = gdal.GetDriverByName("GTiff")
     options = ["COMPRESS=DEFLATE", "TILED=YES"]
@@ -150,8 +154,24 @@ def writeBlocks(imginfo, outfile, que, blockList):
             blockCache.pop(key)
             i += 1
 
+        checkReaderExceptions(procList)
+
     print("Max que size", maxQueueSize)
     print("Max cache size", maxCacheSize)
+
+
+def checkReaderExceptions(procList):
+    """
+    Check the read workers, in case one has raised an exception
+    """
+    for proc in procList:
+        if proc.done():
+            try:
+                e = proc.exception(timeout=0)
+            except TimeoutError:
+                e = None
+            if e is not None:
+                raise e
 
 
 def makeBlockKey(block):
