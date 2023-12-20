@@ -33,3 +33,17 @@ Notes on the scheme for a parallel mosaicing tool.
         block. If all inputs are present in cache, then combine as desired,
         and write output block to outfile. Remove input blocks from cache,
         and go to next output block.
+
+
+Extra notes
+-----------
+* If using threads, I think (??) that there should only be a single GDAL
+  file/block cache, which should cope with partial block reads when output
+  grid does not align with input grid for some file. However, this would
+  not be true if using processes, so this is an argument against processes.
+* As new files are opened, we should cache the Dataset & Band objects, so
+  they are only opened once. Can we share this between all threads? Yes, but
+  only if we lock it with semaphores. 
+* For each file we should also keep record of which blocks need to be read,
+  and which have been read, so that we can close the file once all blocks
+  have been read for that file.
