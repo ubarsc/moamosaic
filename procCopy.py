@@ -166,10 +166,7 @@ def checkReaderExceptions(procList):
     """
     for proc in procList:
         if proc.done():
-            try:
-                e = proc.exception(timeout=0)
-            except TimeoutError:
-                e = None
+            e = proc.exception(timeout=0)
             if e is not None:
                 raise e
 
