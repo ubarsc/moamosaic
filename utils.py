@@ -197,3 +197,9 @@ class TimeStampSet():
             pcnt = 100 * totInOverlap / totElapsed
             pcntList.append(pcnt)
         return numpy.array(pcntList)
+
+    def merge(self, other):
+        """
+        Merge another timestamps instance into this one
+        """
+        self.stamps.update(other.stamps)
