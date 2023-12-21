@@ -17,11 +17,17 @@ Notes on the scheme for a parallel mosaicing tool.
 - Turn this into a much longer list of blocks which need to be read. Keep
   the order so that input blocks for the same output block are grouped
   together, and these groups are then in the order in which we would
-  write the output blocks.
+  write the output blocks. This ordering is critical to the parallel
+  performance, so the docstring should describe in detail what is occurring
+  and why.
 - Spin off <n> read workers, each running the same readFunc. Pass in a
   subset of the big block list (every n-th block, similar to procCopy.py),
   where, as a block is read, it is placed in the main queue, along with
   its output and input block specification.
+  The construction of the sub-list of blocks for the n-th worker to read
+  is critical to the parallelism available. While it is only one line
+  of code, it should be a separate function, so it can have a huge
+  docstring to explain how important it is.
 - In main thread, run the writeFunc. Takes the original block list with
   annotated input blocks. Its main loop is similar to procCopy.py. Note that
   this scheme is designed to write the blocks in normal block order, to
@@ -36,6 +42,12 @@ Notes on the scheme for a parallel mosaicing tool.
         block. If all inputs are present in cache, then combine as desired,
         and write output block to outfile. Remove input blocks from cache,
         and go to next output block.
+      - Should include some sort of guard to prevent the local cache from
+        growing too large. There is potential for a deadlock to arise,
+        though, so this should be approached with caution.
+- The above is for a single band, but can be looped for multi-band files.
+  Each band would be independent of the others, and completed before the
+  next one starts.
 
 
 Extra notes
