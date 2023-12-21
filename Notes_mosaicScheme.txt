@@ -23,7 +23,10 @@ Notes on the scheme for a parallel mosaicing tool.
   where, as a block is read, it is placed in the main queue, along with
   its output and input block specification.
 - In main thread, run the writeFunc. Takes the original block list with
-  annotated input blocks. Its main loop is similar to procCopy.py.
+  annotated input blocks. Its main loop is similar to procCopy.py. Note that
+  this scheme is designed to write the blocks in normal block order, to
+  avoid random sequencing of blocks which may ruin other caching schemes
+  when using the file later on.
   - start at output block 0
   - while not finished:
       - check for anything to get from the queue, and put it
