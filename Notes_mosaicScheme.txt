@@ -47,3 +47,7 @@ Extra notes
 * For each file we should also keep record of which blocks need to be read,
   and which have been read, so that we can close the file once all blocks
   have been read for that file.
+* I have now demonstrated that queue.Queue (used between threads) sends
+  objects by reference, i.e. no copying, whereas multitasking's equivalent
+  Queue class (used between processes) does a pickle-copy-unpickle.
+  Another reason to use threads instead of processes.
