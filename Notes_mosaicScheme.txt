@@ -66,3 +66,9 @@ Extra notes
   objects by reference, i.e. no copying, whereas multitasking's equivalent
   Queue class (used between processes) does a pickle-copy-unpickle.
   Another reason to use threads instead of processes.
+* GDAL's notes about multi-threading are very clear that any GDAL data 
+  structures should not be shared between threads, and explicitly mentions
+  that Dataset objects should not be shared. This suggests that I
+  should allow each thread to have its own open Dataset object for any
+  given file. That means the cache of open GDAL objects should also be
+  private for each thread. 
