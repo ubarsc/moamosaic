@@ -387,6 +387,7 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
     """
     allInputsForBlock = []
     i = 0
+    shp = None
     missing = False
     filelist = filesForBlock[outblock]
     numFiles = len(filelist)
@@ -395,6 +396,16 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
         k = blockCache.makeKey(filename, outblock)
         if k in blockCache.cache:
             (blockInfo, arr) = blockCache.cache[k]
+            # Check on array shape. They must all be the same shape
+            if shp is None:
+                shp = arr.shape
+            if arr.shape != shp:
+                msg = ("Block array mismatch at block {}".format(
+                       blockInfo.outblock) +
+                       "\n{}!={}\n{}".format(arr.shape, shp, filelist)
+                       )
+                raise ValueError(msg)
+
             allInputsForBlock.append(arr)
             i += 1
         else:
@@ -434,17 +445,6 @@ def mergeInputs(allInputsForBlock, outNullVal):
     value is the one used.
     """
     numInputs = len(allInputsForBlock)
-
-    # Check that all the inputs are the same size
-    allShp = [arr.shape for arr in allInputsForBlock]
-    mismatch = False
-    for i in range(1, numInputs):
-        if allShp[i] != allShp[0]:
-            mismatch = True
-    if mismatch:
-        msg = "Shape mismatch\n{}".format(allShp)
-        raise ValueError(msg)
-    
     outArr = allInputsForBlock[0]
     for i in range(1, numInputs):
         arr = allInputsForBlock[i]
