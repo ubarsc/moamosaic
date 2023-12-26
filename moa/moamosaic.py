@@ -433,8 +433,19 @@ def mergeInputs(allInputsForBlock, outNullVal):
     output array. Ordering is important, the last non-null
     value is the one used.
     """
-    outArr = allInputsForBlock[0]
     numInputs = len(allInputsForBlock)
+
+    # Check that all the inputs are the same size
+    allShp = [arr.shape for arr in allInputsForBlock]
+    mismatch = False
+    for i in range(1, numInputs):
+        if allShp[i] != allShp[0]:
+            mismatch = True
+    if mismatch:
+        msg = "Shape mismatch\n{}".format(allShp)
+        raise ValueError(msg)
+    
+    outArr = allInputsForBlock[0]
     for i in range(1, numInputs):
         arr = allInputsForBlock[i]
         nonNull = (arr != outNullVal)
