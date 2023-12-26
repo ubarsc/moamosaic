@@ -44,7 +44,7 @@ def getCmdargs():
         help="Number of read threads to use (default=%(default)s)")
     p.add_argument("-b", "--blocksize", type=int, default=1024,
         help="Blocksize in pixels (default=%(default)s)")
-    p.add_argument("-d", "--driver", default="KEA",
+    p.add_argument("-d", "--driver", default="GTiff",
         help="GDAL driver to use for output file (default=%(default)s)")
     p.add_argument("-o", "--outfile", help="Name of output raster")
     p.add_argument("--nullval", type=int,
