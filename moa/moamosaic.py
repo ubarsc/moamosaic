@@ -400,9 +400,10 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
             if shp is None:
                 shp = arr.shape
             if arr.shape != shp:
-                msg = ("Block array mismatch at block {}".format(
-                       blockInfo.outblock) +
-                       "\n{}!={}\n{}".format(arr.shape, shp, filelist)
+                msg = ("Block array mismatch at block {}\n".format(
+                       outblock) +
+                       "Inblock = {}\n".format(blockInfo.inblock)
+                       "{}!={}\n{}".format(arr.shape, shp, filelist)
                        )
                 raise ValueError(msg)
 
