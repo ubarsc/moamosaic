@@ -441,6 +441,10 @@ def openOutfile(outfile, driver, outgrid, outImgInfo):
     datatype = outImgInfo.dataType
     options = creationOptions[driver]
     drvr = gdal.GetDriverByName(driver)
+    if drvr is None:
+        msg = "Driver {} not supported in this version of GDAL".forat(driver)
+        raise ValueError(msg)
+
     if os.path.exists(outfile):
         drvr.Delete(outfile)
     ds = drvr.Create(outfile, ncols, nrows, numBands, datatype,
