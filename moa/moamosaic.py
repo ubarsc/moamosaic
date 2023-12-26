@@ -395,14 +395,13 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
         filename = filelist[i]
         k = blockCache.makeKey(filename, outblock)
         if k in blockCache.cache:
-            (blockInfo, arr) = blockCache.cache[k]
+            (blockSpec, arr) = blockCache.cache[k]
             # Check on array shape. They must all be the same shape
             if shp is None:
                 shp = arr.shape
             if arr.shape != shp:
                 msg = ("Block array mismatch at block {}\n".format(
-                       outblock) +
-                       "Inblock = {}\n".format(blockInfo.inblock) +
+                       blockSpec) +
                        "{}!={}\n{}".format(arr.shape, shp, filelist)
                        )
                 raise ValueError(msg)
