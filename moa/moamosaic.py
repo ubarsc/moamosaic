@@ -532,8 +532,8 @@ class BlockSpec:
         (fileRight, fileBottom) = gdal.ApplyGeoTransform(imgInvGT, xRight,
             yBottom)
 
-        return (int(fileLeft), int(fileTop), int(fileRight),
-                int(fileBottom))
+        return (int(round(fileLeft)), int(round(fileTop)),
+                int(round(fileRight)), int(round(fileBottom)))
 
     def __str__(self):
         s = "{} {} {} {}".format(self.top, self.left, self.xsize, self.ysize)
