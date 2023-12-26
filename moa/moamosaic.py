@@ -38,7 +38,7 @@ def getCmdargs():
     Get command line arguments
     """
     p = argparse.ArgumentParser()
-    p.add_argument("-i", "--infilelist", help="Text file of input images")
+    p.add_argument("-i", "--infilelist", help="Text file list of input images")
     p.add_argument("-n", "--numthreads", type=int, default=4,
         help="Number of read threads to use (default=%(default)s)")
     p.add_argument("-b", "--blocksize", type=int, default=1024,
@@ -55,57 +55,71 @@ def getCmdargs():
     return cmdargs
 
 
-def main():
+def mainCmd():
     """
-    Main routine
+    Main command line stub, referenced from pyproject.toml
     """
     cmdargs = getCmdargs()
+    filelist = makeFilelist(cmdargs.infilelist)
+    doMosaic(filelist, cmdargs.outfile, cmdargs.numthreads, cmdargs.blocksize,
+        cmdargs.driver, cmdargs.nullval, cmdargs.nopyramids,
+        cmdargs.monitorjson)
+
+
+def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
+        nopyramids, monitorjson):
+    """
+    Main routine, callable from non-commandline context
+    """
     monitors = monitoring.Monitoring()
+    monitors.setParam('numthreads', numthreads)
+    monitors.setParam('blocksize', blocksize)
 
     # Work out what we are going to do
-    filelist = makeFilelist(cmdargs)
+    monitors.setParam('numinfiles', len(filelist))
     monitors.timestamps.stamp("imginfodict", monitoring.TS_START)
-    imgInfoDict = makeImgInfoDict(filelist, cmdargs)
+    imgInfoDict = makeImgInfoDict(filelist, numthreads)
     monitors.timestamps.stamp("imginfodict", monitoring.TS_END)
 
-    outgrid = makeOutputGrid(filelist, imgInfoDict, cmdargs)
+    monitors.timestamps.stamp("analysis", monitoring.TS_START)
+    outgrid = makeOutputGrid(filelist, imgInfoDict)
     outGeoTransform = outgrid.makeGeoTransform()
-    blockList = makeOutputBlockList(outgrid, cmdargs)
+    blockList = makeOutputBlockList(outgrid, blocksize)
 
     (blockListWithInputs, filesForBlock) = (
         findInputsPerBlock(blockList, outGeoTransform, filelist, imgInfoDict))
     blockReadingList = makeBlockReadingList(blockListWithInputs)
-    blocksPerThread = divideBlocksByThread(blockReadingList, cmdargs)
+    blocksPerThread = divideBlocksByThread(blockReadingList, numthreads)
+    monitors.timestamps.stamp("analysis", monitoring.TS_END)
 
     blockQ = queue.Queue()
     poolClass = futures.ThreadPoolExecutor
-    numThreads = cmdargs.numthreads
     numBands = imgInfoDict[filelist[0]].numBands
 
     # Now do it all, using concurrent threads to read blocks into a queue
-    outImgInfo = makeOutImgInfo(imgInfoDict[filelist[0]], outgrid, cmdargs)
-    outDs = openOutfile(cmdargs, outgrid, outImgInfo)
+    outImgInfo = makeOutImgInfo(imgInfoDict[filelist[0]], outgrid, nullval)
+    outDs = openOutfile(outfile, driver, outgrid, outImgInfo)
     monitors.timestamps.stamp("domosaic", monitoring.TS_START)
     for bandNum in range(1, numBands + 1):
-        with poolClass(max_workers=numThreads) as threadPool:
+        with poolClass(max_workers=numthreads) as threadPool:
             workerList = []
-            for i in range(numThreads):
+            for i in range(numthreads):
                 blocksToRead = blocksPerThread[i]
                 worker = threadPool.submit(readFunc, blocksToRead, blockQ,
                         bandNum, outImgInfo.nullVal)
                 workerList.append(worker)
 
-            writeFunc(outgrid, cmdargs, blockQ, outDs, outImgInfo, bandNum,
+            writeFunc(outgrid, blockQ, outDs, outImgInfo, bandNum,
                     blockList, filesForBlock, workerList, monitors)
     monitors.timestamps.stamp("domosaic", monitoring.TS_END)
 
     outDs.SetGeoTransform(outGeoTransform)
     outDs.SetProjection(outImgInfo.projection)
-    if not cmdargs.nopyramids:
+    if not nopyramids:
         outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
 
-    if cmdargs.monitorjson is not None:
-        with open(cmdargs.monitorjson, 'w') as f:
+    if monitorjson is not None:
+        with open(monitorjson, 'w') as f:
             json.dump(monitors.reportAsDict(), f, indent=2)
 
 
@@ -154,7 +168,7 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
         i += 1
 
 
-def writeFunc(outgrid, cmdargs, blockQ, outDs, outImgInfo, bandNum,
+def writeFunc(outgrid, blockQ, outDs, outImgInfo, bandNum,
                     blockList, filesForBlock, workerList, monitors):
     """
     Loop over all blocks of the output grid, and write them.
@@ -239,15 +253,15 @@ def allWorkersDone(workerList):
     return allDone
 
 
-def makeFilelist(cmdargs):
+def makeFilelist(infilelist):
     """
     Read the list of input files, and return a list of the filenames
     """
-    filelist = [line.strip() for line in open(cmdargs.infilelist)]
+    filelist = [line.strip() for line in open(infilelist)]
     return filelist
 
 
-def makeOutputGrid(filelist, imgInfoDict, cmdargs):
+def makeOutputGrid(filelist, imgInfoDict):
     """
     Work out the extent of the whole mosaic. Return a pixel grid
     of the whole thing.
@@ -267,14 +281,13 @@ def makeOutputGrid(filelist, imgInfoDict, cmdargs):
     return unionGrid
 
 
-def makeOutputBlockList(outgrid, cmdargs):
+def makeOutputBlockList(outgrid, blocksize):
     """
     Given a pixel grid of the whole extent, divide it up into blocks.
     Return a list of BlockSpec objects.
     """
     # Divide this up into blocks
     # Should do something to avoid tiny blocks on the right and bottom edges...
-    blocksize = cmdargs.blocksize
     (nrows, ncols) = outgrid.getDimensions()
     blockList = []
     top = 0
@@ -290,15 +303,14 @@ def makeOutputBlockList(outgrid, cmdargs):
     return blockList
 
 
-def makeImgInfoDict(filelist, cmdargs):
+def makeImgInfoDict(filelist, numthreads):
     """
     Use a number of threads to open all of the input files, and create
     ImageInfo objects for them all. Store these in a dictionary, keyed by
     their filenames.
     """
     poolClass = futures.ThreadPoolExecutor
-    numThreads = cmdargs.numthreads
-    with poolClass(max_workers=numThreads) as threadPool:
+    with poolClass(max_workers=numthreads) as threadPool:
         imgInfoList = threadPool.map(ImageInfo, filelist)
 
     imgInfoDict = {fn: info for (fn, info) in zip(filelist, imgInfoList)}
@@ -355,15 +367,14 @@ def makeBlockReadingList(blockListWithInputs):
     return blockReadingList
 
 
-def divideBlocksByThread(blockReadingList, cmdargs):
+def divideBlocksByThread(blockReadingList, numthreads):
     """
     Divide up the given blockReadingList into several such lists, one
     per thread. Return a list of these sub-lists.
     """
-    numThreads = cmdargs.numthreads
     blocksPerThread = []
-    for i in range(numThreads):
-        sublist = blockReadingList[i::numThreads]
+    for i in range(numthreads):
+        sublist = blockReadingList[i::numthreads]
         blocksPerThread.append(sublist)
     return blocksPerThread
 
@@ -393,7 +404,7 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
     return allInputsForBlock
 
 
-def openOutfile(cmdargs, outgrid, outImgInfo):
+def openOutfile(outfile, driver, outgrid, outImgInfo):
     """
     Open the output file
     """
@@ -407,11 +418,11 @@ def openOutfile(cmdargs, outgrid, outImgInfo):
     (nrows, ncols) = outgrid.getDimensions()
     numBands = outImgInfo.numBands
     datatype = outImgInfo.dataType
-    options = creationOptions[cmdargs.driver]
-    drvr = gdal.GetDriverByName(cmdargs.driver)
-    if os.path.exists(cmdargs.outfile):
-        drvr.Delete(cmdargs.outfile)
-    ds = drvr.Create(cmdargs.outfile, ncols, nrows, numBands, datatype,
+    options = creationOptions[driver]
+    drvr = gdal.GetDriverByName(driver)
+    if os.path.exists(outfile):
+        drvr.Delete(outfile)
+    ds = drvr.Create(outfile, ncols, nrows, numBands, datatype,
         options)
     return ds
 
@@ -431,10 +442,10 @@ def mergeInputs(allInputsForBlock, outNullVal):
     return outArr
 
 
-def makeOutImgInfo(inImgInfo, outgrid, cmdargs):
+def makeOutImgInfo(inImgInfo, outgrid, nullval):
     """
     Create an ImageInfo for the output file, based on one of the
-    input files, and information from the outgrid and the cmdargs.
+    input files, and information from the outgrid and the nullval.
     """
     outImgInfo = ImageInfo(None)
     (outImgInfo.nrows, outImgInfo.ncols) = outgrid.getDimensions()
@@ -443,8 +454,8 @@ def makeOutImgInfo(inImgInfo, outgrid, cmdargs):
     outImgInfo.projection = inImgInfo.projection
     outImgInfo.dataType = inImgInfo.dataType
     outImgInfo.nullVal = inImgInfo.nullVal
-    if cmdargs.nullval is not None:
-        outImgInfo.nullVal = cmdargs.nullval
+    if nullval is not None:
+        outImgInfo.nullVal = nullval
     return outImgInfo
 
 
@@ -658,4 +669,4 @@ class GdalObjCache:
 
 
 if __name__ == "__main__":
-    main()
+    mainCmd()
