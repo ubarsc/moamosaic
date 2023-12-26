@@ -442,7 +442,7 @@ def openOutfile(outfile, driver, outgrid, outImgInfo):
     options = creationOptions[driver]
     drvr = gdal.GetDriverByName(driver)
     if drvr is None:
-        msg = "Driver {} not supported in this version of GDAL".forat(driver)
+        msg = "Driver {} not supported in this version of GDAL".format(driver)
         raise ValueError(msg)
 
     if os.path.exists(outfile):
