@@ -203,12 +203,20 @@ def writeFunc(outgrid, blockQ, outDs, outImgInfo, bandNum,
             blockInfo = None
             arr = None
 
-        # If we actually got something from the blockQ, then we might
-        # be ready to write the current block
-        if blockInfo is not None or len(blockCache) > 0:
-            outblock = blockList[i]
-            # Returns None if we don't have all of them, otherwise a list
-            # of block arrays
+        outblock = blockList[i]
+
+        if outblock not in filesForBlock:
+            # This block does not intersect any input files, so
+            # just write nulls
+            outArr = numpy.zeros((outblock.ysize, outblock.xsize),
+                    dtype=numpyDtype[outImgInfo.dataType])
+            outArr.fill(outImgInfo.nullVal)
+            band.WriteArray(outArr, outblock.left, outblock.top)
+            i += 1
+        elif blockInfo is not None or len(blockCache) > 0:
+            # If we actually got something from the blockQ, then we might
+            # be ready to write the current block
+
             allInputBlocks = getInputsForBlock(blockCache, outblock,
                     filesForBlock)
             if allInputBlocks is not None:
@@ -677,6 +685,18 @@ class GdalObjCache:
 
     def __len__(self):
         return len(self.cache)
+
+numpyDtype = {
+    gdal.GDT_Byte: numpy.uint8,
+    gdal.GDT_Int16: numpy.int16,
+    gdal.GDT_UInt16: numpy.uint16,
+    gdal.GDT_Int32: numpy.int32,
+    gdal.GDT_UInt32: numpy.uint32,
+    gdal.GDT_Int64: numpy.int64,
+    gdal.GDT_UInt64: numpy.uint64,
+    gdal.GDT_Float32: numpy.float32,
+    gdal.GDT_Float64: numpy.float64
+}
 
 
 if __name__ == "__main__":
