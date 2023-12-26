@@ -20,11 +20,14 @@ import os
 import argparse
 from concurrent import futures
 import queue
+import json
 
 import numpy
 from osgeo import gdal
 
 from rios import pixelgrid
+
+import monitoring
 
 
 gdal.UseExceptions()
@@ -47,6 +50,7 @@ def getCmdargs():
         help="Null value to use (default comes from input files)")
     p.add_argument("--nopyramids", default=False, action="store_true",
         help="Omit the pyramid layers (i.e. overviews)")
+    p.add_argument("--monitorjson", help="Output JSON file of monitoring info")
     cmdargs = p.parse_args()
     return cmdargs
 
@@ -56,10 +60,13 @@ def main():
     Main routine
     """
     cmdargs = getCmdargs()
+    monitors = monitoring.Monitoring()
 
     # Work out what we are going to do
     filelist = makeFilelist(cmdargs)
+    monitors.timestamps.stamp("imginfodict", monitoring.TS_START)
     imgInfoDict = makeImgInfoDict(filelist, cmdargs)
+    monitors.timestamps.stamp("imginfodict", monitoring.TS_END)
 
     outgrid = makeOutputGrid(filelist, imgInfoDict, cmdargs)
     outGeoTransform = outgrid.makeGeoTransform()
@@ -78,6 +85,7 @@ def main():
     # Now do it all, using concurrent threads to read blocks into a queue
     outImgInfo = makeOutImgInfo(imgInfoDict[filelist[0]], outgrid, cmdargs)
     outDs = openOutfile(cmdargs, outgrid, outImgInfo)
+    monitors.timestamps.stamp("domosaic", monitoring.TS_START)
     for bandNum in range(1, numBands + 1):
         with poolClass(max_workers=numThreads) as threadPool:
             workerList = []
@@ -88,13 +96,17 @@ def main():
                 workerList.append(worker)
 
             writeFunc(outgrid, cmdargs, blockQ, outDs, outImgInfo, bandNum,
-                    blockList, filesForBlock, workerList)
+                    blockList, filesForBlock, workerList, monitors)
+    monitors.timestamps.stamp("domosaic", monitoring.TS_END)
 
     outDs.SetGeoTransform(outGeoTransform)
     outDs.SetProjection(outImgInfo.projection)
     if not cmdargs.nopyramids:
         outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
-        
+
+    if cmdargs.monitorjson is not None:
+        with open(cmdargs.monitorjson, 'w') as f:
+            json.dump(monitors.reportAsDict(), f, indent=2)
 
 
 def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
@@ -107,7 +119,6 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
         blocksPerInfile.blockToDo(blockInfo.filename, blockInfo.outblock)
     gdalObjCache = GdalObjCache()
 
-    numBlocksToRead = len(blocksToRead)
     i = 0
     for blockInfo in blocksToRead:
         filename = blockInfo.filename
@@ -144,7 +155,7 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
 
 
 def writeFunc(outgrid, cmdargs, blockQ, outDs, outImgInfo, bandNum,
-                    blockList, filesForBlock, workerList):
+                    blockList, filesForBlock, workerList, monitors):
     """
     Loop over all blocks of the output grid, and write them.
 
@@ -198,6 +209,9 @@ def writeFunc(outgrid, cmdargs, blockQ, outDs, outImgInfo, bandNum,
                 i += 1
 
         checkReaderExceptions(workerList)
+
+        monitors.minMaxBlockCacheSize.update(len(blockCache))
+        monitors.minMaxBlockQueueSize.update(blockQ.qsize())
 
     band.SetNoDataValue(outImgInfo.nullVal)
 
@@ -500,7 +514,8 @@ class BlockSpec:
                 int(fileBottom))
 
     def __str__(self):
-        return "{} {} {} {}".format(self.top, self.left, self.xsize, self.ysize)
+        s = "{} {} {} {}".format(self.top, self.left, self.xsize, self.ysize)
+        return s
 
     # Define __hash__ and __eq__ so we can use these objects as
     # dictionary keys.
