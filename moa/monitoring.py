@@ -11,6 +11,10 @@ class Monitoring:
         self.minMaxBlockCacheSize = MinMax()
         self.minMaxBlockQueueSize = MinMax()
         self.timestamps = TimeStampSet()
+        self.params = {}
+
+    def setParam(self, name, value):
+        self.params[name] = value
 
     def reportAsDict(self):
         """
@@ -21,6 +25,7 @@ class Monitoring:
         d['minMaxBlockCacheSize'] = self.minMaxBlockCacheSize.minMax()
         d['minMaxBlockQueueSize'] = self.minMaxBlockQueueSize.minMax()
         d['timestamps'] = self.timestamps.stamps
+        d['params'] = self.params
         return d
 
 
