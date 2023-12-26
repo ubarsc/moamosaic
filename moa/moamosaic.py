@@ -402,7 +402,7 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
             if arr.shape != shp:
                 msg = ("Block array mismatch at block {}\n".format(
                        outblock) +
-                       "Inblock = {}\n".format(blockInfo.inblock)
+                       "Inblock = {}\n".format(blockInfo.inblock) +
                        "{}!={}\n{}".format(arr.shape, shp, filelist)
                        )
                 raise ValueError(msg)
