@@ -21,7 +21,10 @@ import sys
 import argparse
 import json
 
-from pystac_client import Client
+try:
+    from pystac_client import Client
+except ImportError:
+    Client = None
 
 from moa import moamosaic
 
@@ -41,6 +44,11 @@ def getCmdargs():
     Get command line arguments
     """
     p = argparse.ArgumentParser()
+    p.add_argument("--loadstacresults", help=("JSON file of pre-computed " +
+        "STAC search results (default will do search based on central tile " +
+        "and year)"))
+    p.add_argument("--savestacresults", help=("JSON file in which to save " +
+        "STAC search results (default will not save)"))
     p.add_argument("-c", "--centraltile", default="56JPQ",
         help="Nominated central tile (default=%(default)s)")
     p.add_argument("-l", "--listknowncentraltiles", default=False,
@@ -72,8 +80,13 @@ def getCmdargs():
 def main():
     cmdargs = getCmdargs()
 
-    tilesByDate = searchStac(cmdargs)
-    print("Found {} dates".format(len(tilesByDate)))
+    if cmdargs.loadstacresults is not None:
+        tilesByDate = json.load(open(cmdargs.loadstacresults))
+    else:
+        tilesByDate = searchStac(cmdargs)
+        print("Found {} dates".format(len(tilesByDate)))
+        if cmdargs.savestacresults is not None:
+            json.dump(tilesByDate, open(cmdargs.savestacresults, 'w'))
 
     mosaicJobList = genJoblist(tilesByDate)
     print("Made {} mosaic jobs".format(len(mosaicJobList)))
