@@ -34,10 +34,10 @@ def main():
     timeList = []
     for infileList in mosaicJobList:
         cmdList = ['gdal_merge.py', '-o', 'crap.tif', '-of', 'GTiff',
-            '-co', 'COMPRESS=DEFLATE', '-co', 'TILED=YES', 
-            '-co', 'BIGTIFF=IF_SAFER', '-co', 'INTERLEAVE=BAND',
-            '-n', '0', '-a_nodata', '0'
-        ] + infileList
+                     '-co', 'COMPRESS=DEFLATE', '-co', 'TILED=YES',
+                     '-co', 'BIGTIFF=IF_SAFER', '-co', 'INTERLEAVE=BAND',
+                     '-n', '0', '-a_nodata', '0'
+                  ] + infileList
 
         print(' '.join(cmdList))
         t0 = time.time()
