@@ -4,6 +4,7 @@ Run timings for gdal_merge.py, using similar mosaics to those
 in runmoatiming.py. This makes a comparable set of timings.
 
 """
+import os
 import argparse
 import json
 import time
