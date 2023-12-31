@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 This script is designed to generate sets of test data for the mosaic
 script. The aim is to have many different but equivalent sets of input
