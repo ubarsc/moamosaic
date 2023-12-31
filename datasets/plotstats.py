@@ -6,7 +6,7 @@ import argparse
 import json
 
 import numpy
-from matplotlib import pyplot
+from matplotlib import pyplot, markers
 
 
 def getCmdargs():
@@ -18,6 +18,8 @@ def getCmdargs():
     p.add_argument("--gdaltiming", help="JSON file of gdal_merge timings")
     p.add_argument("--plotfile",
         help="Name of output plot file (default plots to screen)")
+    p.add_argument("--confidence", default=90, type=int,
+        help="Confidence interval to show (in %) (default=%(default)s)")
     cmdargs = p.parse_args()
     return cmdargs
 
@@ -28,8 +30,17 @@ def main():
     """
     cmdargs = getCmdargs()
 
-    plotMoaTimings(cmdargs)
-    plotGdalmergeTimings(cmdargs)
+    figure = pyplot.figure(figsize=(8, 4))
+    pyplot.subplots_adjust(right=0.98, top=0.98, left=0.08, bottom=0.12)
+
+    confidence = cmdargs.confidence
+    confResidual = (100 - confidence) / 2
+    upper = 100 - confResidual
+    lower = confResidual
+    print(lower, upper)
+
+    plotMoaTimings(cmdargs, lower, upper)
+    plotGdalmergeTimings(cmdargs, lower, upper)
 
     pyplot.xlabel('Number of extra read threads')
     pyplot.ylabel('Elapsed time (seconds)')
@@ -41,7 +52,7 @@ def main():
         pyplot.show()
 
 
-def plotMoaTimings(cmdargs):
+def plotMoaTimings(cmdargs, lower, upper):
     """
     Plot the timing graph for moamosaic stats.
 
@@ -65,30 +76,35 @@ def plotMoaTimings(cmdargs):
     for numthreads in allNumthreads:
         allElapsed = numpy.array(timesByNumthreads[numthreads])
         elapsedStats[numthreads - 1, 0] = numpy.percentile(allElapsed, 50)
-        elapsedStats[numthreads - 1, 1] = numpy.percentile(allElapsed, 75)
-        elapsedStats[numthreads - 1, 2] = numpy.percentile(allElapsed, 25)
+        elapsedStats[numthreads - 1, 1] = numpy.percentile(allElapsed, upper)
+        elapsedStats[numthreads - 1, 2] = numpy.percentile(allElapsed, lower)
         elapsedStats[numthreads - 1, 3] = len(allElapsed)
 
     pyplot.plot(allNumthreads, elapsedStats[:, 0], linestyle='-', c='k',
-        label='Moamosaic (median)')
+        label='Moamosaic (median)', linewidth=0.8)
     pyplot.plot(allNumthreads, elapsedStats[:, 1], linestyle='--', c='k',
-        label='Moamosaic (quartiles)')
-    pyplot.plot(allNumthreads, elapsedStats[:, 2], linestyle='--', c='k')
+        label='Moamosaic ({}% confidence)'.format(cmdargs.confidence), 
+        linewidth=0.8)
+    pyplot.plot(allNumthreads, elapsedStats[:, 2], linestyle='--', c='k',
+        linewidth=0.8)
     pyplot.xticks(range(numThreadcounts + 1))
 
 
-def plotGdalmergeTimings(cmdargs):
+def plotGdalmergeTimings(cmdargs, lower, upper):
     """
     Plot gdal_merge timings
     """
     timeList = json.load(open(cmdargs.gdaltiming))
     median = numpy.percentile(timeList, 50)
-    quartiles = [numpy.percentile(timeList, 25),
-        numpy.percentile(timeList, 75)]
-    pyplot.plot([0], [median], linestyle=None, marker='X', c='k',
-        label="gdal_merge (median")
-    pyplot.plot([0, 0], quartiles, linestyle=None, marker='0', c='k',
-        label="gdal_merge (quartiles)")
+    quartiles = [numpy.percentile(timeList, lower),
+        numpy.percentile(timeList, upper)]
+    pyplot.scatter([0], [median], c='k', label="gdal_merge (median)",
+        marker=markers.MarkerStyle('x', fillstyle='none'),
+        linewidth=0.8)
+    pyplot.scatter([0, 0], quartiles, c='k',
+        label="gdal_merge ({}% confidence)".format(cmdargs.confidence),
+        marker=markers.MarkerStyle('o', fillstyle='none'),
+        linewidth=0.8)
 
 
 if __name__ == "__main__":
