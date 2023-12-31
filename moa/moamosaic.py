@@ -21,6 +21,7 @@ import argparse
 from concurrent import futures
 import queue
 import json
+from multiprocessing import cpu_count
 
 import numpy
 from osgeo import gdal
@@ -75,6 +76,7 @@ def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
     monitors = monitoring.Monitoring()
     monitors.setParam('numthreads', numthreads)
     monitors.setParam('blocksize', blocksize)
+    monitors.setParam('cpucount', cpu_count())
 
     # Work out what we are going to do
     monitors.setParam('numinfiles', len(filelist))
