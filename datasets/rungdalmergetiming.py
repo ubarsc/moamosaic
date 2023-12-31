@@ -45,7 +45,6 @@ def main():
                      '-n', '0', '-a_nodata', '0'
                   ] + infileList
 
-        print(' '.join(cmdList))
         t0 = time.time()
         subprocess.run(cmdList)
         t1 = time.time()
