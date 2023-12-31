@@ -125,6 +125,8 @@ def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
         with open(monitorjson, 'w') as f:
             json.dump(monitors.reportAsDict(), f, indent=2)
 
+    return monitors.reportAsDict()
+
 
 def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
     """
