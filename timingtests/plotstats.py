@@ -37,7 +37,6 @@ def main():
     confResidual = (100 - confidence) / 2
     upper = 100 - confResidual
     lower = confResidual
-    print(lower, upper)
 
     plotMoaTimings(cmdargs, lower, upper)
     plotGdalmergeTimings(cmdargs, lower, upper)
