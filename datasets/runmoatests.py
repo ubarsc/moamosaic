@@ -1,42 +1,20 @@
 #!/usr/bin/env python3
 """
-This script is designed to generate sets of test data for the mosaic
-script. The aim is to have many different but equivalent sets of input
-images which would all result in similar mosaics, but allowing us to
-run many different mosaics with distinct inputs, thus avoiding any
-caching of inputs which would invalidate timings of test runs.
+Run a series of moamosaic jobs, doing 3x3 tile mosaics of Sentinel-2
+inputs, for varying numbers of read threads.
 
-Make a series of mosaic input files. Starting point is the name and
-bounds of a central Sentinel-2 tile. This bounding box is queried
-via STAC to find the images forming a 3x3 mosaic around it. The central
-tile is one chosen to be in the centre of a Sentinel-2 swath, so that
-there is a sensible set of tiles surrounding it.
-
-The query is for a single year, and all the dates for those sets of tiles
-make up a series of mosaics, for band B02. The other 10m bands would
-make similar sets of mosaics, I might use them for extra sets later on.
+Input is a STAC search results file from searchStac.py.
+Output is a JSON file of monitoring information, containing timings and
+other info.
 
 """
-import sys
 import argparse
 import json
-
-try:
-    from pystac_client import Client
-except ImportError:
-    Client = None
 
 from moa import moamosaic
 
 
-# This holds the known central tile bounds, used for searching
-# with STAC. Bounds are in order given to pystac_client.
-centralTileBounds = {
-    '56JPQ': (153.98, -28.15, 155.1, -27.18)
-}
 bandList = ['B02', 'B03', 'B04', 'B08']
-stacServer = "https://earth-search.aws.element84.com/v1/"
-collection = "sentinel-2-l2a"
 
 
 def getCmdargs():
@@ -44,17 +22,8 @@ def getCmdargs():
     Get command line arguments
     """
     p = argparse.ArgumentParser()
-    p.add_argument("--loadstacresults", help=("JSON file of pre-computed " +
-        "STAC search results (default will do search based on central tile " +
-        "and year)"))
-    p.add_argument("--savestacresults", help=("JSON file in which to save " +
-        "STAC search results (default will not save)"))
-    p.add_argument("-c", "--centraltile", default="56JPQ",
-        help="Nominated central tile (default=%(default)s)")
-    p.add_argument("-l", "--listknowncentraltiles", default=False,
-        action="store_true", help="List known central tiles, and exit")
-    p.add_argument("-y", "--year", default=2023, type=int,
-        help="Year (default=%(default)s)")
+    p.add_argument("--stacresults", help=("JSON file of pre-computed " +
+        "STAC search results"))
     p.add_argument("--monitorjson", default="fullrun.stats.json",
         help="Name of JSON file to save monitoring info (default=%(default)s)")
     p.add_argument("--maxnumthreads", default=5, type=int,
@@ -65,28 +34,13 @@ def getCmdargs():
 
     cmdargs = p.parse_args()
 
-    if cmdargs.listknowncentraltiles:
-        for tile in centralTileBounds:
-            print(tile)
-        sys.exit()
-
-    if cmdargs.centraltile not in centralTileBounds:
-        msg = "Unknown central tile '{}'".format(cmdargs.centraltile)
-        raise ValueError(msg)
-
     return cmdargs
 
 
 def main():
     cmdargs = getCmdargs()
 
-    if cmdargs.loadstacresults is not None:
-        tilesByDate = json.load(open(cmdargs.loadstacresults))
-    else:
-        tilesByDate = searchStac(cmdargs)
-        print("Found {} dates".format(len(tilesByDate)))
-        if cmdargs.savestacresults is not None:
-            json.dump(tilesByDate, open(cmdargs.savestacresults, 'w'))
+    tilesByDate = json.load(open(cmdargs.stacresults))
 
     mosaicJobList = genJoblist(tilesByDate)
     print("Made {} mosaic jobs".format(len(mosaicJobList)))
@@ -118,31 +72,6 @@ def main():
         i += 1
 
     json.dump(monitorList, outf, indent=2)
-
-
-def searchStac(cmdargs):
-    """
-    Search the STAC server for suitable tiles. Return a dictionary
-    of tiles, keyed by date.
-    """
-    bbox = centralTileBounds[cmdargs.centraltile]
-
-    client = Client.open(stacServer)
-    results = client.search(collections=collection, bbox=bbox,
-        datetime='{year}-01-01/{year}-12-31'.format(year=cmdargs.year))
-    featureCollection = results.item_collection_as_dict()
-
-    tilesByDate = {}
-    for feature in featureCollection['features']:
-        props = feature['properties']
-        datestr = props['datetime'].split('T')[0]
-        tilename = props['grid:code'].split('-')[1]
-        path = props['earthsearch:s3_path']
-        nullPcnt = props['s2:nodata_pixel_percentage']
-        if datestr not in tilesByDate:
-            tilesByDate[datestr] = []
-        tilesByDate[datestr].append((tilename, path, tilename, nullPcnt))
-    return tilesByDate
 
 
 def genFilelist(tileList, band):
