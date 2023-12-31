@@ -98,8 +98,10 @@ def main():
                 numthreads, cmdargs.blocksize, driver, nullval,
                 nopyramids, monitorjson)
             monitorList.append(monitorDict)
+            print("Done job", i)
         except Exception as e:
             print("Exception {} for job {}".format(e, i))
+
         i += 1
 
     json.dump(monitorList, outf, indent=2)
