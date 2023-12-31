@@ -19,8 +19,11 @@ make similar sets of mosaics, I might use them for extra sets later on.
 """
 import sys
 import argparse
+import json
 
 from pystac_client import Client
+
+from moa import moamosaic
 
 
 # This holds the known central tile bounds, used for searching
@@ -28,6 +31,7 @@ from pystac_client import Client
 centralTileBounds = {
     '56JPQ': (153.98, -28.15, 155.1, -27.18)
 }
+bandList = ['B02', 'B03', 'B04', 'B08']
 stacServer = "https://earth-search.aws.element84.com/v1/"
 collection = "sentinel-2-l2a"
 
@@ -43,12 +47,16 @@ def getCmdargs():
         action="store_true", help="List known central tiles, and exit")
     p.add_argument("-y", "--year", default=2023, type=int,
         help="Year (default=%(default)s)")
+    p.add_argument("--monitorjson", default="fullrun.stats.json",
+        help="Name of JSON file to save monitoring info (default=%(default)s)")
+    p.add_argument("--maxnumthreads", default=5, type=int,
+        help=("Maximum number of threads to use in mosaic runs " +
+                "(default=%(default)s)"))
+    p.add_argument("--blocksize", default=1024, type=int,
+        help="Blocksize (in pixels) (default=%(default)s)")
+
     cmdargs = p.parse_args()
-    return cmdargs
 
-
-def main():
-    cmdargs = getCmdargs()
     if cmdargs.listknowncentraltiles:
         for tile in centralTileBounds:
             print(tile)
@@ -58,6 +66,50 @@ def main():
         msg = "Unknown central tile '{}'".format(cmdargs.centraltile)
         raise ValueError(msg)
 
+    return cmdargs
+
+
+def main():
+    cmdargs = getCmdargs()
+
+    tilesByDate = searchStac(cmdargs)
+    print("Found {} dates".format(len(tilesByDate)))
+
+    mosaicJobList = genJoblist(tilesByDate)
+    print("Made {} mosaic jobs".format(len(mosaicJobList)))
+
+    # For each value of numthreads, do this many mosaic jobs, to make a
+    # population of runtimes.
+    runsPerThreadcount = len(mosaicJobList) // cmdargs.maxnumthreads
+
+    driver = "GTiff"
+    outfile = "crap.tif"
+    nopyramids = True
+    monitorjson = None
+    nullval = 0
+    outf = open(cmdargs.monitorjson, 'w')
+
+    monitorList = []
+    i = 0
+    for infileList in mosaicJobList:
+        try:
+            numthreads = i // runsPerThreadcount + 1
+            monitorDict = moamosaic.doMosaic(infileList, outfile,
+                numthreads, cmdargs.blocksize, driver, nullval,
+                nopyramids, monitorjson)
+            monitorList.append(monitorDict)
+        except Exception as e:
+            print("Exception {} for job {}".format(e, i))
+        i += 1
+
+    json.dump(monitorList, outf, indent=2)
+
+
+def searchStac(cmdargs):
+    """
+    Search the STAC server for suitable tiles. Return a dictionary
+    of tiles, keyed by date.
+    """
     bbox = centralTileBounds[cmdargs.centraltile]
 
     client = Client.open(stacServer)
@@ -71,24 +123,36 @@ def main():
         datestr = props['datetime'].split('T')[0]
         tilename = props['grid:code'].split('-')[1]
         path = props['earthsearch:s3_path']
+        nullPcnt = props['s2:nodata_pixel_percentage']
         if datestr not in tilesByDate:
             tilesByDate[datestr] = []
-        tilesByDate[datestr].append((tilename, path))
-    print("Found {} dates".format(len(tilesByDate)))
+        tilesByDate[datestr].append((tilename, path, tilename, nullPcnt))
+    return tilesByDate
 
+
+def genFilelist(tileList, band):
+    filelist = []
+    for (tilename, path, tilename, nullPcnt) in tileList:
+        vsiPath = path.replace("s3:/", "/vsis3")
+        fn = "{}/{}.tif".format(vsiPath, band)
+        filelist.append(fn)
+    return filelist
+
+
+def genJoblist(tilesByDate):
+    """
+    Generate a list of mosaic jobs to do. Each job is a list of
+    nine adjacent tiles for a given date and band. Return a list
+    of these lists.
+    """
     datelist = sorted(tilesByDate.keys())
+    mosaicJobList = []
     for date in datelist:
         if len(tilesByDate[date]) == 9:
-            writeOutfile(cmdargs.centraltile, date, tilesByDate[date])
-
-
-def writeOutfile(centraltile, date, tileList):
-    filename = "{}-3x3_{}.txt".format(centraltile, date)
-    f = open(filename, 'w')
-    for (tilename, path) in tileList:
-        vsiPath = path.replace("s3:/", "/vsis3")
-        f.write("{}/B02.tif\n".format(vsiPath))
-    f.close()
+            for band in bandList:
+                filelist = genFilelist(tilesByDate[date], band)
+                mosaicJobList.append(filelist)
+    return mosaicJobList
 
 
 if __name__ == "__main__":
