@@ -31,9 +31,14 @@ def main():
     # Limit to 40 jobs
     mosaicJobList = mosaicJobList[:40]
 
+    outfile = 'crap.tif'
+
     timeList = []
     for infileList in mosaicJobList:
-        cmdList = ['gdal_merge.py', '-o', 'crap.tif', '-of', 'GTiff',
+        if os.path.exists(outfile):
+            os.remove(outfile)
+
+        cmdList = ['gdal_merge.py', '-o', outfile, '-of', 'GTiff',
                      '-co', 'COMPRESS=DEFLATE', '-co', 'TILED=YES',
                      '-co', 'BIGTIFF=IF_SAFER', '-co', 'INTERLEAVE=BAND',
                      '-n', '0', '-a_nodata', '0'
