@@ -29,16 +29,30 @@ from osgeo.gdal_array import GDALTypeCodeToNumericTypeCode
 
 from rios import pixelgrid
 
-from . import monitoring
+from moa import monitoring
 
 
 gdal.UseExceptions()
+
+
+# Some default values
+DFLT_NUMTHREADS = 4
+DFLT_BLOCKSIZE = 1024
+DFLT_DRIVER = "GTiff"
+defaultCreationOptions = {
+    'GTiff': ['COMPRESS=DEFLATE', 'TILED=YES', 'BIGTIFF=IF_SAFER',
+        'INTERLEAVE=BAND'],
+    'KEA': [],
+    'HFA': ['COMPRESS=YES', 'IGNORE_UTM=TRUE']
+}
 
 
 def getCmdargs():
     """
     Get command line arguments
     """
+    knownDrivers = ','.join(defaultCreationOptions.keys())
+
     p = argparse.ArgumentParser()
     p.add_argument("-i", "--infilelist", help="Text file list of input images")
     p.add_argument("-n", "--numthreads", type=int, default=4,
@@ -48,6 +62,11 @@ def getCmdargs():
     p.add_argument("-d", "--driver", default="GTiff",
         help="GDAL driver to use for output file (default=%(default)s)")
     p.add_argument("-o", "--outfile", help="Name of output raster")
+    p.add_argument("--creationoption", action="append",
+        help=("Specify a GDAL creation option (as 'NAME=VALUE'). Can be " +
+              "given multiple times. There are sensible default creation " +
+              "options for some drivers ({}), but if this option is used, " +
+              "those are ignored.").format(knownDrivers))
     p.add_argument("--nullval", type=int,
         help="Null value to use (default comes from input files)")
     p.add_argument("--nopyramids", default=False, action="store_true",
@@ -63,17 +82,22 @@ def mainCmd():
     """
     cmdargs = getCmdargs()
     filelist = makeFilelist(cmdargs.infilelist)
-    monitorDict = doMosaic(filelist, cmdargs.outfile, cmdargs.numthreads,
-        cmdargs.blocksize, cmdargs.driver, cmdargs.nullval,
-        cmdargs.nopyramids)
+    monitorDict = doMosaic(filelist, cmdargs.outfile,
+            numthreads=cmdargs.numthreads,
+            blocksize=cmdargs.blocksize,
+            driver=cmdargs.driver,
+            nullval=cmdargs.nullval,
+            nopyramids=cmdargs.nopyramids,
+            creationoptions=cmdargs.creationoption)
 
     if cmdargs.monitorjson is not None:
         with open(cmdargs.monitorjson, 'w') as f:
             json.dump(monitorDict, f, indent=2)
 
 
-def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
-        nopyramids):
+def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
+        blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
+        nopyramids=False, creationoptions=None):
     """
     Main routine, callable from non-commandline context
     """
@@ -108,7 +132,7 @@ def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
 
     # Now do it all, using concurrent threads to read blocks into a queue
     outImgInfo = makeOutImgInfo(imgInfoDict[filelist[0]], outgrid, nullval)
-    outDs = openOutfile(outfile, driver, outgrid, outImgInfo)
+    outDs = openOutfile(outfile, driver, outgrid, outImgInfo, creationoptions)
     monitors.timestamps.stamp("domosaic", monitoring.TS_START)
     for bandNum in range(1, numBands + 1):
         with poolClass(max_workers=numthreads) as threadPool:
@@ -432,21 +456,15 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
     return allInputsForBlock
 
 
-def openOutfile(outfile, driver, outgrid, outImgInfo):
+def openOutfile(outfile, driver, outgrid, outImgInfo, creationoptions):
     """
     Open the output file
     """
-    creationOptions = {
-        'GTiff': ['COMPRESS=DEFLATE', 'TILED=YES', 'BIGTIFF=IF_SAFER',
-            'INTERLEAVE=BAND'],
-        'KEA': [],
-        'HFA': ['COMPRESS=YES', 'IGNORE_UTM=TRUE']
-    }
-
     (nrows, ncols) = outgrid.getDimensions()
     numBands = outImgInfo.numBands
     datatype = outImgInfo.dataType
-    options = creationOptions[driver]
+    if creationoptions is None:
+        creationoptions = defaultCreationOptions[driver]
     drvr = gdal.GetDriverByName(driver)
     if drvr is None:
         msg = "Driver {} not supported in this version of GDAL".format(driver)
@@ -455,7 +473,7 @@ def openOutfile(outfile, driver, outgrid, outImgInfo):
     if os.path.exists(outfile):
         drvr.Delete(outfile)
     ds = drvr.Create(outfile, ncols, nrows, numBands, datatype,
-        options)
+        creationoptions)
     return ds
 
 
