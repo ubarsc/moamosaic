@@ -29,7 +29,7 @@ from osgeo.gdal_array import GDALTypeCodeToNumericTypeCode
 
 from rios import pixelgrid
 
-from moa import monitoring
+from . import monitoring
 
 
 gdal.UseExceptions()
