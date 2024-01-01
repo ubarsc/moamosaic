@@ -63,13 +63,17 @@ def mainCmd():
     """
     cmdargs = getCmdargs()
     filelist = makeFilelist(cmdargs.infilelist)
-    doMosaic(filelist, cmdargs.outfile, cmdargs.numthreads, cmdargs.blocksize,
-        cmdargs.driver, cmdargs.nullval, cmdargs.nopyramids,
-        cmdargs.monitorjson)
+    monitorDict = doMosaic(filelist, cmdargs.outfile, cmdargs.numthreads,
+        cmdargs.blocksize, cmdargs.driver, cmdargs.nullval,
+        cmdargs.nopyramids)
+
+    if cmdargs.monitorjson is not None:
+        with open(cmdargs.monitorjson, 'w') as f:
+            json.dump(monitorDict, f, indent=2)
 
 
 def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
-        nopyramids, monitorjson):
+        nopyramids):
     """
     Main routine, callable from non-commandline context
     """
@@ -120,10 +124,6 @@ def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
     outDs.SetProjection(outImgInfo.projection)
     if not nopyramids:
         outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
-
-    if monitorjson is not None:
-        with open(monitorjson, 'w') as f:
-            json.dump(monitors.reportAsDict(), f, indent=2)
 
     return monitors.reportAsDict()
 
