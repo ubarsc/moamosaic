@@ -43,7 +43,7 @@ def main():
                      '-co', 'COMPRESS=DEFLATE', '-co', 'TILED=YES',
                      '-co', 'BIGTIFF=IF_SAFER', '-co', 'INTERLEAVE=BAND',
                      '-n', '0', '-a_nodata', '0'
-                  ] + infileList
+                   ] + infileList
 
         t0 = time.time()
         subprocess.run(cmdList)
