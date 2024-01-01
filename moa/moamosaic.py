@@ -150,7 +150,9 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     outDs.SetGeoTransform(outGeoTransform)
     outDs.SetProjection(outImgInfo.projection)
     if not nopyramids:
+        monitors.timestamps.stamp("pyramids", monitoring.TS_START)
         outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
+        monitors.timestamps.stamp("pyramids", monitoring.TS_END)
 
     return monitors.reportAsDict()
 
