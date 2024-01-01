@@ -351,20 +351,6 @@ def makeImgInfoDict(filelist, numthreads):
     Create ImageInfo objects for all the given input files.
     Store these in a dictionary, keyed by their filenames.
     """
-    # I originally had the following elegant multi-threaded implementation
-    # of this. However, for reasons which are not at all clear to me,
-    # this does not play well with the HDF5 library. So, if the input
-    # files are KEA format files, this code throws up lots of scary
-    # error messages from deep within the HDF5 library. So, I have disabled
-    # this, in favour of a simple sequential version. Hopefully it does not
-    # make much difference. It worked fine with GTiff inputs.
-    #
-    # poolClass = futures.ThreadPoolExecutor
-    # with poolClass(max_workers=numthreads) as threadPool:
-    #     imgInfoList = threadPool.map(ImageInfo, filelist)
-    #
-    # imgInfoDict = {fn: info for (fn, info) in zip(filelist, imgInfoList)}
-
     imgInfoDict = {}
     for filename in filelist:
         imgInfoDict[filename] = ImageInfo(filename)
