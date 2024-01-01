@@ -1,0 +1,4802 @@
+[
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704007555.0979538,
+      "imginfodict:end": 1704007556.8111207,
+      "analysis:start": 1704007556.8111234,
+      "analysis:end": 1704007556.8682554,
+      "domosaic:start": 1704007556.8693573,
+      "domosaic:end": 1704007687.232665
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      7
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704007689.9064443,
+      "imginfodict:end": 1704007691.265228,
+      "analysis:start": 1704007691.2652314,
+      "analysis:end": 1704007691.3187401,
+      "domosaic:start": 1704007691.470091,
+      "domosaic:end": 1704007820.444319
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704007823.0564997,
+      "imginfodict:end": 1704007824.226242,
+      "analysis:start": 1704007824.2262459,
+      "analysis:end": 1704007824.2800212,
+      "domosaic:start": 1704007824.4323149,
+      "domosaic:end": 1704007958.373049
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704007961.000065,
+      "imginfodict:end": 1704007962.1955664,
+      "analysis:start": 1704007962.1955705,
+      "analysis:end": 1704007962.2702036,
+      "domosaic:start": 1704007962.424017,
+      "domosaic:end": 1704008092.7092865
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008095.3554554,
+      "imginfodict:end": 1704008096.8486462,
+      "analysis:start": 1704008096.8486493,
+      "analysis:end": 1704008096.902272,
+      "domosaic:start": 1704008097.054914,
+      "domosaic:end": 1704008225.4213214
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      9
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008228.7846575,
+      "imginfodict:end": 1704008230.1351597,
+      "analysis:start": 1704008230.1351635,
+      "analysis:end": 1704008230.1918554,
+      "domosaic:start": 1704008230.3299289,
+      "domosaic:end": 1704008353.3873677
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      7
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008356.814453,
+      "imginfodict:end": 1704008358.1648993,
+      "analysis:start": 1704008358.1649027,
+      "analysis:end": 1704008358.2188559,
+      "domosaic:start": 1704008358.3591032,
+      "domosaic:end": 1704008479.231372
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      7
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008482.7836764,
+      "imginfodict:end": 1704008483.9834356,
+      "analysis:start": 1704008483.9834392,
+      "analysis:end": 1704008484.0392344,
+      "domosaic:start": 1704008484.180665,
+      "domosaic:end": 1704008602.4732862
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      12
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008606.0880103,
+      "imginfodict:end": 1704008607.5948005,
+      "analysis:start": 1704008607.594804,
+      "analysis:end": 1704008607.6490731,
+      "domosaic:start": 1704008607.7877555,
+      "domosaic:end": 1704008715.013537
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008718.5300636,
+      "imginfodict:end": 1704008719.7324393,
+      "analysis:start": 1704008719.7324429,
+      "analysis:end": 1704008719.7955866,
+      "domosaic:start": 1704008719.946053,
+      "domosaic:end": 1704008823.519902
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008826.8760037,
+      "imginfodict:end": 1704008827.9805806,
+      "analysis:start": 1704008827.9805844,
+      "analysis:end": 1704008828.0354133,
+      "domosaic:start": 1704008828.1612823,
+      "domosaic:end": 1704008934.1888855
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      12
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704008937.4253435,
+      "imginfodict:end": 1704008938.636531,
+      "analysis:start": 1704008938.6365342,
+      "analysis:end": 1704008938.6912544,
+      "domosaic:start": 1704008938.8207867,
+      "domosaic:end": 1704009045.665558
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009048.9583747,
+      "imginfodict:end": 1704009050.405392,
+      "analysis:start": 1704009050.4053957,
+      "analysis:end": 1704009050.467509,
+      "domosaic:start": 1704009050.593437,
+      "domosaic:end": 1704009167.8388753
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      7
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009170.7481477,
+      "imginfodict:end": 1704009171.8620927,
+      "analysis:start": 1704009171.8620963,
+      "analysis:end": 1704009171.9158192,
+      "domosaic:start": 1704009172.0630054,
+      "domosaic:end": 1704009289.7073164
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009292.4349058,
+      "imginfodict:end": 1704009293.581445,
+      "analysis:start": 1704009293.581448,
+      "analysis:end": 1704009293.6368937,
+      "domosaic:start": 1704009293.7885363,
+      "domosaic:end": 1704009411.3444955
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      5
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009414.0137715,
+      "imginfodict:end": 1704009415.112803,
+      "analysis:start": 1704009415.1128066,
+      "analysis:end": 1704009415.170069,
+      "domosaic:start": 1704009415.317245,
+      "domosaic:end": 1704009536.927847
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009539.63135,
+      "imginfodict:end": 1704009541.0042799,
+      "analysis:start": 1704009541.0042837,
+      "analysis:end": 1704009541.061312,
+      "domosaic:start": 1704009541.2059739,
+      "domosaic:end": 1704009670.951105
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      5
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009673.6220775,
+      "imginfodict:end": 1704009674.8514829,
+      "analysis:start": 1704009674.8514864,
+      "analysis:end": 1704009674.906566,
+      "domosaic:start": 1704009675.057514,
+      "domosaic:end": 1704009815.2493427
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      5
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009817.8624692,
+      "imginfodict:end": 1704009819.0466607,
+      "analysis:start": 1704009819.046664,
+      "analysis:end": 1704009819.1036382,
+      "domosaic:start": 1704009819.2566,
+      "domosaic:end": 1704009963.7409897
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      4
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704009966.3636029,
+      "imginfodict:end": 1704009967.6197422,
+      "analysis:start": 1704009967.619746,
+      "analysis:end": 1704009967.6743855,
+      "domosaic:start": 1704009967.8261,
+      "domosaic:end": 1704010105.961004
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      9
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010108.5963027,
+      "imginfodict:end": 1704010110.52075,
+      "analysis:start": 1704010110.5207534,
+      "analysis:end": 1704010110.5845413,
+      "domosaic:start": 1704010110.7369354,
+      "domosaic:end": 1704010243.1089382
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010245.9869983,
+      "imginfodict:end": 1704010247.1599271,
+      "analysis:start": 1704010247.1599305,
+      "analysis:end": 1704010247.214461,
+      "domosaic:start": 1704010247.365389,
+      "domosaic:end": 1704010379.856349
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      5
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010382.7818325,
+      "imginfodict:end": 1704010384.1599326,
+      "analysis:start": 1704010384.1599362,
+      "analysis:end": 1704010384.2154286,
+      "domosaic:start": 1704010384.3705394,
+      "domosaic:end": 1704010516.9717996
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      5
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010519.6978962,
+      "imginfodict:end": 1704010520.869521,
+      "analysis:start": 1704010520.8695242,
+      "analysis:end": 1704010520.924301,
+      "domosaic:start": 1704010521.0799713,
+      "domosaic:end": 1704010654.5240335
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      11
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010657.2867806,
+      "imginfodict:end": 1704010658.7717822,
+      "analysis:start": 1704010658.7717855,
+      "analysis:end": 1704010658.8259277,
+      "domosaic:start": 1704010658.9777877,
+      "domosaic:end": 1704010790.7040267
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      13
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010793.74692,
+      "imginfodict:end": 1704010794.9960778,
+      "analysis:start": 1704010794.9960816,
+      "analysis:end": 1704010795.0548623,
+      "domosaic:start": 1704010795.1972554,
+      "domosaic:end": 1704010926.0929837
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704010929.1844199,
+      "imginfodict:end": 1704010930.4161282,
+      "analysis:start": 1704010930.4161308,
+      "analysis:end": 1704010930.4704819,
+      "domosaic:start": 1704010930.614352,
+      "domosaic:end": 1704011062.2051797
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      11
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011065.265095,
+      "imginfodict:end": 1704011066.5939777,
+      "analysis:start": 1704011066.5939815,
+      "analysis:end": 1704011066.6488924,
+      "domosaic:start": 1704011066.7919385,
+      "domosaic:end": 1704011198.515463
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011201.6220033,
+      "imginfodict:end": 1704011203.5065622,
+      "analysis:start": 1704011203.5065658,
+      "analysis:end": 1704011203.5696747,
+      "domosaic:start": 1704011203.7184837,
+      "domosaic:end": 1704011331.9354186
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011334.8385851,
+      "imginfodict:end": 1704011336.1756382,
+      "analysis:start": 1704011336.1756413,
+      "analysis:end": 1704011336.2303414,
+      "domosaic:start": 1704011336.5346358,
+      "domosaic:end": 1704011463.292678
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011466.1776526,
+      "imginfodict:end": 1704011467.4736288,
+      "analysis:start": 1704011467.4736323,
+      "analysis:end": 1704011467.528536,
+      "domosaic:start": 1704011467.6627817,
+      "domosaic:end": 1704011589.8376486
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      9
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011592.6765835,
+      "imginfodict:end": 1704011594.1765642,
+      "analysis:start": 1704011594.1765673,
+      "analysis:end": 1704011594.231163,
+      "domosaic:start": 1704011594.3589272,
+      "domosaic:end": 1704011720.352604
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      11
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011723.310497,
+      "imginfodict:end": 1704011725.0517523,
+      "analysis:start": 1704011725.0517557,
+      "analysis:end": 1704011725.1108165,
+      "domosaic:start": 1704011725.2358584,
+      "domosaic:end": 1704011843.3837252
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      16
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011846.9767084,
+      "imginfodict:end": 1704011848.229328,
+      "analysis:start": 1704011848.2293315,
+      "analysis:end": 1704011848.2840793,
+      "domosaic:start": 1704011848.4150774,
+      "domosaic:end": 1704011963.0196738
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      19
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704011966.3580563,
+      "imginfodict:end": 1704011967.4414976,
+      "analysis:start": 1704011967.441501,
+      "analysis:end": 1704011967.4964561,
+      "domosaic:start": 1704011967.6295319,
+      "domosaic:end": 1704012078.6395721
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      14
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012082.0352774,
+      "imginfodict:end": 1704012083.1223707,
+      "analysis:start": 1704012083.1223752,
+      "analysis:end": 1704012083.176816,
+      "domosaic:start": 1704012083.3079317,
+      "domosaic:end": 1704012197.8997996
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      33
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012201.2018576,
+      "imginfodict:end": 1704012202.5791054,
+      "analysis:start": 1704012202.5791082,
+      "analysis:end": 1704012202.6425605,
+      "domosaic:start": 1704012202.774405,
+      "domosaic:end": 1704012309.446243
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      67
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012314.2655208,
+      "imginfodict:end": 1704012315.4221127,
+      "analysis:start": 1704012315.4221165,
+      "analysis:end": 1704012315.4818501,
+      "domosaic:start": 1704012315.5989118,
+      "domosaic:end": 1704012418.4251776
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      50
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012423.331577,
+      "imginfodict:end": 1704012424.473827,
+      "analysis:start": 1704012424.4738302,
+      "analysis:end": 1704012424.5309012,
+      "domosaic:start": 1704012424.6494117,
+      "domosaic:end": 1704012518.6091485
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      3
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      51
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012523.5091512,
+      "imginfodict:end": 1704012524.6374466,
+      "analysis:start": 1704012524.63745,
+      "analysis:end": 1704012524.6924975,
+      "domosaic:start": 1704012524.7953503,
+      "domosaic:end": 1704012620.9421506
+    },
+    "params": {
+      "numthreads": 1,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      96
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012625.9207664,
+      "imginfodict:end": 1704012627.033702,
+      "analysis:start": 1704012627.0337055,
+      "analysis:end": 1704012627.0905433,
+      "domosaic:start": 1704012627.1943283,
+      "domosaic:end": 1704012698.7838466
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      26
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      167
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012703.3905509,
+      "imginfodict:end": 1704012704.1993423,
+      "analysis:start": 1704012704.1993454,
+      "analysis:end": 1704012704.2619276,
+      "domosaic:start": 1704012704.4037118,
+      "domosaic:end": 1704012780.302397
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      28
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      322
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012785.1154506,
+      "imginfodict:end": 1704012785.956703,
+      "analysis:start": 1704012785.9567063,
+      "analysis:end": 1704012786.0125308,
+      "domosaic:start": 1704012786.1337903,
+      "domosaic:end": 1704012861.205822
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      28
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      254
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012866.2136796,
+      "imginfodict:end": 1704012867.034382,
+      "analysis:start": 1704012867.034386,
+      "analysis:end": 1704012867.0918503,
+      "domosaic:start": 1704012867.1976464,
+      "domosaic:end": 1704012932.8234956
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      75
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704012938.023296,
+      "imginfodict:end": 1704012939.0857453,
+      "analysis:start": 1704012939.0857487,
+      "analysis:end": 1704012939.1521778,
+      "domosaic:start": 1704012939.248816,
+      "domosaic:end": 1704012999.1956728
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      25
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      66
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013005.9620996,
+      "imginfodict:end": 1704013006.8169818,
+      "analysis:start": 1704013006.8169856,
+      "analysis:end": 1704013006.8722935,
+      "domosaic:start": 1704013006.9889889,
+      "domosaic:end": 1704013068.8665767
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      72
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013075.946747,
+      "imginfodict:end": 1704013076.7795515,
+      "analysis:start": 1704013076.7795548,
+      "analysis:end": 1704013076.8355162,
+      "domosaic:start": 1704013076.9483805,
+      "domosaic:end": 1704013136.735247
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      65
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013143.882726,
+      "imginfodict:end": 1704013144.6296184,
+      "analysis:start": 1704013144.6296215,
+      "analysis:end": 1704013144.6848826,
+      "domosaic:start": 1704013144.7952912,
+      "domosaic:end": 1704013205.2418165
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      23
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      12
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013212.0710688,
+      "imginfodict:end": 1704013213.0636342,
+      "analysis:start": 1704013213.0636377,
+      "analysis:end": 1704013213.1183608,
+      "domosaic:start": 1704013213.2307124,
+      "domosaic:end": 1704013284.9090943
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013288.0069144,
+      "imginfodict:end": 1704013288.8634737,
+      "analysis:start": 1704013288.863477,
+      "analysis:end": 1704013288.9189572,
+      "domosaic:start": 1704013289.058481,
+      "domosaic:end": 1704013361.102375
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      27
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013364.0136616,
+      "imginfodict:end": 1704013364.851098,
+      "analysis:start": 1704013364.8511007,
+      "analysis:end": 1704013364.9071867,
+      "domosaic:start": 1704013365.0449505,
+      "domosaic:end": 1704013441.3910406
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013444.3710241,
+      "imginfodict:end": 1704013445.2821867,
+      "analysis:start": 1704013445.2821898,
+      "analysis:end": 1704013445.3371797,
+      "domosaic:start": 1704013445.4751987,
+      "domosaic:end": 1704013519.9783926
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      42
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013522.9458666,
+      "imginfodict:end": 1704013524.0050874,
+      "analysis:start": 1704013524.0050914,
+      "analysis:end": 1704013524.0835638,
+      "domosaic:start": 1704013524.240904,
+      "domosaic:end": 1704013593.7869523
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      21
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      50
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013598.7615387,
+      "imginfodict:end": 1704013599.5953777,
+      "analysis:start": 1704013599.5953815,
+      "analysis:end": 1704013599.6514204,
+      "domosaic:start": 1704013599.7790895,
+      "domosaic:end": 1704013671.559978
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      67
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013676.5052087,
+      "imginfodict:end": 1704013677.3282013,
+      "analysis:start": 1704013677.3282049,
+      "analysis:end": 1704013677.3830454,
+      "domosaic:start": 1704013677.5110624,
+      "domosaic:end": 1704013746.5337527
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      28
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013751.7360787,
+      "imginfodict:end": 1704013752.555029,
+      "analysis:start": 1704013752.555032,
+      "analysis:end": 1704013752.615091,
+      "domosaic:start": 1704013752.9470873,
+      "domosaic:end": 1704013821.6809566
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      9
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013826.9021122,
+      "imginfodict:end": 1704013828.040719,
+      "analysis:start": 1704013828.0407224,
+      "analysis:end": 1704013828.0978324,
+      "domosaic:start": 1704013828.2160602,
+      "domosaic:end": 1704013903.0791028
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013906.1017184,
+      "imginfodict:end": 1704013906.894779,
+      "analysis:start": 1704013906.8947823,
+      "analysis:end": 1704013906.9489193,
+      "domosaic:start": 1704013907.08747,
+      "domosaic:end": 1704013983.0611007
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      25
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704013986.0812771,
+      "imginfodict:end": 1704013986.9499378,
+      "analysis:start": 1704013986.9499412,
+      "analysis:end": 1704013987.0054333,
+      "domosaic:start": 1704013987.1461506,
+      "domosaic:end": 1704014060.968364
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014063.8396924,
+      "imginfodict:end": 1704014064.7321997,
+      "analysis:start": 1704014064.732203,
+      "analysis:end": 1704014064.78624,
+      "domosaic:start": 1704014064.9191964,
+      "domosaic:end": 1704014136.5037663
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      23
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      112
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014139.5041878,
+      "imginfodict:end": 1704014140.5941017,
+      "analysis:start": 1704014140.5941055,
+      "analysis:end": 1704014140.6492581,
+      "domosaic:start": 1704014140.787715,
+      "domosaic:end": 1704014217.2503917
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      28
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      201
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014225.125508,
+      "imginfodict:end": 1704014225.9672685,
+      "analysis:start": 1704014225.9672713,
+      "analysis:end": 1704014226.0392795,
+      "domosaic:start": 1704014226.1502764,
+      "domosaic:end": 1704014306.2243454
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      23
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      221
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014314.840406,
+      "imginfodict:end": 1704014315.7602682,
+      "analysis:start": 1704014315.7602713,
+      "analysis:end": 1704014315.8157854,
+      "domosaic:start": 1704014315.9156437,
+      "domosaic:end": 1704014393.7130456
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      28
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      253
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014403.0139208,
+      "imginfodict:end": 1704014403.7984893,
+      "analysis:start": 1704014403.7984931,
+      "analysis:end": 1704014403.8535018,
+      "domosaic:start": 1704014403.9392083,
+      "domosaic:end": 1704014478.8451328
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      27
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      24
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014487.4533074,
+      "imginfodict:end": 1704014488.4393454,
+      "analysis:start": 1704014488.4393487,
+      "analysis:end": 1704014488.496515,
+      "domosaic:start": 1704014488.5802326,
+      "domosaic:end": 1704014555.8339667
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      20
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014560.5960364,
+      "imginfodict:end": 1704014561.4433858,
+      "analysis:start": 1704014561.443389,
+      "analysis:end": 1704014561.4994893,
+      "domosaic:start": 1704014561.6261466,
+      "domosaic:end": 1704014630.946246
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      21
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      38
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014636.206728,
+      "imginfodict:end": 1704014637.0441735,
+      "analysis:start": 1704014637.0441768,
+      "analysis:end": 1704014637.1011894,
+      "domosaic:start": 1704014637.2263327,
+      "domosaic:end": 1704014703.2661083
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      27
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      49
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014708.8646102,
+      "imginfodict:end": 1704014709.7319613,
+      "analysis:start": 1704014709.731965,
+      "analysis:end": 1704014709.792678,
+      "domosaic:start": 1704014709.932493,
+      "domosaic:end": 1704014776.0039027
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014781.7268891,
+      "imginfodict:end": 1704014782.6957684,
+      "analysis:start": 1704014782.6957712,
+      "analysis:end": 1704014782.750518,
+      "domosaic:start": 1704014782.8722637,
+      "domosaic:end": 1704014850.8448164
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      32
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      9
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014854.2874744,
+      "imginfodict:end": 1704014855.073499,
+      "analysis:start": 1704014855.0735023,
+      "analysis:end": 1704014855.140867,
+      "domosaic:start": 1704014855.2771282,
+      "domosaic:end": 1704014921.8196163
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      21
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      12
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014924.88685,
+      "imginfodict:end": 1704014925.7762544,
+      "analysis:start": 1704014925.776258,
+      "analysis:end": 1704014925.8315017,
+      "domosaic:start": 1704014925.9609828,
+      "domosaic:end": 1704014993.1262608
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      13
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704014996.5914807,
+      "imginfodict:end": 1704014997.4432204,
+      "analysis:start": 1704014997.443224,
+      "analysis:end": 1704014997.4984567,
+      "domosaic:start": 1704014997.6312943,
+      "domosaic:end": 1704015067.3244698
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      13
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015070.354692,
+      "imginfodict:end": 1704015071.480062,
+      "analysis:start": 1704015071.4800653,
+      "analysis:end": 1704015071.536643,
+      "domosaic:start": 1704015071.6679804,
+      "domosaic:end": 1704015139.571113
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      25
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      17
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015142.4480681,
+      "imginfodict:end": 1704015143.292851,
+      "analysis:start": 1704015143.2928548,
+      "analysis:end": 1704015143.3472216,
+      "domosaic:start": 1704015143.4729729,
+      "domosaic:end": 1704015210.4948976
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      27
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      35
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015213.3173842,
+      "imginfodict:end": 1704015214.1208901,
+      "analysis:start": 1704015214.1208937,
+      "analysis:end": 1704015214.1764758,
+      "domosaic:start": 1704015214.306527,
+      "domosaic:end": 1704015277.5023825
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      27
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      52
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015280.904899,
+      "imginfodict:end": 1704015281.7507703,
+      "analysis:start": 1704015281.7507734,
+      "analysis:end": 1704015281.8070328,
+      "domosaic:start": 1704015281.927938,
+      "domosaic:end": 1704015346.8426406
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      25
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      7
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015350.1981993,
+      "imginfodict:end": 1704015351.260394,
+      "analysis:start": 1704015351.2604136,
+      "analysis:end": 1704015351.3169029,
+      "domosaic:start": 1704015351.4390795,
+      "domosaic:end": 1704015423.5529644
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      23
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      10
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015426.1797955,
+      "imginfodict:end": 1704015427.0114834,
+      "analysis:start": 1704015427.0114868,
+      "analysis:end": 1704015427.0781014,
+      "domosaic:start": 1704015427.2277997,
+      "domosaic:end": 1704015497.1490476
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      8
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015499.8346407,
+      "imginfodict:end": 1704015500.620093,
+      "analysis:start": 1704015500.6200967,
+      "analysis:end": 1704015500.6811104,
+      "domosaic:start": 1704015500.8416407,
+      "domosaic:end": 1704015571.8984597
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      21
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      6
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015574.615041,
+      "imginfodict:end": 1704015575.478658,
+      "analysis:start": 1704015575.4786613,
+      "analysis:end": 1704015575.5389066,
+      "domosaic:start": 1704015575.680156,
+      "domosaic:end": 1704015646.3750806
+    },
+    "params": {
+      "numthreads": 2,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      286
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015649.1778138,
+      "imginfodict:end": 1704015650.1417348,
+      "analysis:start": 1704015650.1417384,
+      "analysis:end": 1704015650.1982126,
+      "domosaic:start": 1704015650.3418992,
+      "domosaic:end": 1704015717.9688323
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      7
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      318
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015723.6885352,
+      "imginfodict:end": 1704015724.4208248,
+      "analysis:start": 1704015724.420828,
+      "analysis:end": 1704015724.4761136,
+      "domosaic:start": 1704015724.597935,
+      "domosaic:end": 1704015798.4624133
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      15
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      350
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015804.9612253,
+      "imginfodict:end": 1704015805.646894,
+      "analysis:start": 1704015805.6468973,
+      "analysis:end": 1704015805.702012,
+      "domosaic:start": 1704015805.8271677,
+      "domosaic:end": 1704015878.0666535
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      343
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015885.0545337,
+      "imginfodict:end": 1704015885.7772305,
+      "analysis:start": 1704015885.7772338,
+      "analysis:end": 1704015885.833325,
+      "domosaic:start": 1704015885.942972,
+      "domosaic:end": 1704015958.9431891
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      398
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704015966.4940739,
+      "imginfodict:end": 1704015967.51113,
+      "analysis:start": 1704015967.511134,
+      "analysis:end": 1704015967.5678732,
+      "domosaic:start": 1704015967.6746976,
+      "domosaic:end": 1704016040.8503792
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      543
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016047.2280016,
+      "imginfodict:end": 1704016047.8740897,
+      "analysis:start": 1704016047.8740933,
+      "analysis:end": 1704016047.9382465,
+      "domosaic:start": 1704016048.0495877,
+      "domosaic:end": 1704016129.4022412
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      540
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016136.3024993,
+      "imginfodict:end": 1704016137.0379958,
+      "analysis:start": 1704016137.0380108,
+      "analysis:end": 1704016137.0954368,
+      "domosaic:start": 1704016137.2067995,
+      "domosaic:end": 1704016213.4566417
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      7
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      578
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016219.7863533,
+      "imginfodict:end": 1704016220.4776719,
+      "analysis:start": 1704016220.4776752,
+      "analysis:end": 1704016220.5338352,
+      "domosaic:start": 1704016220.6330955,
+      "domosaic:end": 1704016294.5678444
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      525
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016298.8400366,
+      "imginfodict:end": 1704016299.7876935,
+      "analysis:start": 1704016299.787697,
+      "analysis:end": 1704016299.843531,
+      "domosaic:start": 1704016299.9253974,
+      "domosaic:end": 1704016377.9861846
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      7
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      592
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016384.7319188,
+      "imginfodict:end": 1704016385.4183311,
+      "analysis:start": 1704016385.4183345,
+      "analysis:end": 1704016385.4743197,
+      "domosaic:start": 1704016385.590601,
+      "domosaic:end": 1704016473.4778483
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      596
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016481.2767825,
+      "imginfodict:end": 1704016481.9300525,
+      "analysis:start": 1704016481.9300556,
+      "analysis:end": 1704016481.985033,
+      "domosaic:start": 1704016482.0928812,
+      "domosaic:end": 1704016564.8264444
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      567
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016573.3416991,
+      "imginfodict:end": 1704016574.0465221,
+      "analysis:start": 1704016574.0465255,
+      "analysis:end": 1704016574.1056664,
+      "domosaic:start": 1704016574.1923504,
+      "domosaic:end": 1704016652.714367
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      13
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      211
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016661.2514954,
+      "imginfodict:end": 1704016662.1128092,
+      "analysis:start": 1704016662.1128125,
+      "analysis:end": 1704016662.1810122,
+      "domosaic:start": 1704016662.2658143,
+      "domosaic:end": 1704016724.6425292
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      245
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016730.8953898,
+      "imginfodict:end": 1704016731.556323,
+      "analysis:start": 1704016731.5563264,
+      "analysis:end": 1704016731.6227064,
+      "domosaic:start": 1704016731.7488472,
+      "domosaic:end": 1704016797.6720483
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      6
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      226
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016804.747182,
+      "imginfodict:end": 1704016805.4001632,
+      "analysis:start": 1704016805.4001667,
+      "analysis:end": 1704016805.4558651,
+      "domosaic:start": 1704016805.5813322,
+      "domosaic:end": 1704016874.4580023
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      18
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      231
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016881.9167044,
+      "imginfodict:end": 1704016882.5733964,
+      "analysis:start": 1704016882.5734,
+      "analysis:end": 1704016882.6296391,
+      "domosaic:start": 1704016882.7520955,
+      "domosaic:end": 1704016952.4256403
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      6
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      31
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704016957.8572352,
+      "imginfodict:end": 1704016958.6645436,
+      "analysis:start": 1704016958.6645465,
+      "analysis:end": 1704016958.7201245,
+      "domosaic:start": 1704016958.8388922,
+      "domosaic:end": 1704017016.3668933
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      17
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017019.5382886,
+      "imginfodict:end": 1704017020.217092,
+      "analysis:start": 1704017020.2170956,
+      "analysis:end": 1704017020.275867,
+      "domosaic:start": 1704017020.43305,
+      "domosaic:end": 1704017078.945702
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      15
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      19
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017081.987262,
+      "imginfodict:end": 1704017082.6776795,
+      "analysis:start": 1704017082.677683,
+      "analysis:end": 1704017082.7323515,
+      "domosaic:start": 1704017082.8790152,
+      "domosaic:end": 1704017140.963984
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      15
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017144.338995,
+      "imginfodict:end": 1704017144.97795,
+      "analysis:start": 1704017144.9779534,
+      "analysis:end": 1704017145.0461195,
+      "domosaic:start": 1704017145.1989734,
+      "domosaic:end": 1704017203.2214882
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      41
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      76
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017206.5744846,
+      "imginfodict:end": 1704017207.4750245,
+      "analysis:start": 1704017207.4750278,
+      "analysis:end": 1704017207.5298948,
+      "domosaic:start": 1704017207.6778216,
+      "domosaic:end": 1704017263.2476923
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      52
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      86
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017267.227996,
+      "imginfodict:end": 1704017267.9520462,
+      "analysis:start": 1704017267.9520488,
+      "analysis:end": 1704017268.0085003,
+      "domosaic:start": 1704017268.13798,
+      "domosaic:end": 1704017324.536134
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      59
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017328.9525702,
+      "imginfodict:end": 1704017329.6958663,
+      "analysis:start": 1704017329.6958704,
+      "analysis:end": 1704017329.758841,
+      "domosaic:start": 1704017329.8820765,
+      "domosaic:end": 1704017381.6230283
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      83
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017385.808163,
+      "imginfodict:end": 1704017386.500955,
+      "analysis:start": 1704017386.5009582,
+      "analysis:end": 1704017386.5555725,
+      "domosaic:start": 1704017386.6758235,
+      "domosaic:end": 1704017437.850385
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      50
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017442.065176,
+      "imginfodict:end": 1704017443.2188807,
+      "analysis:start": 1704017443.2188845,
+      "analysis:end": 1704017443.2812977,
+      "domosaic:start": 1704017443.401672,
+      "domosaic:end": 1704017499.0943677
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      43
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017503.218539,
+      "imginfodict:end": 1704017504.0266578,
+      "analysis:start": 1704017504.0266612,
+      "analysis:end": 1704017504.0831273,
+      "domosaic:start": 1704017504.2234123,
+      "domosaic:end": 1704017559.8229067
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      53
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017563.913054,
+      "imginfodict:end": 1704017564.60676,
+      "analysis:start": 1704017564.6067636,
+      "analysis:end": 1704017564.664025,
+      "domosaic:start": 1704017564.8109634,
+      "domosaic:end": 1704017620.3231363
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      46
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017624.500145,
+      "imginfodict:end": 1704017625.2141714,
+      "analysis:start": 1704017625.214175,
+      "analysis:end": 1704017625.283601,
+      "domosaic:start": 1704017625.424181,
+      "domosaic:end": 1704017681.5778663
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      540
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017685.804395,
+      "imginfodict:end": 1704017686.7184427,
+      "analysis:start": 1704017686.718446,
+      "analysis:end": 1704017686.774536,
+      "domosaic:start": 1704017686.9139879,
+      "domosaic:end": 1704017771.2823873
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      569
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017777.4627972,
+      "imginfodict:end": 1704017778.0973577,
+      "analysis:start": 1704017778.0973613,
+      "analysis:end": 1704017778.1533983,
+      "domosaic:start": 1704017778.274593,
+      "domosaic:end": 1704017864.869042
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      641
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017871.8546202,
+      "imginfodict:end": 1704017872.5972028,
+      "analysis:start": 1704017872.5972059,
+      "analysis:end": 1704017872.6604064,
+      "domosaic:start": 1704017872.7567887,
+      "domosaic:end": 1704017960.140453
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      532
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704017967.660919,
+      "imginfodict:end": 1704017968.3701835,
+      "analysis:start": 1704017968.3701868,
+      "analysis:end": 1704017968.4264693,
+      "domosaic:start": 1704017968.5100439,
+      "domosaic:end": 1704018040.406378
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      15
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      63
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018048.1271698,
+      "imginfodict:end": 1704018048.9950745,
+      "analysis:start": 1704018048.9950776,
+      "analysis:end": 1704018049.0507915,
+      "domosaic:start": 1704018049.1170707,
+      "domosaic:end": 1704018103.1997383
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      7
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      78
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018106.914273,
+      "imginfodict:end": 1704018107.5934541,
+      "analysis:start": 1704018107.5934572,
+      "analysis:end": 1704018107.6486208,
+      "domosaic:start": 1704018107.790259,
+      "domosaic:end": 1704018162.1583467
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      79
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018166.0877593,
+      "imginfodict:end": 1704018166.8005016,
+      "analysis:start": 1704018166.8005052,
+      "analysis:end": 1704018166.8564487,
+      "domosaic:start": 1704018166.9916766,
+      "domosaic:end": 1704018218.969692
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      93
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018222.8415298,
+      "imginfodict:end": 1704018223.5353649,
+      "analysis:start": 1704018223.5353682,
+      "analysis:end": 1704018223.5903704,
+      "domosaic:start": 1704018223.7185445,
+      "domosaic:end": 1704018274.6939256
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      155
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018278.6533968,
+      "imginfodict:end": 1704018279.6087134,
+      "analysis:start": 1704018279.6087167,
+      "analysis:end": 1704018279.6647959,
+      "domosaic:start": 1704018279.793568,
+      "domosaic:end": 1704018338.1487381
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      6
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      162
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018341.8981643,
+      "imginfodict:end": 1704018342.56861,
+      "analysis:start": 1704018342.5686133,
+      "analysis:end": 1704018342.6241772,
+      "domosaic:start": 1704018342.76412,
+      "domosaic:end": 1704018400.6010594
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      6
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      150
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018404.3297043,
+      "imginfodict:end": 1704018405.016474,
+      "analysis:start": 1704018405.0164783,
+      "analysis:end": 1704018405.091912,
+      "domosaic:start": 1704018405.237135,
+      "domosaic:end": 1704018463.5645766
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      219
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018467.3085501,
+      "imginfodict:end": 1704018467.981727,
+      "analysis:start": 1704018467.9817302,
+      "analysis:end": 1704018468.0388384,
+      "domosaic:start": 1704018468.177286,
+      "domosaic:end": 1704018528.2548485
+    },
+    "params": {
+      "numthreads": 3,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      24
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      605
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018531.9549599,
+      "imginfodict:end": 1704018532.9581962,
+      "analysis:start": 1704018532.9582043,
+      "analysis:end": 1704018533.014073,
+      "domosaic:start": 1704018533.151004,
+      "domosaic:end": 1704018605.2542863
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      601
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018608.8653233,
+      "imginfodict:end": 1704018609.5218303,
+      "analysis:start": 1704018609.5218332,
+      "analysis:end": 1704018609.5772502,
+      "domosaic:start": 1704018609.7099466,
+      "domosaic:end": 1704018683.470886
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      646
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018687.300388,
+      "imginfodict:end": 1704018687.9395134,
+      "analysis:start": 1704018687.9395168,
+      "analysis:end": 1704018687.9952033,
+      "domosaic:start": 1704018688.1255639,
+      "domosaic:end": 1704018764.9769256
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      21
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      631
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018768.674797,
+      "imginfodict:end": 1704018769.408842,
+      "analysis:start": 1704018769.408846,
+      "analysis:end": 1704018769.4632215,
+      "domosaic:start": 1704018769.5904148,
+      "domosaic:end": 1704018846.6847768
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      409
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018850.3760328,
+      "imginfodict:end": 1704018851.4988534,
+      "analysis:start": 1704018851.4988565,
+      "analysis:end": 1704018851.5548992,
+      "domosaic:start": 1704018851.685745,
+      "domosaic:end": 1704018911.6082957
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      467
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018915.8561707,
+      "imginfodict:end": 1704018916.523524,
+      "analysis:start": 1704018916.5235274,
+      "analysis:end": 1704018916.578649,
+      "domosaic:start": 1704018916.7217329,
+      "domosaic:end": 1704018976.1023898
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      21
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      494
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704018980.1702242,
+      "imginfodict:end": 1704018980.8966455,
+      "analysis:start": 1704018980.8966486,
+      "analysis:end": 1704018980.96169,
+      "domosaic:start": 1704018981.0938094,
+      "domosaic:end": 1704019040.555889
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      18
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      465
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019044.4030178,
+      "imginfodict:end": 1704019045.0928082,
+      "analysis:start": 1704019045.092812,
+      "analysis:end": 1704019045.149467,
+      "domosaic:start": 1704019045.2823508,
+      "domosaic:end": 1704019104.2028832
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      611
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019107.9917133,
+      "imginfodict:end": 1704019108.9984236,
+      "analysis:start": 1704019108.998427,
+      "analysis:end": 1704019109.0550754,
+      "domosaic:start": 1704019109.188641,
+      "domosaic:end": 1704019175.491732
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      553
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019179.6647913,
+      "imginfodict:end": 1704019180.3224595,
+      "analysis:start": 1704019180.3224626,
+      "analysis:end": 1704019180.3786535,
+      "domosaic:start": 1704019180.4968545,
+      "domosaic:end": 1704019244.3892386
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      18
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      588
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019248.5295093,
+      "imginfodict:end": 1704019249.1740754,
+      "analysis:start": 1704019249.1740787,
+      "analysis:end": 1704019249.2296166,
+      "domosaic:start": 1704019249.3568912,
+      "domosaic:end": 1704019315.7908137
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      18
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      596
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019319.9255164,
+      "imginfodict:end": 1704019320.7879689,
+      "analysis:start": 1704019320.7879722,
+      "analysis:end": 1704019320.8441935,
+      "domosaic:start": 1704019320.9684167,
+      "domosaic:end": 1704019387.6579413
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      24
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      369
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019391.7829065,
+      "imginfodict:end": 1704019392.7256374,
+      "analysis:start": 1704019392.7256408,
+      "analysis:end": 1704019392.7808185,
+      "domosaic:start": 1704019392.9060955,
+      "domosaic:end": 1704019451.5104122
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      352
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019455.9744306,
+      "imginfodict:end": 1704019456.7095888,
+      "analysis:start": 1704019456.7095919,
+      "analysis:end": 1704019456.7646172,
+      "domosaic:start": 1704019456.9075775,
+      "domosaic:end": 1704019513.8213658
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      23
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      301
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019517.772787,
+      "imginfodict:end": 1704019518.4808607,
+      "analysis:start": 1704019518.480864,
+      "analysis:end": 1704019518.5486133,
+      "domosaic:start": 1704019518.6939464,
+      "domosaic:end": 1704019575.572903
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      387
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019579.4748793,
+      "imginfodict:end": 1704019580.1641612,
+      "analysis:start": 1704019580.1641648,
+      "analysis:end": 1704019580.221321,
+      "domosaic:start": 1704019580.3650365,
+      "domosaic:end": 1704019638.0397935
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      16
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      260
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019641.9194977,
+      "imginfodict:end": 1704019643.0526626,
+      "analysis:start": 1704019643.052667,
+      "analysis:end": 1704019643.1097014,
+      "domosaic:start": 1704019643.2568574,
+      "domosaic:end": 1704019695.3605793
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      283
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019698.7948108,
+      "imginfodict:end": 1704019699.4475143,
+      "analysis:start": 1704019699.4475174,
+      "analysis:end": 1704019699.5024576,
+      "domosaic:start": 1704019699.6491284,
+      "domosaic:end": 1704019752.247569
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      13
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      280
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019755.66292,
+      "imginfodict:end": 1704019756.4104578,
+      "analysis:start": 1704019756.4104614,
+      "analysis:end": 1704019756.4709992,
+      "domosaic:start": 1704019756.6238232,
+      "domosaic:end": 1704019808.0308
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      16
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      248
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019811.4118798,
+      "imginfodict:end": 1704019812.1482844,
+      "analysis:start": 1704019812.1482882,
+      "analysis:end": 1704019812.203444,
+      "domosaic:start": 1704019812.3517625,
+      "domosaic:end": 1704019863.8944702
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      570
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019867.3232,
+      "imginfodict:end": 1704019868.3299103,
+      "analysis:start": 1704019868.3299134,
+      "analysis:end": 1704019868.386738,
+      "domosaic:start": 1704019868.537754,
+      "domosaic:end": 1704019931.773415
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      572
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704019936.6582162,
+      "imginfodict:end": 1704019937.317648,
+      "analysis:start": 1704019937.3176513,
+      "analysis:end": 1704019937.3722267,
+      "domosaic:start": 1704019937.4970784,
+      "domosaic:end": 1704019999.952949
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      609
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020004.7686658,
+      "imginfodict:end": 1704020005.4458027,
+      "analysis:start": 1704020005.4458058,
+      "analysis:end": 1704020005.5014203,
+      "domosaic:start": 1704020005.6427445,
+      "domosaic:end": 1704020067.9356167
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      16
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      582
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020072.5726259,
+      "imginfodict:end": 1704020073.26315,
+      "analysis:start": 1704020073.263154,
+      "analysis:end": 1704020073.3244643,
+      "domosaic:start": 1704020073.4527874,
+      "domosaic:end": 1704020135.2584858
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      18
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      336
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020139.738836,
+      "imginfodict:end": 1704020140.729407,
+      "analysis:start": 1704020140.7294106,
+      "analysis:end": 1704020140.7840552,
+      "domosaic:start": 1704020140.9188218,
+      "domosaic:end": 1704020195.0817292
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      22
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      309
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020198.6183295,
+      "imginfodict:end": 1704020199.2582457,
+      "analysis:start": 1704020199.258249,
+      "analysis:end": 1704020199.3144238,
+      "domosaic:start": 1704020199.4563696,
+      "domosaic:end": 1704020253.0113354
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      16
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      337
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020256.459973,
+      "imginfodict:end": 1704020257.102888,
+      "analysis:start": 1704020257.1028924,
+      "analysis:end": 1704020257.1604137,
+      "domosaic:start": 1704020257.3110535,
+      "domosaic:end": 1704020310.6750038
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      16
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      301
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020313.9979577,
+      "imginfodict:end": 1704020314.613798,
+      "analysis:start": 1704020314.6138012,
+      "analysis:end": 1704020314.6685562,
+      "domosaic:start": 1704020314.8181305,
+      "domosaic:end": 1704020367.9344122
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      24
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      330
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020371.3077266,
+      "imginfodict:end": 1704020372.2744496,
+      "analysis:start": 1704020372.2744527,
+      "analysis:end": 1704020372.330587,
+      "domosaic:start": 1704020372.4793358,
+      "domosaic:end": 1704020426.4549723
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      229
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020430.0974436,
+      "imginfodict:end": 1704020430.7981944,
+      "analysis:start": 1704020430.7981975,
+      "analysis:end": 1704020430.856079,
+      "domosaic:start": 1704020431.0049448,
+      "domosaic:end": 1704020483.398922
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      269
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020486.8894434,
+      "imginfodict:end": 1704020487.5949934,
+      "analysis:start": 1704020487.5949967,
+      "analysis:end": 1704020487.6512,
+      "domosaic:start": 1704020487.79485,
+      "domosaic:end": 1704020540.2449572
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      204
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020543.703593,
+      "imginfodict:end": 1704020544.3572853,
+      "analysis:start": 1704020544.3572886,
+      "analysis:end": 1704020544.4209633,
+      "domosaic:start": 1704020544.5669632,
+      "domosaic:end": 1704020596.1977534
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      262
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020599.6131475,
+      "imginfodict:end": 1704020600.5285418,
+      "analysis:start": 1704020600.5285454,
+      "analysis:end": 1704020600.584951,
+      "domosaic:start": 1704020600.735907,
+      "domosaic:end": 1704020655.4716716
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      263
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020659.0168624,
+      "imginfodict:end": 1704020659.7298234,
+      "analysis:start": 1704020659.729827,
+      "analysis:end": 1704020659.7844112,
+      "domosaic:start": 1704020659.9201195,
+      "domosaic:end": 1704020713.4273598
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      214
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020717.2032123,
+      "imginfodict:end": 1704020717.8893778,
+      "analysis:start": 1704020717.8893812,
+      "analysis:end": 1704020717.9469726,
+      "domosaic:start": 1704020718.0907507,
+      "domosaic:end": 1704020770.6838927
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      245
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020774.0204344,
+      "imginfodict:end": 1704020774.7441638,
+      "analysis:start": 1704020774.7441669,
+      "analysis:end": 1704020774.7995977,
+      "domosaic:start": 1704020774.9424753,
+      "domosaic:end": 1704020828.2743945
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      256
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020831.6630416,
+      "imginfodict:end": 1704020832.544846,
+      "analysis:start": 1704020832.5448499,
+      "analysis:end": 1704020832.6046443,
+      "domosaic:start": 1704020832.7472415,
+      "domosaic:end": 1704020886.7387676
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      237
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020890.179168,
+      "imginfodict:end": 1704020890.886699,
+      "analysis:start": 1704020890.8867018,
+      "analysis:end": 1704020890.9425273,
+      "domosaic:start": 1704020891.096255,
+      "domosaic:end": 1704020945.304777
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      16
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      219
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704020948.556985,
+      "imginfodict:end": 1704020949.235768,
+      "analysis:start": 1704020949.2357717,
+      "analysis:end": 1704020949.2912238,
+      "domosaic:start": 1704020949.438719,
+      "domosaic:end": 1704021001.9402726
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      182
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021005.181691,
+      "imginfodict:end": 1704021005.8885021,
+      "analysis:start": 1704021005.8885055,
+      "analysis:end": 1704021005.9539378,
+      "domosaic:start": 1704021006.1075358,
+      "domosaic:end": 1704021058.6001835
+    },
+    "params": {
+      "numthreads": 4,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      387
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021062.0521512,
+      "imginfodict:end": 1704021063.1040611,
+      "analysis:start": 1704021063.1040652,
+      "analysis:end": 1704021063.1617374,
+      "domosaic:start": 1704021063.3168323,
+      "domosaic:end": 1704021118.3310356
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      13
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      443
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021121.72518,
+      "imginfodict:end": 1704021122.5042114,
+      "analysis:start": 1704021122.5042148,
+      "analysis:end": 1704021122.5608492,
+      "domosaic:start": 1704021122.713942,
+      "domosaic:end": 1704021177.651432
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      12
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      435
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021180.9400785,
+      "imginfodict:end": 1704021181.646846,
+      "analysis:start": 1704021181.6468568,
+      "analysis:end": 1704021181.7131023,
+      "domosaic:start": 1704021181.8695855,
+      "domosaic:end": 1704021236.4579675
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      489
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021239.6426322,
+      "imginfodict:end": 1704021240.3718176,
+      "analysis:start": 1704021240.3718212,
+      "analysis:end": 1704021240.4348938,
+      "domosaic:start": 1704021240.5914109,
+      "domosaic:end": 1704021296.0552292
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      489
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021299.2821693,
+      "imginfodict:end": 1704021300.315671,
+      "analysis:start": 1704021300.3156748,
+      "analysis:end": 1704021300.3942287,
+      "domosaic:start": 1704021300.5517242,
+      "domosaic:end": 1704021354.9025903
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      518
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021358.2378483,
+      "imginfodict:end": 1704021358.9687433,
+      "analysis:start": 1704021358.9687467,
+      "analysis:end": 1704021359.0251124,
+      "domosaic:start": 1704021359.1712172,
+      "domosaic:end": 1704021413.967538
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      529
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021417.2842932,
+      "imginfodict:end": 1704021417.9696698,
+      "analysis:start": 1704021417.9696739,
+      "analysis:end": 1704021418.027477,
+      "domosaic:start": 1704021418.1790242,
+      "domosaic:end": 1704021473.3004544
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      553
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021476.6235223,
+      "imginfodict:end": 1704021477.3336775,
+      "analysis:start": 1704021477.3336809,
+      "analysis:end": 1704021477.4097202,
+      "domosaic:start": 1704021477.5815182,
+      "domosaic:end": 1704021533.4835794
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      549
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021536.787816,
+      "imginfodict:end": 1704021537.9011793,
+      "analysis:start": 1704021537.9011827,
+      "analysis:end": 1704021537.956346,
+      "domosaic:start": 1704021538.0913231,
+      "domosaic:end": 1704021595.1556587
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      535
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021598.7094543,
+      "imginfodict:end": 1704021599.403253,
+      "analysis:start": 1704021599.4032574,
+      "analysis:end": 1704021599.459054,
+      "domosaic:start": 1704021599.5920105,
+      "domosaic:end": 1704021655.4516206
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      13
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      550
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021658.9151556,
+      "imginfodict:end": 1704021659.6358829,
+      "analysis:start": 1704021659.6358867,
+      "analysis:end": 1704021659.6911929,
+      "domosaic:start": 1704021659.8303366,
+      "domosaic:end": 1704021715.1333566
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      12
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      544
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021718.5472896,
+      "imginfodict:end": 1704021719.260562,
+      "analysis:start": 1704021719.260565,
+      "analysis:end": 1704021719.317632,
+      "domosaic:start": 1704021719.466901,
+      "domosaic:end": 1704021775.071092
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      722
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021778.5437841,
+      "imginfodict:end": 1704021779.6343396,
+      "analysis:start": 1704021779.634343,
+      "analysis:end": 1704021779.6903894,
+      "domosaic:start": 1704021779.8368957,
+      "domosaic:end": 1704021842.974429
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      699
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021846.3755965,
+      "imginfodict:end": 1704021847.132553,
+      "analysis:start": 1704021847.1325562,
+      "analysis:end": 1704021847.1874716,
+      "domosaic:start": 1704021847.299098,
+      "domosaic:end": 1704021908.5752544
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      13
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      673
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021911.8981788,
+      "imginfodict:end": 1704021912.5603614,
+      "analysis:start": 1704021912.5603645,
+      "analysis:end": 1704021912.624946,
+      "domosaic:start": 1704021912.7449818,
+      "domosaic:end": 1704021973.7165074
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      684
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704021976.993866,
+      "imginfodict:end": 1704021977.6979408,
+      "analysis:start": 1704021977.697944,
+      "analysis:end": 1704021977.7529304,
+      "domosaic:start": 1704021977.8698344,
+      "domosaic:end": 1704022037.7160995
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      606
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022041.0434973,
+      "imginfodict:end": 1704022042.131749,
+      "analysis:start": 1704022042.1317515,
+      "analysis:end": 1704022042.1880894,
+      "domosaic:start": 1704022042.3167853,
+      "domosaic:end": 1704022099.8093767
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      575
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022103.1933198,
+      "imginfodict:end": 1704022103.9223409,
+      "analysis:start": 1704022103.9223444,
+      "analysis:end": 1704022103.9792676,
+      "domosaic:start": 1704022104.1124399,
+      "domosaic:end": 1704022160.4864335
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      602
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022164.1685874,
+      "imginfodict:end": 1704022164.831772,
+      "analysis:start": 1704022164.831775,
+      "analysis:end": 1704022164.8877,
+      "domosaic:start": 1704022165.0229433,
+      "domosaic:end": 1704022221.482372
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      8
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      581
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022224.7572193,
+      "imginfodict:end": 1704022225.4968271,
+      "analysis:start": 1704022225.4968305,
+      "analysis:end": 1704022225.5518847,
+      "domosaic:start": 1704022225.6889296,
+      "domosaic:end": 1704022282.5741072
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      572
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022285.8597598,
+      "imginfodict:end": 1704022286.8817577,
+      "analysis:start": 1704022286.8817608,
+      "analysis:end": 1704022286.9373302,
+      "domosaic:start": 1704022287.0779052,
+      "domosaic:end": 1704022345.4583945
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      545
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022348.8537564,
+      "imginfodict:end": 1704022349.6120288,
+      "analysis:start": 1704022349.6120322,
+      "analysis:end": 1704022349.6807764,
+      "domosaic:start": 1704022349.8479786,
+      "domosaic:end": 1704022408.0368586
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      15
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      548
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022411.537972,
+      "imginfodict:end": 1704022412.238831,
+      "analysis:start": 1704022412.2388349,
+      "analysis:end": 1704022412.3027523,
+      "domosaic:start": 1704022412.4491334,
+      "domosaic:end": 1704022471.0864124
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      579
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022474.554515,
+      "imginfodict:end": 1704022475.2351701,
+      "analysis:start": 1704022475.2351732,
+      "analysis:end": 1704022475.2918997,
+      "domosaic:start": 1704022475.440024,
+      "domosaic:end": 1704022534.6186614
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      541
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022538.1281707,
+      "imginfodict:end": 1704022539.2323012,
+      "analysis:start": 1704022539.2323046,
+      "analysis:end": 1704022539.291682,
+      "domosaic:start": 1704022539.4378645,
+      "domosaic:end": 1704022595.2776399
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      536
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022598.5664618,
+      "imginfodict:end": 1704022599.2542586,
+      "analysis:start": 1704022599.2542624,
+      "analysis:end": 1704022599.3109806,
+      "domosaic:start": 1704022599.4655457,
+      "domosaic:end": 1704022654.081979
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      11
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      539
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022657.4201205,
+      "imginfodict:end": 1704022658.1959953,
+      "analysis:start": 1704022658.1959991,
+      "analysis:end": 1704022658.2555928,
+      "domosaic:start": 1704022658.4043849,
+      "domosaic:end": 1704022713.502814
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      12
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      552
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022716.7346108,
+      "imginfodict:end": 1704022717.4337912,
+      "analysis:start": 1704022717.4337947,
+      "analysis:end": 1704022717.4895353,
+      "domosaic:start": 1704022717.6465123,
+      "domosaic:end": 1704022772.0326076
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      624
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022775.249093,
+      "imginfodict:end": 1704022776.336975,
+      "analysis:start": 1704022776.3369782,
+      "analysis:end": 1704022776.3928235,
+      "domosaic:start": 1704022776.5478497,
+      "domosaic:end": 1704022835.5575678
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      17
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      634
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022838.986039,
+      "imginfodict:end": 1704022839.6856134,
+      "analysis:start": 1704022839.6856172,
+      "analysis:end": 1704022839.7403245,
+      "domosaic:start": 1704022839.8716903,
+      "domosaic:end": 1704022898.4381583
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      635
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022901.8031628,
+      "imginfodict:end": 1704022902.4992802,
+      "analysis:start": 1704022902.4992836,
+      "analysis:end": 1704022902.5634289,
+      "domosaic:start": 1704022902.6980913,
+      "domosaic:end": 1704022960.7334516
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      12
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      642
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704022964.0952337,
+      "imginfodict:end": 1704022964.8200362,
+      "analysis:start": 1704022964.82004,
+      "analysis:end": 1704022964.875093,
+      "domosaic:start": 1704022964.9880612,
+      "domosaic:end": 1704023022.9013033
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      19
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      870
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023026.2740836,
+      "imginfodict:end": 1704023027.3275318,
+      "analysis:start": 1704023027.3275347,
+      "analysis:end": 1704023027.3852289,
+      "domosaic:start": 1704023027.518441,
+      "domosaic:end": 1704023116.039877
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      12
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      861
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023125.4794939,
+      "imginfodict:end": 1704023126.1439707,
+      "analysis:start": 1704023126.1439743,
+      "analysis:end": 1704023126.2008572,
+      "domosaic:start": 1704023126.3065293,
+      "domosaic:end": 1704023214.862952
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      15
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      859
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023223.725118,
+      "imginfodict:end": 1704023224.4371357,
+      "analysis:start": 1704023224.437139,
+      "analysis:end": 1704023224.4924474,
+      "domosaic:start": 1704023224.5725272,
+      "domosaic:end": 1704023312.9978569
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      20
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      861
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023321.8324642,
+      "imginfodict:end": 1704023322.6129415,
+      "analysis:start": 1704023322.612945,
+      "analysis:end": 1704023322.668435,
+      "domosaic:start": 1704023322.7520294,
+      "domosaic:end": 1704023411.9129853
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      863
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023420.6600587,
+      "imginfodict:end": 1704023421.7037902,
+      "analysis:start": 1704023421.7037938,
+      "analysis:end": 1704023421.7588973,
+      "domosaic:start": 1704023421.8453543,
+      "domosaic:end": 1704023503.1980503
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      9
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      848
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023507.2802005,
+      "imginfodict:end": 1704023507.9697063,
+      "analysis:start": 1704023507.9697096,
+      "analysis:end": 1704023508.0262697,
+      "domosaic:start": 1704023508.129425,
+      "domosaic:end": 1704023589.4809809
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      10
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      880
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023593.5440314,
+      "imginfodict:end": 1704023594.2072172,
+      "analysis:start": 1704023594.2072206,
+      "analysis:end": 1704023594.2719383,
+      "domosaic:start": 1704023594.3666644,
+      "domosaic:end": 1704023676.4937713
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  },
+  {
+    "minMaxBlockCacheSize": [
+      0,
+      14
+    ],
+    "minMaxBlockQueueSize": [
+      0,
+      888
+    ],
+    "timestamps": {
+      "imginfodict:start": 1704023680.483523,
+      "imginfodict:end": 1704023681.1764584,
+      "analysis:start": 1704023681.1764612,
+      "analysis:end": 1704023681.2319171,
+      "domosaic:start": 1704023681.3256056,
+      "domosaic:end": 1704023763.2833328
+    },
+    "params": {
+      "numthreads": 5,
+      "blocksize": 1024,
+      "cpucount": 2,
+      "numinfiles": 9
+    }
+  }
+]
