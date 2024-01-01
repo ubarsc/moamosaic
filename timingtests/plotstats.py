@@ -30,13 +30,13 @@ def main():
     """
     cmdargs = getCmdargs()
 
-    figure = pyplot.figure(figsize=(8, 4))
+    pyplot.figure(figsize=(8, 4))
     pyplot.subplots_adjust(right=0.98, top=0.98, left=0.08, bottom=0.12)
 
     confidence = cmdargs.confidence
-    confResidual = (100 - confidence) / 2
-    upper = 100 - confResidual
-    lower = confResidual
+    confTail = (100 - confidence) / 2
+    upper = 100 - confTail
+    lower = confTail
 
     plotMoaTimings(cmdargs, lower, upper)
     plotGdalmergeTimings(cmdargs, lower, upper)
@@ -82,7 +82,7 @@ def plotMoaTimings(cmdargs, lower, upper):
     pyplot.plot(allNumthreads, elapsedStats[:, 0], linestyle='-', c='k',
         label='Moamosaic (median)', linewidth=0.8)
     pyplot.plot(allNumthreads, elapsedStats[:, 1], linestyle='--', c='k',
-        label='Moamosaic ({}% confidence)'.format(cmdargs.confidence), 
+        label='Moamosaic ({}% confidence)'.format(cmdargs.confidence),
         linewidth=0.8)
     pyplot.plot(allNumthreads, elapsedStats[:, 2], linestyle='--', c='k',
         linewidth=0.8)
