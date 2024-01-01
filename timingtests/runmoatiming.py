@@ -11,6 +11,8 @@ other info.
 import argparse
 import json
 
+from osgeo import gdal
+
 from moa import moamosaic
 
 
@@ -39,6 +41,7 @@ def getCmdargs():
 
 def main():
     cmdargs = getCmdargs()
+    gdal.UseExceptions()
 
     tilesByDate = json.load(open(cmdargs.stacresults))
 

@@ -32,9 +32,6 @@ from rios import pixelgrid
 from . import monitoring
 
 
-gdal.UseExceptions()
-
-
 # Some default values
 DFLT_NUMTHREADS = 4
 DFLT_BLOCKSIZE = 1024
@@ -80,6 +77,8 @@ def mainCmd():
     """
     Main command line stub, referenced from pyproject.toml
     """
+    gdal.UseExceptions()
+
     cmdargs = getCmdargs()
     filelist = makeFilelist(cmdargs.infilelist)
     monitorDict = doMosaic(filelist, cmdargs.outfile,

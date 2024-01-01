@@ -10,6 +10,8 @@ import json
 import time
 import subprocess
 
+from osgeo import gdal
+
 
 def getCmdargs():
     """
@@ -26,6 +28,7 @@ def getCmdargs():
 
 def main():
     cmdargs = getCmdargs()
+    gdal.UseExceptions()
 
     tilesByDate = json.load(open(cmdargs.stacresults))
     mosaicJobList = genJoblist(tilesByDate)
