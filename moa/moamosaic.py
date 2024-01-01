@@ -88,6 +88,9 @@ def doMosaic(filelist, outfile, numthreads, blocksize, driver, nullval,
     imgInfoDict = makeImgInfoDict(filelist, numthreads)
     monitors.timestamps.stamp("imginfodict", monitoring.TS_END)
 
+    if nullval is None:
+        nullval = imgInfoDict[filelist[0]].nullVal
+
     monitors.timestamps.stamp("analysis", monitoring.TS_START)
     outgrid = makeOutputGrid(filelist, imgInfoDict)
     outGeoTransform = outgrid.makeGeoTransform()
