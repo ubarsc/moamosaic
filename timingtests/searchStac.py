@@ -32,7 +32,7 @@ def getCmdargs():
         action="store_true", help="List known central tiles, and exit")
     p.add_argument("-y", "--year", default=2023, type=int,
         help="Year (default=%(default)s)")
-    p.add_argument("--outjson", 
+    p.add_argument("--outjson",
         help="JSON file in which to save STAC search results")
 
     cmdargs = p.parse_args()
