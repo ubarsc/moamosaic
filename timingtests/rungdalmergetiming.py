@@ -20,8 +20,8 @@ def getCmdargs():
     p = argparse.ArgumentParser()
     p.add_argument("--stacresults", help=("JSON file of pre-computed " +
         "STAC search results"))
-    p.add_argument("--outjson", default="gdalmerge.timing.json",
-        help="Name of JSON file to save monitoring info (default=%(default)s)")
+    p.add_argument("--outjson", help=("Name of JSON file to save " +
+        "monitoring info (default=%(default)s)"))
     cmdargs = p.parse_args()
     return cmdargs
 
