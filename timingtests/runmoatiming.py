@@ -76,7 +76,7 @@ def main():
 
 def genFilelist(tileList, band):
     filelist = []
-    for (tilename, path, tilename, nullPcnt) in tileList:
+    for (tilename, path, nullPcnt) in tileList:
         vsiPath = path.replace("s3:/", "/vsis3")
         fn = "{}/{}.tif".format(vsiPath, band)
         filelist.append(fn)

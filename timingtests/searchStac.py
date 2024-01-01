@@ -79,7 +79,7 @@ def searchStac(cmdargs):
         nullPcnt = props['s2:nodata_pixel_percentage']
         if datestr not in tilesByDate:
             tilesByDate[datestr] = []
-        tilesByDate[datestr].append((tilename, path, tilename, nullPcnt))
+        tilesByDate[datestr].append((tilename, path, nullPcnt))
     return tilesByDate
 
 
