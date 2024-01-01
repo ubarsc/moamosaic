@@ -12,7 +12,7 @@ readme = "README.md"
 license = {text = "MIT License"}
 
 [project.scripts]
-moamosaic = "moasaic.mosaic:mainCmd"
+moamosaic = "moamosaic.mosaic:mainCmd"
 
 [tool.setuptools]
 packages = ["moamosaic"]
