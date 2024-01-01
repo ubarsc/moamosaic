@@ -12,13 +12,13 @@ readme = "README.md"
 license = {text = "MIT License"}
 
 [project.scripts]
-moamosaic = "moa.moamosaic:mainCmd"
+moamosaic = "moasaic.mosaic:mainCmd"
 
 [tool.setuptools]
-packages = ["moa"]
+packages = ["moamosaic"]
 
 [tool.setuptools.dynamic]
-version = {attr = "moa.__version__"}
+version = {attr = "moamosaic.__version__"}
 
 [project.urls]
 Repository = "https://github.com/ubarsc/moamosaic.git"

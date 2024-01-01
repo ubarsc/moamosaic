@@ -13,7 +13,7 @@ import json
 
 from osgeo import gdal
 
-from moa import moamosaic
+from moamosaic import mosaic
 
 
 bandList = ['B02', 'B03', 'B04', 'B08']
@@ -64,7 +64,7 @@ def main():
     for infileList in mosaicJobList:
         try:
             numthreads = i // runsPerThreadcount + 1
-            monitorDict = moamosaic.doMosaic(infileList, outfile,
+            monitorDict = mosaic.doMosaic(infileList, outfile,
                 numthreads, cmdargs.blocksize, driver, nullval,
                 nopyramids, monitorjson)
             monitorList.append(monitorDict)
