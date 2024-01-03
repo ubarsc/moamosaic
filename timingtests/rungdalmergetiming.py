@@ -35,7 +35,7 @@ def main():
     # Limit to 40 jobs
     mosaicJobList = mosaicJobList[:40]
 
-    outfile = 'crap.tif'
+    outfile = 'testimg.tif'
 
     timeList = []
     for infileList in mosaicJobList:

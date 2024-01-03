@@ -61,7 +61,7 @@ def main():
     numRuns = min(numRuns, len(mosaicJobList))
 
     driver = "GTiff"
-    outfile = "crap.tif"
+    outfile = "testimg.tif"
     nopyramids = True
     nullval = 0
     outf = open(cmdargs.outjson, 'w')
