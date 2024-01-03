@@ -27,7 +27,10 @@ def getCmdargs():
     p.add_argument("--stacresults", help=("JSON file of pre-computed " +
         "STAC search results"))
     p.add_argument("--outjson", help=("Name of JSON file to save " +
-        "monitoring info (default=%(default)s)"))
+        "monitoring info"))
+    p.add_argument("--minnumthreads", default=1, type=int,
+        help=("Minimum number of threads to use in mosaic runs " +
+                "(default=%(default)s)"))
     p.add_argument("--maxnumthreads", default=5, type=int,
         help=("Maximum number of threads to use in mosaic runs " +
                 "(default=%(default)s)"))
@@ -50,27 +53,33 @@ def main():
 
     # For each value of numthreads, do this many mosaic jobs, to make a
     # population of runtimes.
-    runsPerThreadcount = len(mosaicJobList) // cmdargs.maxnumthreads
+    runsPerThreadcount = 40
+    # Number of runs to do
+    numRuns = ((cmdargs.maxnumthreads - cmdargs.minnumthreads + 1) *
+            runsPerThreadcount)
+    # But don't do more runs than we have data for
+    numRuns = min(numRuns, len(mosaicJobList))
 
     driver = "GTiff"
     outfile = "crap.tif"
     nopyramids = True
-    monitorjson = None
     nullval = 0
-    outf = open(cmdargs.monitorjson, 'w')
+    outf = open(cmdargs.outjson, 'w')
 
     monitorList = []
     i = 0
-    for infileList in mosaicJobList:
+    while i < numRuns:
+        infileList = mosaicJobList[i]
+
         try:
-            numthreads = i // runsPerThreadcount + 1
+            numthreads = i // runsPerThreadcount + cmdargs.minnumthreads
             monitorDict = mosaic.doMosaic(infileList, outfile,
-                numthreads, cmdargs.blocksize, driver, nullval,
-                nopyramids, monitorjson)
+                numthreads=numthreads, blocksize=cmdargs.blocksize,
+                driver=driver, nullval=nullval, nopyramids=nopyramids)
             monitorList.append(monitorDict)
             print("Done job", i)
         except Exception as e:
-            print("Exception {} for job {}".format(e, i))
+            print("Exception '{}' for job {}".format(e, i))
 
         i += 1
 
