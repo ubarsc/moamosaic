@@ -19,7 +19,7 @@ def getCmdargs():
     p.add_argument("--plotfile",
         help="Name of output plot file (default plots to screen)")
     p.add_argument("--confidence", default=90, type=int,
-        help="Confidence interval to show (in %) (default=%(default)s)")
+        help="Confidence interval to show (in %%) (default=%(default)s)")
     cmdargs = p.parse_args()
     return cmdargs
 
