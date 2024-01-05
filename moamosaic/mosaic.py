@@ -172,6 +172,9 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         monitors.timestamps.stamp("pyramids", monitoring.TS_START)
         outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
         monitors.timestamps.stamp("pyramids", monitoring.TS_END)
+        monitors.timestamps.stamp("stats", monitoring.TS_START)
+        doStats(outDs)
+        monitors.timestamps.stamp("stats", monitoring.TS_END)
 
     if tmpdir is not None:
         shutil.rmtree(tmpdir)
@@ -520,6 +523,34 @@ def mergeInputs(allInputsForBlock, outNullVal):
         nonNull = (arr != outNullVal)
         outArr[nonNull] = arr[nonNull]
     return outArr
+
+
+def doStats(outDs):
+    """
+    Calculate basic statistics on all bands of the output file
+    """
+    allNullErrorMsg = ("Failed to compute statistics, " +
+        "no valid pixels found in sampling.")
+
+    usingExceptions = gdal.GetUseExceptions()
+    gdal.UseExceptions()
+
+    approx_ok = True
+    try:
+        for i in range(1, outDs.RasterCount + 1):
+            band = outDs.GetRasterBand(i)
+            (minval, maxval, meanval, stddevval) = band.ComputeStatistics(
+                approx_ok)
+            band.SetMetadataItem("STATISTICS_MINIMUM", repr(minval))
+            band.SetMetadataItem("STATISTICS_MAXIMUM", repr(maxval))
+            band.SetMetadataItem("STATISTICS_MEAN", repr(meanval))
+            band.SetMetadataItem("STATISTICS_STDDEV", repr(stddevval))
+    except RuntimeError as e:
+        if not str(e).endswith(allNullErrorMsg):
+            raise e
+    finally:
+        if not usingExceptions:
+            gdal.DontUseExceptions()
 
 
 if __name__ == "__main__":
