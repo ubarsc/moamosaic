@@ -522,22 +522,5 @@ def mergeInputs(allInputsForBlock, outNullVal):
     return outArr
 
 
-def makeOutImgInfo(inImgInfo, outgrid, nullval):
-    """
-    Create an ImageInfo for the output file, based on one of the
-    input files, and information from the outgrid and the nullval.
-    """
-    outImgInfo = structures.ImageInfo(None)
-    (outImgInfo.nrows, outImgInfo.ncols) = outgrid.getDimensions()
-    outImgInfo.numBands = inImgInfo.numBands
-    outImgInfo.transform = inImgInfo.transform
-    outImgInfo.projection = inImgInfo.projection
-    outImgInfo.dataType = inImgInfo.dataType
-    outImgInfo.nullVal = inImgInfo.nullVal
-    if nullval is not None:
-        outImgInfo.nullVal = nullval
-    return outImgInfo
-
-
 if __name__ == "__main__":
     mainCmd()
