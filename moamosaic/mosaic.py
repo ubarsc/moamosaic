@@ -98,7 +98,7 @@ def mainCmd():
 def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
         dopyramids=True, creationoptions=None, outprojepsg=None,
-        outprojwktfile=None, outXres=None, outYres=None):
+        outprojwktfile=None, outXres=None, outYres=None, resamplemethod=None):
     """
     Main routine, callable from non-commandline context
     """
@@ -113,8 +113,11 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     imgInfoDict = makeImgInfoDict(filelist, numthreads)
     monitors.timestamps.stamp("imginfodict", monitoring.TS_END)
 
-    (filelist, vrtLookup, tmpdir) = reproj.handleProjections(filelist,
-        imgInfoDict, outprojepsg, outprojwktfile, outXres, outYres)
+    monitors.timestamps.stamp("projection", monitoring.TS_START)
+    (filelist, tmpdir) = reproj.handleProjections(filelist,
+        imgInfoDict, outprojepsg, outprojwktfile, outXres, outYres,
+        resamplemethod)
+    monitors.timestamps.stamp("projection", monitoring.TS_END)
 
     if nullval is None:
         nullval = imgInfoDict[filelist[0]].nullVal

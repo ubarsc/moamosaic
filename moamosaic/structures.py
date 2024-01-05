@@ -3,6 +3,7 @@ All major data structures for moamosaic
 """
 from osgeo import gdal
 
+
 class ImageInfo:
     """
     Just the critical information about the given GDAL raster file.
