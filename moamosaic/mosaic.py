@@ -21,6 +21,7 @@ import argparse
 from concurrent import futures
 import queue
 import json
+import shutil
 from multiprocessing import cpu_count
 
 import numpy
@@ -31,6 +32,7 @@ from rios import pixelgrid
 
 from . import monitoring
 from . import structures
+from . import reproj
 
 
 # Some default values
@@ -67,7 +69,7 @@ def getCmdargs():
               "those are ignored.").format(knownDrivers))
     p.add_argument("--nullval", type=int,
         help="Null value to use (default comes from input files)")
-    p.add_argument("--nopyramids", default=False, action="store_true",
+    p.add_argument("--omitpyramids", default=False, action="store_true",
         help="Omit the pyramid layers (i.e. overviews)")
     p.add_argument("--monitorjson", help="Output JSON file of monitoring info")
     cmdargs = p.parse_args()
@@ -83,12 +85,10 @@ def mainCmd():
     cmdargs = getCmdargs()
     filelist = makeFilelist(cmdargs.infilelist)
     monitorDict = doMosaic(filelist, cmdargs.outfile,
-            numthreads=cmdargs.numthreads,
-            blocksize=cmdargs.blocksize,
-            driver=cmdargs.driver,
-            nullval=cmdargs.nullval,
-            nopyramids=cmdargs.nopyramids,
-            creationoptions=cmdargs.creationoption)
+        numthreads=cmdargs.numthreads, blocksize=cmdargs.blocksize,
+        driver=cmdargs.driver, nullval=cmdargs.nullval,
+        dopyramids=(not cmdargs.omitpyramids),
+        creationoptions=cmdargs.creationoption)
 
     if cmdargs.monitorjson is not None:
         with open(cmdargs.monitorjson, 'w') as f:
@@ -97,7 +97,8 @@ def mainCmd():
 
 def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
-        nopyramids=False, creationoptions=None):
+        dopyramids=True, creationoptions=None, outprojepsg=None,
+        outprojwktfile=None, outXres=None, outYres=None):
     """
     Main routine, callable from non-commandline context
     """
@@ -112,10 +113,15 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     imgInfoDict = makeImgInfoDict(filelist, numthreads)
     monitors.timestamps.stamp("imginfodict", monitoring.TS_END)
 
+    (filelist, vrtLookup, tmpdir) = reproj.handleProjections(filelist,
+        imgInfoDict, outprojepsg, outprojwktfile, outXres, outYres)
+    # Handle reprojection issues
+
     if nullval is None:
         nullval = imgInfoDict[filelist[0]].nullVal
 
     monitors.timestamps.stamp("analysis", monitoring.TS_START)
+# Rewrite the next two lines!!!!!!
     outgrid = makeOutputGrid(filelist, imgInfoDict)
     outGeoTransform = outgrid.makeGeoTransform()
     blockList = makeOutputBlockList(outgrid, blocksize)
@@ -149,10 +155,13 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     outDs.SetGeoTransform(outGeoTransform)
     outDs.SetProjection(outImgInfo.projection)
-    if not nopyramids:
+    if dopyramids:
         monitors.timestamps.stamp("pyramids", monitoring.TS_START)
         outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
         monitors.timestamps.stamp("pyramids", monitoring.TS_END)
+
+    if tmpdir is not None:
+        shutil.rmtree(tmpdir)
 
     return monitors.reportAsDict()
 
