@@ -62,7 +62,7 @@ def getCmdargs():
     p.add_argument("-d", "--driver", default="GTiff",
         help="GDAL driver to use for output file (default=%(default)s)")
     p.add_argument("-o", "--outfile", help="Name of output raster")
-    p.add_argument("--creationoption", action="append",
+    p.add_argument("--co", action="append",
         help=("Specify a GDAL creation option (as 'NAME=VALUE'). Can be " +
               "given multiple times. There are sensible default creation " +
               "options for some drivers ({}), but if this option is used, " +
@@ -115,7 +115,6 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     (filelist, vrtLookup, tmpdir) = reproj.handleProjections(filelist,
         imgInfoDict, outprojepsg, outprojwktfile, outXres, outYres)
-    # Handle reprojection issues
 
     if nullval is None:
         nullval = imgInfoDict[filelist[0]].nullVal
@@ -149,7 +148,7 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
                         bandNum, outImgInfo.nullVal)
                 workerList.append(worker)
 
-            writeFunc(outgrid, blockQ, outDs, outImgInfo, bandNum,
+            writeFunc(blockQ, outDs, outImgInfo, bandNum,
                     blockList, filesForBlock, workerList, monitors)
     monitors.timestamps.stamp("domosaic", monitoring.TS_END)
 
@@ -211,7 +210,7 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
         i += 1
 
 
-def writeFunc(outgrid, blockQ, outDs, outImgInfo, bandNum,
+def writeFunc(blockQ, outDs, outImgInfo, bandNum,
                     blockList, filesForBlock, workerList, monitors):
     """
     Loop over all blocks of the output grid, and write them.
