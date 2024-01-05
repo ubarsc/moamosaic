@@ -28,8 +28,6 @@ import numpy
 from osgeo import gdal
 from osgeo.gdal_array import GDALTypeCodeToNumericTypeCode
 
-from rios import pixelgrid
-
 from . import monitoring
 from . import structures
 from . import reproj
@@ -138,13 +136,12 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         nullval = imgInfoDict[filelist[0]].nullVal
 
     monitors.timestamps.stamp("analysis", monitoring.TS_START)
-# Rewrite the next two lines!!!!!!
-    outgrid = makeOutputGrid(filelist, imgInfoDict)
-    outGeoTransform = outgrid.makeGeoTransform()
-    blockList = makeOutputBlockList(outgrid, blocksize)
+    outImgInfo = makeOutputGrid(filelist, imgInfoDict, nullval)
+    blockList = makeOutputBlockList(outImgInfo, blocksize)
 
     (blockListWithInputs, filesForBlock) = (
-        findInputsPerBlock(blockList, outGeoTransform, filelist, imgInfoDict))
+        findInputsPerBlock(blockList, outImgInfo.transform, filelist,
+        imgInfoDict))
     blockReadingList = makeBlockReadingList(blockListWithInputs)
     blocksPerThread = divideBlocksByThread(blockReadingList, numthreads)
     monitors.timestamps.stamp("analysis", monitoring.TS_END)
@@ -154,8 +151,7 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     numBands = imgInfoDict[filelist[0]].numBands
 
     # Now do it all, using concurrent threads to read blocks into a queue
-    outImgInfo = makeOutImgInfo(imgInfoDict[filelist[0]], outgrid, nullval)
-    outDs = openOutfile(outfile, driver, outgrid, outImgInfo, creationoptions)
+    outDs = openOutfile(outfile, driver, outImgInfo, creationoptions)
     monitors.timestamps.stamp("domosaic", monitoring.TS_START)
     for bandNum in range(1, numBands + 1):
         with poolClass(max_workers=numthreads) as threadPool:
@@ -170,7 +166,7 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
                     blockList, filesForBlock, workerList, monitors)
     monitors.timestamps.stamp("domosaic", monitoring.TS_END)
 
-    outDs.SetGeoTransform(outGeoTransform)
+    outDs.SetGeoTransform(outImgInfo.transform)
     outDs.SetProjection(outImgInfo.projection)
     if dopyramids:
         monitors.timestamps.stamp("pyramids", monitoring.TS_START)
@@ -330,34 +326,42 @@ def makeFilelist(infilelist):
     return filelist
 
 
-def makeOutputGrid(filelist, imgInfoDict):
+def makeOutputGrid(filelist, imgInfoDict, nullval):
     """
-    Work out the extent of the whole mosaic. Return a pixel grid
-    of the whole thing.
+    Work out the extent of the whole mosaic. Return an ImageInfo
+    object of the output grid.
     """
-    # For now, we will assume that all inputs are in the same projection,
-    # pixel size and grid alignment, but later we may intercede at this
-    # point to generate some VRT files to reproject on the fly.
-
-    # Use RIOS's pixelgrid module to work out the union of all input rasters.
-    # Probably should re-write this bit to be independent of RIOS, eventually.
     infoList = [imgInfoDict[fn] for fn in filelist]
-    pixgridList = [pixelgrid.PixelGridDefn(geotransform=info.transform,
-            nrows=info.nrows, ncols=info.ncols) for info in infoList]
-    unionGrid = pixgridList[0]
-    for pixgrid in pixgridList[1:]:
-        unionGrid = unionGrid.union(pixgrid)
-    return unionGrid
+    boundsArray = numpy.array([(i.xMin, i.xMax, i.yMin, i.yMax)
+        for i in infoList])
+    xMin = boundsArray[:, 0].min()
+    xMax = boundsArray[:, 1].max()
+    yMin = boundsArray[:, 2].min()
+    yMax = boundsArray[:, 3].max()
+
+    firstImgInfo = imgInfoDict[filelist[0]]
+    outImgInfo = structures.ImageInfo(None)
+    outImgInfo.projection = firstImgInfo.projection
+    (xRes, yRes) = (firstImgInfo.xRes, firstImgInfo.yRes)
+    outImgInfo.ncols = int(round(((xMax - xMin) / xRes)))
+    outImgInfo.nrows = int(round(((yMax - yMin) / yRes)))
+    outImgInfo.transform = (xMin, xRes, 0.0, yMax, 0.0, -yRes)
+    outImgInfo.dataType = firstImgInfo.dataType
+    outImgInfo.numBands = firstImgInfo.numBands
+    outImgInfo.nullVal = firstImgInfo.nullVal
+    if nullval is not None:
+        outImgInfo.nullVal = nullval
+    return outImgInfo
 
 
-def makeOutputBlockList(outgrid, blocksize):
+def makeOutputBlockList(outImgInfo, blocksize):
     """
     Given a pixel grid of the whole extent, divide it up into blocks.
     Return a list of BlockSpec objects.
     """
     # Divide this up into blocks
     # Should do something to avoid tiny blocks on the right and bottom edges...
-    (nrows, ncols) = outgrid.getDimensions()
+    (nrows, ncols) = (outImgInfo.nrows, outImgInfo.ncols)
     blockList = []
     top = 0
     while top < nrows:
@@ -482,11 +486,11 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
     return allInputsForBlock
 
 
-def openOutfile(outfile, driver, outgrid, outImgInfo, creationoptions):
+def openOutfile(outfile, driver, outImgInfo, creationoptions):
     """
     Open the output file
     """
-    (nrows, ncols) = outgrid.getDimensions()
+    (nrows, ncols) = (outImgInfo.nrows, outImgInfo.ncols)
     numBands = outImgInfo.numBands
     datatype = outImgInfo.dataType
     if creationoptions is None:

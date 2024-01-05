@@ -31,15 +31,26 @@ class ImageInfo:
     @property
     def xMin(self):
         return self.transform[0]
+
     @property
     def xMax(self):
         return self.transform[0] + self.ncols * self.transform[1]
+
     @property
     def yMax(self):
         return self.transform[3]
+
     @property
     def yMin(self):
         return self.transform[3] + self.nrows * self.transform[5]
+
+    @property
+    def xRes(self):
+        return self.transform[1]
+
+    @property
+    def yRes(self):
+        return abs(self.transform[5])
 
 
 class BlockSpec:

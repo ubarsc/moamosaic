@@ -151,8 +151,8 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
     if outXres is None or outYres is None:
         if outSrs.GetLinearUnitsName() != firstSrs.GetLinearUnitsName():
             msg = ("Cannot deduce default pixel size, because output " +
-                    "coordinate units '{}' are different to input '{}'").format(
-                    outSrs.GetLinearUnitsName(), firstSrs.GetLinearUnitsName())
+                "coordinate units '{}' are different to input '{}'").format(
+                outSrs.GetLinearUnitsName(), firstSrs.GetLinearUnitsName())
             raise MoaProjectionError(msg)
 
         outXres = firstImgInfo.transform[1]
@@ -174,8 +174,8 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
 
         outBounds = (xMin, yMin, xMax, yMax)
         warpOptions = gdal.WarpOptions(format="VRT", xRes=outXres,
-                yRes=abs(outYres), srcNodata=nullval, dstNodata=nullval,
-                dstSRS=outSrs, outputBounds=outBounds, overviewLevel='NONE')
+            yRes=abs(outYres), srcNodata=nullval, dstNodata=nullval,
+            dstSRS=outSrs, outputBounds=outBounds, overviewLevel='NONE')
         gdal.Warp(vrtfilename, filename, options=warpOptions)
 
         newFilelist.append(vrtfilename)
