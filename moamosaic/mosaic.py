@@ -72,6 +72,18 @@ def getCmdargs():
     p.add_argument("--omitpyramids", default=False, action="store_true",
         help="Omit the pyramid layers (i.e. overviews)")
     p.add_argument("--monitorjson", help="Output JSON file of monitoring info")
+    outprojGroup = p.add_argument_group("Output Projection")
+    outprojGroup.add_argument("--outprojepsg", type=int,
+        help="EPSG number of desired output projection")
+    outprojGroup.add_argument("--outprojwktfile",
+        help="Name of text file containing WKT of desired output projection")
+    outprojGroup.add_argument("--xres", type=float,
+        help="Desired output X pixel size (default matches input)")
+    outprojGroup.add_argument("--yres", type=float,
+        help="Desired output Y pixel size (default matches input)")
+    outprojGroup.add_argument("--resample", default="nearest",
+        help=("GDAL name of resampling method to use for " +
+            "reprojection (default=%(default)s)"))
     cmdargs = p.parse_args()
     return cmdargs
 
@@ -87,8 +99,10 @@ def mainCmd():
     monitorDict = doMosaic(filelist, cmdargs.outfile,
         numthreads=cmdargs.numthreads, blocksize=cmdargs.blocksize,
         driver=cmdargs.driver, nullval=cmdargs.nullval,
-        dopyramids=(not cmdargs.omitpyramids),
-        creationoptions=cmdargs.creationoption)
+        dopyramids=(not cmdargs.omitpyramids), creationoptions=cmdargs.co,
+        outprojepsg=cmdargs.outprojepsg, outprojwktfile=cmdargs.outprojwktfile,
+        outXres=cmdargs.xres, outYres=cmdargs.yres,
+        resamplemethod=cmdargs.resample)
 
     if cmdargs.monitorjson is not None:
         with open(cmdargs.monitorjson, 'w') as f:
@@ -98,7 +112,8 @@ def mainCmd():
 def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
         dopyramids=True, creationoptions=None, outprojepsg=None,
-        outprojwktfile=None, outXres=None, outYres=None, resamplemethod=None):
+        outprojwktfile=None, outprojwkt=None, outXres=None,
+        outYres=None, resamplemethod=None):
     """
     Main routine, callable from non-commandline context
     """
@@ -115,8 +130,8 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     monitors.timestamps.stamp("projection", monitoring.TS_START)
     (filelist, tmpdir) = reproj.handleProjections(filelist,
-        imgInfoDict, outprojepsg, outprojwktfile, outXres, outYres,
-        resamplemethod)
+        imgInfoDict, outprojepsg, outprojwktfile, outprojwkt, outXres,
+        outYres, resamplemethod, nullval)
     monitors.timestamps.stamp("projection", monitoring.TS_END)
 
     if nullval is None:

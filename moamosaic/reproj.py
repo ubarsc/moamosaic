@@ -12,16 +12,17 @@ from . import structures
 
 
 def handleProjections(filelist, imgInfoDict, outprojepsg, outprojwktfile,
-        outXres, outYres):
+        outprojwkt, outXres, outYres, resampleMethod, nullval):
     """
     Main routine for handling issues around projections, etc.
 
     Returns
     """
     tmpdir = None
-    if reprojectionRequested(outprojepsg, outprojwktfile):
+    if reprojectionRequested(outprojepsg, outprojwktfile, outprojwkt):
         returnTuple = makeReprojVRTs(filelist, imgInfoDict,
-                outprojepsg, outprojwktfile)
+                outprojepsg, outprojwktfile, outprojwkt, outXres,
+                outYres, resampleMethod, nullval)
     else:
         # Raise an exception if input projections don't match
         checkInputProjections(imgInfoDict)
@@ -30,12 +31,13 @@ def handleProjections(filelist, imgInfoDict, outprojepsg, outprojwktfile,
     return returnTuple
 
 
-def reprojectionRequested(outprojepsg, outprojwktfile):
+def reprojectionRequested(outprojepsg, outprojwktfile, outprojwkt):
     """
     Check whether an output projection has been requested,
     in any of the possible forms.
     """
-    reprojReq = (outprojepsg is not None or outprojwktfile is not None)
+    reprojReq = (outprojepsg is not None or outprojwktfile is not None or
+        outprojwkt is not None)
     return reprojReq
 
 
@@ -130,7 +132,7 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
         Name of temporary directory containing all VRTs
 
     """
-    tmpdir = tempfile.mkdtemp()
+    tmpdir = tempfile.mkdtemp(prefix='moamosaic_')
 
     if outprojwktfile is not None:
         outprojwkt = open(outprojwktfile).read()
@@ -147,9 +149,10 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
 
     # Work out default resolution
     if outXres is None or outYres is None:
-        if not outSrs.IsSameGeogGC(firstSrs):
+        if outSrs.GetLinearUnitsName() != firstSrs.GetLinearUnitsName():
             msg = ("Cannot deduce default pixel size, because output " +
-                    "coordinate system is different to input")
+                    "coordinate units '{}' are different to input '{}'").format(
+                    outSrs.GetLinearUnitsName(), firstSrs.GetLinearUnitsName())
             raise MoaProjectionError(msg)
 
         outXres = firstImgInfo.transform[1]
@@ -157,8 +160,8 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
 
     newFilelist = []
     for filename in filelist:
-        vrtfilename = os.path.basename(filename) + ".vrt"
-        vrtfilename = os.path.join(tmpdir, vrtfilename)
+        (fd, vrtfilename) = tempfile.mkstemp(dir=tmpdir, suffix=".vrt")
+        os.close(fd)
 
         # Work out the output bounds
         inSrs = osr.SpatialReference()
@@ -170,10 +173,10 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
                 outXres, outYres)
 
         outBounds = (xMin, yMin, xMax, yMax)
-        vrtOptions = gdal.BuildVRTOptions(xRes=outXres, yRes=outYres,
-                srcNodata=nullval, VRTNodata=nullval, outputSRS=outSrs,
-                outputBounds=outBounds)
-        gdal.BuildVRT(vrtfilename, filename, vrtOptions)
+        warpOptions = gdal.WarpOptions(format="VRT", xRes=outXres,
+                yRes=abs(outYres), srcNodata=nullval, dstNodata=nullval,
+                dstSRS=outSrs, outputBounds=outBounds, overviewLevel='NONE')
+        gdal.Warp(vrtfilename, filename, options=warpOptions)
 
         newFilelist.append(vrtfilename)
         imgInfoDict[vrtfilename] = structures.ImageInfo(vrtfilename)
