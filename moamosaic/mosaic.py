@@ -122,29 +122,26 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     # Work out what we are going to do
     monitors.setParam('numinfiles', len(filelist))
-    monitors.timestamps.stamp("imginfodict", monitoring.TS_START)
-    imgInfoDict = makeImgInfoDict(filelist, numthreads)
-    monitors.timestamps.stamp("imginfodict", monitoring.TS_END)
+    with monitors.timestamps.ctx("imginfodict"):
+        imgInfoDict = makeImgInfoDict(filelist, numthreads)
 
-    monitors.timestamps.stamp("projection", monitoring.TS_START)
-    (filelist, tmpdir) = reproj.handleProjections(filelist,
-        imgInfoDict, outprojepsg, outprojwktfile, outprojwkt, outXres,
-        outYres, resamplemethod, nullval)
-    monitors.timestamps.stamp("projection", monitoring.TS_END)
+    with monitors.timestamps.ctx("projection"):
+        (filelist, tmpdir) = reproj.handleProjections(filelist,
+            imgInfoDict, outprojepsg, outprojwktfile, outprojwkt, outXres,
+            outYres, resamplemethod, nullval)
 
     if nullval is None:
         nullval = imgInfoDict[filelist[0]].nullVal
 
-    monitors.timestamps.stamp("analysis", monitoring.TS_START)
-    outImgInfo = makeOutputGrid(filelist, imgInfoDict, nullval)
-    blockList = makeOutputBlockList(outImgInfo, blocksize)
+    with monitors.timestamps.ctx("analysis"):
+        outImgInfo = makeOutputGrid(filelist, imgInfoDict, nullval)
+        blockList = makeOutputBlockList(outImgInfo, blocksize)
 
-    (blockListWithInputs, filesForBlock) = (
-        findInputsPerBlock(blockList, outImgInfo.transform, filelist,
-        imgInfoDict))
-    blockReadingList = makeBlockReadingList(blockListWithInputs)
-    blocksPerThread = divideBlocksByThread(blockReadingList, numthreads)
-    monitors.timestamps.stamp("analysis", monitoring.TS_END)
+        (blockListWithInputs, filesForBlock) = (
+            findInputsPerBlock(blockList, outImgInfo.transform, filelist,
+            imgInfoDict))
+        blockReadingList = makeBlockReadingList(blockListWithInputs)
+        blocksPerThread = divideBlocksByThread(blockReadingList, numthreads)
 
     blockQ = queue.Queue()
     poolClass = futures.ThreadPoolExecutor
@@ -152,29 +149,26 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     # Now do it all, using concurrent threads to read blocks into a queue
     outDs = openOutfile(outfile, driver, outImgInfo, creationoptions)
-    monitors.timestamps.stamp("domosaic", monitoring.TS_START)
-    for bandNum in range(1, numBands + 1):
-        with poolClass(max_workers=numthreads) as threadPool:
-            workerList = []
-            for i in range(numthreads):
-                blocksToRead = blocksPerThread[i]
-                worker = threadPool.submit(readFunc, blocksToRead, blockQ,
-                        bandNum, outImgInfo.nullVal)
-                workerList.append(worker)
+    with monitors.timestamps.ctx("domosaic"):
+        for bandNum in range(1, numBands + 1):
+            with poolClass(max_workers=numthreads) as threadPool:
+                workerList = []
+                for i in range(numthreads):
+                    blocksToRead = blocksPerThread[i]
+                    worker = threadPool.submit(readFunc, blocksToRead, blockQ,
+                            bandNum, outImgInfo.nullVal)
+                    workerList.append(worker)
 
-            writeFunc(blockQ, outDs, outImgInfo, bandNum,
-                    blockList, filesForBlock, workerList, monitors)
-    monitors.timestamps.stamp("domosaic", monitoring.TS_END)
+                writeFunc(blockQ, outDs, outImgInfo, bandNum,
+                        blockList, filesForBlock, workerList, monitors)
 
     outDs.SetGeoTransform(outImgInfo.transform)
     outDs.SetProjection(outImgInfo.projection)
     if dopyramids:
-        monitors.timestamps.stamp("pyramids", monitoring.TS_START)
-        outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
-        monitors.timestamps.stamp("pyramids", monitoring.TS_END)
-        monitors.timestamps.stamp("stats", monitoring.TS_START)
-        doStats(outDs)
-        monitors.timestamps.stamp("stats", monitoring.TS_END)
+        with monitors.timestamps.ctx("pyramids"):
+            outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
+        with monitors.timestamps.ctx("stats"):
+            doStats(outDs)
 
     if tmpdir is not None:
         shutil.rmtree(tmpdir)

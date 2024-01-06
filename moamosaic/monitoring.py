@@ -2,6 +2,7 @@
 Classes for monitoring various things in MoaMosaic
 """
 import time
+import contextlib
 
 import numpy
 
@@ -61,9 +62,27 @@ TS_WHOLEPROGRAM = "program"
 
 
 class TimeStampSet():
+    """
+    A class for managing lots of time stamps at different points within
+    a program. This has grown and changed, but I feel like there is
+    something more generally useful in this.
+    """
     def __init__(self, keySep=':'):
         self.stamps = {}
         self.keySep = keySep
+
+    @contextlib.contextmanager
+    def ctx(self, name):
+        """
+        Allow use of with statements for start/end timing
+        """
+        startTime = time.time()
+        yield
+        endTime = time.time()
+        startKey = self.__makekey(name, TS_START)
+        self.stamps[startKey] = startTime
+        endKey = self.__makekey(name, TS_END)
+        self.stamps[endKey] = endTime
 
     def __makekey(self, name, startEnd):
         if self.keySep in name:
