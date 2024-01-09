@@ -252,7 +252,7 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
       outNullVal : int
         Output null value. Used as the fill value for incomplete
         blocks (i.e. when the output block falls partly off the edge of
-        the input block)
+        the input raster)
 
     """
     blocksPerInfile = structures.BlocksByInfile()
