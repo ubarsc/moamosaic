@@ -37,6 +37,7 @@ from . import reproj
 DFLT_NUMTHREADS = 4
 DFLT_BLOCKSIZE = 1024
 DFLT_DRIVER = "GTiff"
+DFLT_RESAMPLEMETHOD = "nearest"
 defaultCreationOptions = {
     'GTiff': ['COMPRESS=DEFLATE', 'TILED=YES', 'BIGTIFF=IF_SAFER',
         'INTERLEAVE=BAND'],
@@ -68,9 +69,15 @@ def getCmdargs():
     p.add_argument("--nullval", type=int,
         help="Null value to use (default comes from input files)")
     p.add_argument("--omitpyramids", default=False, action="store_true",
-        help="Omit the pyramid layers (i.e. overviews)")
-    p.add_argument("--monitorjson", help="Output JSON file of monitoring info")
-    outprojGroup = p.add_argument_group("Output Projection")
+        help=("Omit the pyramid layers (i.e. overviews) and statistics. " +
+            "These are included by default"))
+    p.add_argument("--monitorjson",
+        help="Output JSON file of monitoring info (optional)")
+
+    outprojGroup = p.add_argument_group("Output Projection",
+        description=("Default projection matches the input files. These " +
+            "are used to specify something different. Use only one of " +
+            "--outprojepsg or --outprojwktfile"))
     outprojGroup.add_argument("--outprojepsg", type=int,
         help="EPSG number of desired output projection")
     outprojGroup.add_argument("--outprojwktfile",
@@ -79,16 +86,19 @@ def getCmdargs():
         help="Desired output X pixel size (default matches input)")
     outprojGroup.add_argument("--yres", type=float,
         help="Desired output Y pixel size (default matches input)")
-    outprojGroup.add_argument("--resample", default="nearest",
+    outprojGroup.add_argument("--resample", default=DFLT_RESAMPLEMETHOD,
         help=("GDAL name of resampling method to use for " +
-            "reprojection (default=%(default)s)"))
+            "reprojection (default='%(default)s')"))
     cmdargs = p.parse_args()
     return cmdargs
 
 
 def mainCmd():
     """
-    Main command line stub, referenced from pyproject.toml
+    Main command line wrapper for the doMosaic function.
+
+    This function is referenced from pyproject.toml to create command
+    line script.
     """
     gdal.UseExceptions()
 
@@ -111,9 +121,57 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
         dopyramids=True, creationoptions=None, outprojepsg=None,
         outprojwktfile=None, outprojwkt=None, outXres=None,
-        outYres=None, resamplemethod=None):
+        outYres=None, resamplemethod=DFLT_RESAMPLEMETHOD):
     """
-    Main routine, callable from non-commandline context
+    From the given list of input raster files, create a single mosaic
+    output raster.
+
+    Parameters
+    ----------
+      filelist : List of str
+        List of filenames of input raster files
+      outfile : str
+        Name of output raster file
+      numthreads : int
+        Number of threads to use for reading input. These are in addition
+        to the main thread which manages everything else, including
+        writing the output
+      blocksize : int
+        Number of pixels in each square block of input (blocksize x blocksize)
+      driver : str
+        GDAL short name of format driver to use for output
+      creationoptions : List of str
+        List of 'NAME=VALUE' strings, giving GDAL creation options to go
+        with the selected format driver. If this is None, then some
+        sensible defaults are supplied for some known drivers.
+      nullval : int
+        Value to use as "no data" in input and output rasters. Default will
+        be taken from the input files, but this can be used to over-ride
+        that.
+      dopyramids : bool
+        If true, then calculate pyramid layers and statistics on the output
+        raster
+      outprojepsg : int
+        EPSG number of projection for output file. Default projection
+        matches the input files
+      outprojwktfile : str
+        Name of text file containing WKT string for output projection
+      outprojwkt : str
+        WKT string for output projection
+      outXres, outYres : float
+        Desired output pxel size (X and Y directions). Default pixel
+        size matches the input files
+      resamplemethod : str
+        GDAL name of resampling method to use, if any resampling is required
+
+
+    Returns
+    -------
+      monitorInfo : dict
+        A dictionary of various bits of monitoring information, mainly
+        useful in development and testing. Most importantly, timing
+        information of various steps in the mosaicing process.
+
     """
     monitors = monitoring.Monitoring()
     monitors.setParam('numthreads', numthreads)
@@ -123,7 +181,7 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     # Work out what we are going to do
     monitors.setParam('numinfiles', len(filelist))
     with monitors.timestamps.ctx("imginfodict"):
-        imgInfoDict = makeImgInfoDict(filelist, numthreads)
+        imgInfoDict = makeImgInfoDict(filelist)
 
     with monitors.timestamps.ctx("projection"):
         (filelist, tmpdir) = reproj.handleProjections(filelist,
@@ -180,6 +238,19 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
     """
     This function is run by all the read workers, each with its own list
     of blocks to read.
+
+    Parameters
+    ----------
+      blocksToRead : List of BlockSpecWithInputs objects
+      blockQ : queue.Queue
+        As each block is read, it is sent to the writer via this Queue
+      bandNum : int
+        GDAL band number of band to read (i.e. first band is 1)
+      outNullVal : int
+        Output null value. Used as the fill value for incomplete
+        blocks (i.e. when the output block falls partly off the edge of
+        the input block)
+
     """
     blocksPerInfile = structures.BlocksByInfile()
     for blockInfo in blocksToRead:
@@ -236,6 +307,28 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum,
 
     This function runs continuously for a single band of the output file,
     after which it returns. It will then be called again for the next band.
+
+    Parameters
+    ----------
+      blockQ : queue.Queue
+        Blocks of data are taken from this Queue
+      outDs : gdal.Dataset
+        Open Dataset of output file
+      outImgInfo : ImageInfo
+        All info about the output file
+      bandNum : int
+        GDAL band number (i.e. starts at 1) for band to write to outDs
+      blockList : List of BlockSpec
+        List of the blocks in the output grid. Blocks of data are written
+        in this order.
+      filesForBlock : dict
+        Key is a BlockSpec, value is a list of filenames which contribute
+        data to that block (i.e. intersect with it)
+      workerList : List of futures.Future
+        List of worker threads, so we can continually check them for
+        exceptions
+      monitors : Monitoring
+        A Monitoring object, mainly used to accumulate timing info
 
     """
     band = outDs.GetRasterBand(bandNum)
@@ -295,7 +388,8 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum,
 def checkReaderExceptions(workerList):
     """
     Check the read workers, in case one has raised an exception. The
-    elements of workerList are futures.Future objects.
+    elements of workerList are futures.Future objects. If a worker
+    has ended by raising an exception, then re-raise it.
     """
     for worker in workerList:
         if worker.done():
@@ -306,7 +400,7 @@ def checkReaderExceptions(workerList):
 
 def allWorkersDone(workerList):
     """
-    Return True if all owrkers are done
+    Return True if all workers are done
     """
     allDone = True
     for worker in workerList:
@@ -317,7 +411,8 @@ def allWorkersDone(workerList):
 
 def makeFilelist(infilelist):
     """
-    Read the list of input files, and return a list of the filenames
+    Read the text file listing all input files, and return a
+    list of the filenames
     """
     filelist = [line.strip() for line in open(infilelist)]
     return filelist
@@ -373,7 +468,7 @@ def makeOutputBlockList(outImgInfo, blocksize):
     return blockList
 
 
-def makeImgInfoDict(filelist, numthreads):
+def makeImgInfoDict(filelist):
     """
     Create ImageInfo objects for all the given input files.
     Store these in a dictionary, keyed by their filenames.
@@ -485,8 +580,23 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
 
 def openOutfile(outfile, driver, outImgInfo, creationoptions):
     """
-    Open the output file
+    Open the output file.
+
+    Parameters
+    ----------
+      outfile : str
+      driver : str
+      outImgInfo : ImageInfo
+      creationoptions : List of str
+
+    Returns
+    -------
+      outDs : gdal.Dataset
+
     """
+    if outfile is None:
+        raise ValueError("Must specify output file")
+
     (nrows, ncols) = (outImgInfo.nrows, outImgInfo.ncols)
     numBands = outImgInfo.numBands
     datatype = outImgInfo.dataType
@@ -509,6 +619,20 @@ def mergeInputs(allInputsForBlock, outNullVal):
     Given a list of input arrays, merge to produce the final
     output array. Ordering is important, the last non-null
     value is the one used.
+
+    Parameters
+    ----------
+      allInputsForBlock : List of numpy.ndarray (nrows, ncols)
+        List of blocks of raster data from input files.
+      outNullVal : int
+        Pixels with this value will be be excluded from contributing
+        to the output array
+
+    Returns
+    -------
+      outArr : numpy.ndarray (nrows, ncols)
+        Final output block of pixels
+
     """
     numInputs = len(allInputsForBlock)
     outArr = allInputsForBlock[0]
