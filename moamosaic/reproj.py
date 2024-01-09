@@ -203,7 +203,8 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
         outBounds = (xMin, yMin, xMax, yMax)
         warpOptions = gdal.WarpOptions(format="VRT", xRes=outXres,
             yRes=abs(outYres), srcNodata=nullval, dstNodata=nullval,
-            dstSRS=outSrs, outputBounds=outBounds, overviewLevel='NONE')
+            dstSRS=outSrs, outputBounds=outBounds, overviewLevel='NONE',
+            resampleAlg=resampleMethod)
         gdal.Warp(vrtfilename, filename, options=warpOptions)
 
         newFilelist.append(vrtfilename)

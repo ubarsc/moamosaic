@@ -39,7 +39,7 @@ from . import reproj
 DFLT_NUMTHREADS = 4
 DFLT_BLOCKSIZE = 1024
 DFLT_DRIVER = "GTiff"
-DFLT_RESAMPLEMETHOD = "nearest"
+DFLT_RESAMPLEMETHOD = "near"
 defaultCreationOptions = {
     'GTiff': ['COMPRESS=DEFLATE', 'TILED=YES', 'BIGTIFF=IF_SAFER',
         'INTERLEAVE=BAND'],
