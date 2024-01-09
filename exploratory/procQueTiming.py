@@ -48,7 +48,7 @@ def main():
     else:
         poolClass = futures.ProcessPoolExecutor
     with poolClass(max_workers=1) as procPool:
-        senderProc = procPool.submit(senderFunc, que, cmdargs.blocksize,
+        procPool.submit(senderFunc, que, cmdargs.blocksize,
             cmdargs.numblocks)
 
         receiverFunc(que)

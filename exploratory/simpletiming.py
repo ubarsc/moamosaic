@@ -74,7 +74,8 @@ def main():
     print("Total reading", timestamps.timeSpentByPrefix("readblock"))
     print("Total elapsed reading", timestamps.timeElapsedByPrefix("readblock"))
     print("Total writing", timestamps.timeSpentByPrefix("writeblock"))
-    print("Total elapsed writing", timestamps.timeElapsedByPrefix("writeblock"))
+    print("Total elapsed writing",
+        timestamps.timeElapsedByPrefix("writeblock"))
     print("Total opening", timestamps.timeSpentByPrefix("open"))
     print("Total closing", timestamps.timeSpentByPrefix("close"))
 

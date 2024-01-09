@@ -93,7 +93,8 @@ def readFunc(infile, que, blockList):
     timestamps = utils.TimeStampSet()
 
     for block in blockList:
-        tsName = utils.TS_READBLOCK.format("{}_{}".format(block.left, block.top))
+        tsName = utils.TS_READBLOCK.format("{}_{}".format(
+            block.left, block.top))
         timestamps.stamp(tsName, utils.TS_START)
         arr = band.ReadAsArray(block.left, block.top, block.xsize, block.ysize)
         timestamps.stamp(tsName, utils.TS_END)

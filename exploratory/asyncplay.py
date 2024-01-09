@@ -61,7 +61,8 @@ def main():
     print("Total elapsed reading", timestamps.timeElapsedByPrefix("readblock"))
     print("Avg reading/block", timestamps.avgTimeByPrefix("readblock"))
     print("Total writing", timestamps.timeSpentByPrefix("writeblock"))
-    print("Total elapsed writing", timestamps.timeElapsedByPrefix("writeblock"))
+    print("Total elapsed writing",
+        timestamps.timeElapsedByPrefix("writeblock"))
     print("Whole program", timestamps.timeSpentByPrefix(utils.TS_WHOLEPROGRAM))
     pcntOverlap = timestamps.pcntOverlapByGroup(groupList)
     print("Mean pcnt overlap", round(pcntOverlap.mean(), 2))
