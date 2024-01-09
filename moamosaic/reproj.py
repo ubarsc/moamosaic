@@ -16,7 +16,35 @@ def handleProjections(filelist, imgInfoDict, outprojepsg, outprojwktfile,
     """
     Main routine for handling issues around projections, etc.
 
+    Parameters
+    ----------
+      filelist : list of str
+        List of input file names, potentially to be reprojected
+      imgInfoDict : dict
+        Dictionary of ImageInfo objects, keyed by corresponding
+        file name. This will be added to with entries for the VRT
+        reprojections of the files.
+      outprojepsg : int
+        Desired output projection, as EPSG (or None)
+      outprojwktfile : str
+        Name of file with desired output projection, as WKT (or None)
+      outprojwkt : str
+        Desired output projection, as WKT string (or None
+      outXres, outYres : float
+        Desired output pixel size (X and Y) in world coordinate system
+      resampleMethod : str
+        GDAL name of resampling method to use (if resampling is required)
+      nullval : int
+        Value of "no data" pixels
+
     Returns
+    -------
+      filelist : list of str
+        List of all filenames, with VRT filenames in place of those
+        given in the input filelist
+      tmpdir : str
+        Name of temporary directory containing all VRT files
+
     """
     tmpdir = None
     if reprojectionRequested(outprojepsg, outprojwktfile, outprojwkt):
@@ -34,7 +62,7 @@ def handleProjections(filelist, imgInfoDict, outprojepsg, outprojwktfile,
 def reprojectionRequested(outprojepsg, outprojwktfile, outprojwkt):
     """
     Check whether an output projection has been requested,
-    in any of the possible forms.
+    in any of the possible forms. Return True if so.
     """
     reprojReq = (outprojepsg is not None or outprojwktfile is not None or
         outprojwkt is not None)
