@@ -15,6 +15,8 @@ MoaMosaic relies on GDAL to read and write raster files, so any format
 supported by GDAL may be used. This includes all of its "/vsi" virtual
 file systems, so support for files on S3 is available via /vsis3/.
 
+The main routine to call from this module is doMosaic().
+
 """
 import os
 import argparse
