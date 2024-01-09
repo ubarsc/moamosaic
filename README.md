@@ -1,4 +1,5 @@
-# moamosaic
+# MoaMosaic
+## Introduction
 A tool for using GDAL to make mosaics of multiple input images. Its main advantage is
 that it reads the input files block-by-block with multiple threads. On systems where there is
 significant latency on reading, this allows the process to be significantly faster.
@@ -15,3 +16,32 @@ are:
   * Automatic reprojection of inputs to a desired output projection
   * Multi-threaded reading of input files, so there is some reading ahead going on. Writing of output is always single-threaded, as most GDAL format drivers do not support multi-threaded writing
 
+The package name is in honour of the Moa, a large flightless bird from 
+New Zealand (sadly, now extinct).
+
+## Installation
+The installation setup is managed with pyproject.toml. The package can be installed using pip, something like
+
+    pip install .
+
+The only dependency is GDAL, with its Python bindings.
+
+## Command Line Usage
+    moamosaic -i infiles.txt -o mosaic.tif
+
+Help can be shown with
+
+    moamosaic -h
+
+## Calling from Python
+The package is written in Python, and is callable as a single function
+
+    from moamosaic import mosaic
+
+    infiles = ['file1.tif', 'file2.tif', 'file3.tif', 'file4.tif']
+    outfile = 'mosaic.tif'
+    mosaic.doMosaic(infiles, outfile)
+
+The help can be displayed with
+
+    help(mosaic.doMosaic)
