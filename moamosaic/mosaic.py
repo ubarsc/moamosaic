@@ -226,7 +226,8 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     outDs.SetProjection(outImgInfo.projection)
     if dopyramids:
         with monitors.timestamps.ctx("pyramids"):
-            outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64, 128, 256, 512])
+            outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64,
+                    128, 256, 512])
         with monitors.timestamps.ctx("stats"):
             doStats(outDs)
 
@@ -281,7 +282,8 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
         outArr.fill(outNullVal)
         coloffset = max(0, -left)
         rowoffset = max(0, -top)
-        outArr[rowoffset:rowoffset+ysize1, coloffset:coloffset+xsize1] = arr
+        outArr[rowoffset:(rowoffset + ysize1),
+               coloffset:(coloffset + xsize1)] = arr
 
         # Put the full bloc into the blockQ, along with the associated
         # block information
