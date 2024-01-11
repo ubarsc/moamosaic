@@ -77,9 +77,9 @@ def getCmdargs():
         help="Output JSON file of monitoring info (optional)")
 
     outprojGroup = p.add_argument_group("Output Projection",
-        description=("Default projection matches the input files. These " +
-            "are used to specify something different. Use only one of " +
-            "--outprojepsg or --outprojwktfile"))
+        description=("Default projection matches the input files. The " +
+            "following options are used to specify something different. " +
+            "Use only one of --outprojepsg or --outprojwktfile"))
     outprojGroup.add_argument("--outprojepsg", type=int,
         help="EPSG number of desired output projection")
     outprojGroup.add_argument("--outprojwktfile",
