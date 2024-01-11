@@ -25,7 +25,7 @@ The code is available from the repository, as a tar.gz file
 
 The installation setup is managed with pyproject.toml. The package can be installed using pip, something like
 
-    pip install .
+    pip install moamosaic-1.0.0.tar.gz
 
 The only dependency is GDAL, with its Python bindings.
 
