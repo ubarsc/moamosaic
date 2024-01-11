@@ -456,7 +456,6 @@ def makeOutputBlockList(outImgInfo, blocksize):
     Return a list of BlockSpec objects.
     """
     # Divide this up into blocks
-    # Should do something to avoid tiny blocks on the right and bottom edges...
     (nrows, ncols) = (outImgInfo.nrows, outImgInfo.ncols)
     blockList = []
     top = 0
@@ -470,7 +469,7 @@ def makeOutputBlockList(outImgInfo, blocksize):
         left = 0
         while left < ncols:
             xsize = min(blocksize, (ncols - left))
-            # Similarly avoid too narrow blocks at the right-hand edge
+            # Similarly avoid 'too narrow' blocks at the right-hand edge
             if (ncols - (left + xsize)) < (blocksize // 4):
                 xsize = ncols - left
 
