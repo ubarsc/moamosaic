@@ -462,12 +462,22 @@ def makeOutputBlockList(outImgInfo, blocksize):
     top = 0
     while top < nrows:
         ysize = min(blocksize, (nrows - top))
+        # If what remains after this block is less than 25% of blocksize,
+        # then expand this block to the edge, to avoid very small blocks
+        if (nrows - (top + ysize)) < (blocksize // 4):
+            ysize = nrows - top
+
         left = 0
         while left < ncols:
             xsize = min(blocksize, (ncols - left))
+            # Similarly avoid too narrow blocks at the right-hand edge
+            if (ncols - (left + xsize)) < (blocksize // 4):
+                xsize = ncols - left
+
             block = structures.BlockSpec(top, left, xsize, ysize)
             blockList.append(block)
             left += xsize
+
         top += ysize
     return blockList
 
