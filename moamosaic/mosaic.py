@@ -130,46 +130,46 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     Parameters
     ----------
-      filelist : List of str
+    filelist : List of str
         List of filenames of input raster files
-      outfile : str
+    outfile : str
         Name of output raster file
-      numthreads : int
+    numthreads : int
         Number of threads to use for reading input. These are in addition
         to the main thread which manages everything else, including
         writing the output
-      blocksize : int
+    blocksize : int
         Number of pixels in each square block of input (blocksize x blocksize)
-      driver : str
+    driver : str
         GDAL short name of format driver to use for output
-      creationoptions : List of str
+    creationoptions : List of str
         List of 'NAME=VALUE' strings, giving GDAL creation options to go
         with the selected format driver. If this is None, then some
         sensible defaults are supplied for some known drivers.
-      nullval : int
+    nullval : int
         Value to use as "no data" in input and output rasters. Default will
         be taken from the input files, but this can be used to over-ride
         that.
-      dopyramids : bool
+    dopyramids : bool
         If true, then calculate pyramid layers and statistics on the output
         raster
-      outprojepsg : int
+    outprojepsg : int
         EPSG number of projection for output file. Default projection
         matches the input files
-      outprojwktfile : str
+    outprojwktfile : str
         Name of text file containing WKT string for output projection
-      outprojwkt : str
+    outprojwkt : str
         WKT string for output projection
-      outXres, outYres : float
+    outXres, outYres : float
         Desired output pxel size (X and Y directions). Default pixel
         size matches the input files
-      resamplemethod : str
+    resamplemethod : str
         GDAL name of resampling method to use, if any resampling is required
 
 
     Returns
     -------
-      monitorInfo : dict
+    monitorInfo : dict
         A dictionary of various bits of monitoring information, mainly
         useful in development and testing. Most importantly, timing
         information of various steps in the mosaicing process.
@@ -244,12 +244,12 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
 
     Parameters
     ----------
-      blocksToRead : List of BlockSpecWithInputs objects
-      blockQ : queue.Queue
+    blocksToRead : List of BlockSpecWithInputs objects
+    blockQ : queue.Queue
         As each block is read, it is sent to the writer via this Queue
-      bandNum : int
+    bandNum : int
         GDAL band number of band to read (i.e. first band is 1)
-      outNullVal : int
+    outNullVal : int
         Output null value. Used as the fill value for incomplete
         blocks (i.e. when the output block falls partly off the edge of
         the input raster)
@@ -314,24 +314,24 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum,
 
     Parameters
     ----------
-      blockQ : queue.Queue
+    blockQ : queue.Queue
         Blocks of data are taken from this Queue
-      outDs : gdal.Dataset
+    outDs : gdal.Dataset
         Open Dataset of output file
-      outImgInfo : ImageInfo
+    outImgInfo : ImageInfo
         All info about the output file
-      bandNum : int
+    bandNum : int
         GDAL band number (i.e. starts at 1) for band to write to outDs
-      blockList : List of BlockSpec
+    blockList : List of BlockSpec
         List of the blocks in the output grid. Blocks of data are written
         in this order.
-      filesForBlock : dict
+    filesForBlock : dict
         Key is a BlockSpec, value is a list of filenames which contribute
         data to that block (i.e. intersect with it)
-      workerList : List of futures.Future
+    workerList : List of futures.Future
         List of worker threads, so we can continually check them for
         exceptions
-      monitors : Monitoring
+    monitors : Monitoring
         A Monitoring object, mainly used to accumulate timing info
 
     """
@@ -597,14 +597,14 @@ def openOutfile(outfile, driver, outImgInfo, creationoptions):
 
     Parameters
     ----------
-      outfile : str
-      driver : str
-      outImgInfo : ImageInfo
-      creationoptions : List of str
+    outfile : str
+    driver : str
+    outImgInfo : ImageInfo
+    creationoptions : List of str
 
     Returns
     -------
-      outDs : gdal.Dataset
+    outDs : gdal.Dataset
 
     """
     if outfile is None:
@@ -635,15 +635,15 @@ def mergeInputs(allInputsForBlock, outNullVal):
 
     Parameters
     ----------
-      allInputsForBlock : List of numpy.ndarray (nrows, ncols)
+    allInputsForBlock : List of numpy.ndarray (nrows, ncols)
         List of blocks of raster data from input files.
-      outNullVal : int
+    outNullVal : int
         Pixels with this value will be be excluded from contributing
         to the output array
 
     Returns
     -------
-      outArr : numpy.ndarray (nrows, ncols)
+    outArr : numpy.ndarray (nrows, ncols)
         Final output block of pixels
 
     """

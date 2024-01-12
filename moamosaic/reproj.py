@@ -18,31 +18,31 @@ def handleProjections(filelist, imgInfoDict, outprojepsg, outprojwktfile,
 
     Parameters
     ----------
-      filelist : list of str
+    filelist : list of str
         List of input file names, potentially to be reprojected
-      imgInfoDict : dict
+    imgInfoDict : dict
         Dictionary of ImageInfo objects, keyed by corresponding
         file name. This will be added to with entries for the VRT
         reprojections of the files.
-      outprojepsg : int
+    outprojepsg : int
         Desired output projection, as EPSG (or None)
-      outprojwktfile : str
+    outprojwktfile : str
         Name of file with desired output projection, as WKT (or None)
-      outprojwkt : str
+    outprojwkt : str
         Desired output projection, as WKT string (or None
-      outXres, outYres : float
+    outXres, outYres : float
         Desired output pixel size (X and Y) in world coordinate system
-      resampleMethod : str
+    resampleMethod : str
         GDAL name of resampling method to use (if resampling is required)
-      nullval : int
+    nullval : int
         Value of "no data" pixels
 
     Returns
     -------
-      filelist : list of str
+    filelist : list of str
         List of all filenames, with VRT filenames in place of those
         given in the input filelist
-      tmpdir : str
+    tmpdir : str
         Name of temporary directory containing all VRT files
 
     """
@@ -133,30 +133,30 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
 
     Parameters
     ----------
-      filelist : List of str
+    filelist : List of str
         The input filenames to be reprojected
-      imgInfoDict : dict
+    imgInfoDict : dict
         Keyed by filename, value is ImageInfo object. This dictionary
         is updated to included entries for all the new VRT files
-      outptojepsg : int
+    outptojepsg : int
         EPSG number of requested output projection. None if not required.
-      outprojwktfile : str
+    outprojwktfile : str
         Name of file containing WKT of requested projection. None if not
         required
-      outprojwkt : str
+    outprojwkt : str
         WKT string of requested projection, or None.
-      outXres, outYres : float
+    outXres, outYres : float
         Pixel size for desired output pixels
-      resampleMethod : str
+    resampleMethod : str
         GDAL resample method string (nearest, cubic, etc.)
-      nullval : float
+    nullval : float
         Null value to use for input and output images, or None.
 
     Returns
     -------
-      newFilelist : List of str
+    newFilelist : List of str
         Names of VRT files
-      tmpdir : str
+    tmpdir : str
         Name of temporary directory containing all VRTs
 
     """
