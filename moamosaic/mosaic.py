@@ -92,7 +92,7 @@ def mainCmd():
 
     cmdargs = getCmdargs()
     filelist = makeFilelist(cmdargs.infilelist)
-    monitorDict = doMosaic(filelist, cmdargs.outfile,
+    monitors = doMosaic(filelist, cmdargs.outfile,
         numthreads=cmdargs.numthreads, blocksize=cmdargs.blocksize,
         driver=cmdargs.driver, nullval=cmdargs.nullval,
         dopyramids=(not cmdargs.omitpyramids), creationoptions=cmdargs.co,
@@ -102,7 +102,7 @@ def mainCmd():
 
     if cmdargs.monitorjson is not None:
         with open(cmdargs.monitorjson, 'w') as f:
-            json.dump(monitorDict, f, indent=2)
+            json.dump(monitors.reportAsDict(), f, indent=2)
 
 
 def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
@@ -155,8 +155,8 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     Returns
     -------
-    monitorInfo : dict
-        A dictionary of various bits of monitoring information, mainly
+    monitorInfo : Monitoring
+        An object of various bits of monitoring information, mainly
         useful in development and testing. Most importantly, timing
         information of various steps in the mosaicing process.
 
@@ -220,7 +220,7 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     if tmpdir is not None:
         shutil.rmtree(tmpdir)
 
-    return monitors.reportAsDict()
+    return monitors
 
 
 def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
