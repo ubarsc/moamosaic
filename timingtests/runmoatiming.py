@@ -73,10 +73,10 @@ def main():
 
         try:
             numthreads = i // runsPerThreadcount + cmdargs.minnumthreads
-            monitorDict = mosaic.doMosaic(infileList, outfile,
+            monitors = mosaic.doMosaic(infileList, outfile,
                 numthreads=numthreads, blocksize=cmdargs.blocksize,
                 driver=driver, nullval=nullval, nopyramids=nopyramids)
-            monitorList.append(monitorDict)
+            monitorList.append(monitors.reportAsDict())
             print("Done job", i)
         except Exception as e:
             print("Exception '{}' for job {}".format(e, i))
