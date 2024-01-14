@@ -18,7 +18,7 @@ import subprocess
 import shutil
 
 
-DOCDIR = 'doc'
+DOCDIR = 'docs'
 APIDIR = 'api'
 CMDLINE_MD = 'cmdline.md'
 CMDLINE_TEMPLATE = '{}.template'.format(CMDLINE_MD)
