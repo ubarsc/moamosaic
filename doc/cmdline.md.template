@@ -1,0 +1,7 @@
+# Command line script
+The package is available from the command line with the `moamosaic` command. 
+Its usage is described below.
+
+```bash
+$CMDLINEHELP
+```
