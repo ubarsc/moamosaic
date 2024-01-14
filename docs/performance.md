@@ -18,4 +18,4 @@ Comparison with gdal_merge.py, also multiple runs.
 Plot of elapsed time for creating a mosaic. Median over all trials, and
 the 90% confidence interval, from the 40 runs for each value of numthreads. 
 
-![Plot of moamosaic runtime against number of threads](moamosaictiming.png)
+![Plot of moamosaic runtime against number of threads](mosaictiming.png)
