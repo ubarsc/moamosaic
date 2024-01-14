@@ -20,16 +20,16 @@ are:
 The package name is in honour of the Moa, a large flightless bird from 
 New Zealand (sadly, now extinct).
 
-## Command line help
-Command line help is available by running `moamosaic -h`, and is 
-reproduced in [cmdline](cmdline.md)
+## Command Line
+Moamosaic can be run from the command line. The command usage is described
+[here](cmdline.md)
 
 ## Python API
 The moamosaic package is written in Python, and can be called directly 
 from Python. The API documentation is available [here](api)
 
 ## Performance
-The analysis of performance timings is available [here](performance.md)
+An analysis of performance timings is available [here](performance.md)
 
 ## Source Code
 The source for moamosaic is available at 
