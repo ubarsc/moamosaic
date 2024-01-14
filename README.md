@@ -48,3 +48,7 @@ The package is written in Python, and is callable as a single function
 The help can be displayed with
 
     help(mosaic.doMosaic)
+
+## Full Documentation
+The full documentation is available on Github Pages 
+(https://ubarsc.github.io/moamosaic/)[https://ubarsc.github.io/moamosaic/]
