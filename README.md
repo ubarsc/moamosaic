@@ -51,4 +51,4 @@ The help can be displayed with
 
 ## Full Documentation
 The full documentation is available on Github Pages 
-(https://ubarsc.github.io/moamosaic/)[https://ubarsc.github.io/moamosaic/]
+https://ubarsc.github.io/moamosaic/
