@@ -20,7 +20,7 @@ are:
 The package name is in honour of the Moa, a large flightless bird from 
 New Zealand (sadly, now extinct).
 
-## Full Documentaion
+## Full Documentation
 Moamosaic can be used either from the command line, or via a Python API.
 
 Full documentation of both is available on Github Pages 
