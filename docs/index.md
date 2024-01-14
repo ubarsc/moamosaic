@@ -45,3 +45,7 @@ It can then be installed using pip, for example
 pip install moamosaic-1.0.0.tar.gz
 ```
 
+It does require a sufficiently modern version of setuptools to install. Version
+69 works fine, but version 59 does not. I am unsure of exactly the minimum
+requirement.
+
