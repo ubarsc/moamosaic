@@ -20,35 +20,8 @@ are:
 The package name is in honour of the Moa, a large flightless bird from 
 New Zealand (sadly, now extinct).
 
-## Installation
-The code is available from the repository, as a tar.gz file
+## Full Documentaion
+Moamosaic can be used either from the command line, or via a Python API.
 
-The installation setup is managed with pyproject.toml. The package can be installed using pip, something like
-
-    pip install moamosaic-1.0.0.tar.gz
-
-The only dependency is GDAL, with its Python bindings.
-
-## Command Line Usage
-    moamosaic -i infiles.txt -o mosaic.tif
-
-Help can be shown with
-
-    moamosaic -h
-
-## Calling from Python
-The package is written in Python, and is callable as a single function
-
-    from moamosaic import mosaic
-
-    infiles = ['file1.tif', 'file2.tif', 'file3.tif', 'file4.tif']
-    outfile = 'mosaic.tif'
-    mosaic.doMosaic(infiles, outfile)
-
-The help can be displayed with
-
-    help(mosaic.doMosaic)
-
-## Full Documentation
-The full documentation is available on Github Pages 
+Full documentation of both is available on Github Pages 
 https://ubarsc.github.io/moamosaic/
