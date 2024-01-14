@@ -38,10 +38,10 @@ def main():
     upper = 100 - confTail
     lower = confTail
 
-    plotMoaTimings(cmdargs, lower, upper)
     plotGdalmergeTimings(cmdargs, lower, upper)
+    plotMoaTimings(cmdargs, lower, upper)
 
-    pyplot.xlabel('Number of extra read threads')
+    pyplot.xlabel('Number of read worker threads')
     pyplot.ylabel('Elapsed time (seconds)')
     pyplot.legend(loc=0)
 
@@ -67,6 +67,8 @@ def plotMoaTimings(cmdargs, lower, upper):
             timesByNumthreads[numthreads] = []
         timesByNumthreads[numthreads].append(elapsed)
 
+    nCpus = monitorlist[0]['params']['cpucount']
+
     allNumthreads = numpy.array(list(timesByNumthreads.keys()))
     numThreadcounts = len(allNumthreads)
     numStats = 4
@@ -80,9 +82,10 @@ def plotMoaTimings(cmdargs, lower, upper):
         elapsedStats[numthreads - 1, 3] = len(allElapsed)
 
     pyplot.plot(allNumthreads, elapsedStats[:, 0], linestyle='-', c='k',
-        label='Moamosaic (median)', linewidth=0.8)
+        label='Moamosaic ({} CPU) (median)'.format(nCpus), linewidth=0.8)
     pyplot.plot(allNumthreads, elapsedStats[:, 1], linestyle='--', c='k',
-        label='Moamosaic ({}% confidence)'.format(cmdargs.confidence),
+        label='Moamosaic ({} CPU) ({}% confidence)'.format(
+            nCpus, cmdargs.confidence),
         linewidth=0.8)
     pyplot.plot(allNumthreads, elapsedStats[:, 2], linestyle='--', c='k',
         linewidth=0.8)
