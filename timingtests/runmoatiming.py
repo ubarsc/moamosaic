@@ -62,7 +62,7 @@ def main():
 
     driver = "GTiff"
     outfile = "testimg.tif"
-    nopyramids = True
+    dopyramids = False
     nullval = 0
     outf = open(cmdargs.outjson, 'w')
 
@@ -75,7 +75,7 @@ def main():
             numthreads = i // runsPerThreadcount + cmdargs.minnumthreads
             monitors = mosaic.doMosaic(infileList, outfile,
                 numthreads=numthreads, blocksize=cmdargs.blocksize,
-                driver=driver, nullval=nullval, nopyramids=nopyramids)
+                driver=driver, nullval=nullval, dopyramids=dopyramids)
             monitorList.append(monitors.reportAsDict())
             print("Done job", i)
         except Exception as e:
