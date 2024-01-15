@@ -39,7 +39,9 @@ The source for moamosaic is available at
 Moamosaic can be downloaded as a tar.gz file from 
 [https://github.com/ubarsc/moamosaic/releases](https://github.com/ubarsc/moamosaic/releases)
 
-It can then be installed using pip, for example
+Release notes for different versions are available [here](releasenotes.md)
+
+The tar.gz file can then be installed using pip, for example
 
 ```bash
 pip install moamosaic-1.0.0.tar.gz
