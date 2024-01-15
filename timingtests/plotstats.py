@@ -59,7 +59,7 @@ def plotMoaTimings(cmdargs, lower, upper):
     X axis is number of read threads, Y is seconds elapsed time.
     """
     maxThreadcount = 0
-    colourList = ['k', 'b', 'g', 'r']
+    colourList = ['b', 'r', 'g']
     j = 0
     for moatimingfile in cmdargs.moatiming:
         monitorlist = json.load(open(moatimingfile))
