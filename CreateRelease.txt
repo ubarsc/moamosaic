@@ -1,0 +1,19 @@
+Notes on how to create a new release version
+
+1. Ensure that all changes have been committed and pushed
+2. Update the version number in moamosaic/__init__.py
+3. Update the release notes to describe what changes are
+   a part of this release. Go through the git logs to check
+   what has changed since the last release.
+4. Commit and push these changes
+5. Checkout a clean copy of the repository into a temp directory,
+   and "cd" into it.
+6. Create the tar.gz with "python -m build". This will go into
+   a build/ subdirectory
+7. Go to the Github Releases page for the repo 
+       https://github.com/ubarsc/moamosaic/releases
+   and press "Draft a new release". You should then fill in
+       Tag version: moamosaic-A.B.C
+       Release Title: Version A.B.C
+       Upload files: Add the tar.gz
+       Click "Publish release"
