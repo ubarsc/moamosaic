@@ -2,8 +2,8 @@ Notes on how to create a new release version
 
 1. Ensure that all changes have been committed and pushed
 2. Update the version number in moamosaic/__init__.py
-3. Update the release notes to describe what changes are
-   a part of this release. Go through the git logs to check
+3. Update the release notes (docs/releasenotes.md) to describe what
+   changes are a part of this release. Go through the git logs to check
    what has changed since the last release.
 4. Commit and push these changes
 5. Checkout a clean copy of the repository into a temp directory,
