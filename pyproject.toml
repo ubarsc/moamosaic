@@ -13,6 +13,7 @@ license = {text = "MIT License"}
 
 [project.scripts]
 moamosaic = "moamosaic.mosaic:mainCmd"
+test_moamosaic = "moamosaic.tests:mainCmd"
 
 [tool.setuptools]
 packages = ["moamosaic"]
