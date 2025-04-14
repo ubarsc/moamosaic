@@ -46,6 +46,20 @@ def readRaster(filename):
     return a
 
 
+def readStats(filename):
+    """
+    Return (minval, maxval, meanval, stddev) from the stored statistics
+    on band 1 of the given file
+    """
+    ds = gdal.Open(filename)
+    band = ds.GetRasterBand(1)
+    minval = eval(band.GetMetadataItem("STATISTICS_MINIMUM"))
+    maxval = eval(band.GetMetadataItem("STATISTICS_MAXIMUM"))
+    meanval = eval(band.GetMetadataItem("STATISTICS_MEAN"))
+    stddev = eval(band.GetMetadataItem("STATISTICS_STDDEV"))
+    return (minval, maxval, meanval, stddev)
+
+
 class Fulltest(unittest.TestCase):
     """
     Run a basic test of the whole mosaic operation. Generates
@@ -80,12 +94,25 @@ class Fulltest(unittest.TestCase):
         trueMosaicImg[:, ncols - 1:] = imgArr[:, 1:]
 
         outfile = 'outfile.kea'
-        mosaic.doMosaic([file1, file2], outfile, driver=DFLT_DRIVER,
-            dopyramids=False)
+        mosaic.doMosaic([file1, file2], outfile, driver=DFLT_DRIVER)
 
         mosaicImg = readRaster(outfile)
 
         self.assertTrue((mosaicImg == trueMosaicImg).all())
+
+        # Check that the stats were correctly calculated
+        nonnullMask = (trueMosaicImg != nullval)
+        nonnullVals = trueMosaicImg[nonnullMask]
+        trueMinval = int(nonnullVals.min())
+        trueMaxval = int(nonnullVals.max())
+        trueMeanval = float(nonnullVals.mean())
+        trueStddev = float(nonnullVals.std())
+        (minval, maxval, meanval, stddev) = readStats(outfile)
+
+        self.assertAlmostEqual(trueMinval, minval, msg="Minval mis-match")
+        self.assertAlmostEqual(trueMaxval, maxval, msg="Maxval mis-match")
+        self.assertAlmostEqual(trueMeanval, meanval, msg="Meanval mis-match")
+        self.assertAlmostEqual(trueStddev, stddev, msg="Stddev mis-match")
 
         for fn in [file1, file2, outfile]:
             if os.path.exists(fn):
