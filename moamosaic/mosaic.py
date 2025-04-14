@@ -1,5 +1,5 @@
 """
-Core module of the moamosaic package. 
+Core module of the moamosaic package.
 
 The main function to call in this module is the `doMosaic` function.
 
@@ -56,9 +56,6 @@ def getCmdargs():
               "those are ignored.").format(knownDrivers))
     p.add_argument("--nullval", type=int,
         help="Null value to use (default comes from input files)")
-    p.add_argument("--omitpyramids", default=False, action="store_true",
-        help=("Omit the pyramid layers (i.e. overviews) and statistics. " +
-            "These are included by default"))
     p.add_argument("--monitorjson",
         help="Output JSON file of monitoring info (optional)")
 
@@ -95,7 +92,7 @@ def mainCmd():
     monitors = doMosaic(filelist, cmdargs.outfile,
         numthreads=cmdargs.numthreads, blocksize=cmdargs.blocksize,
         driver=cmdargs.driver, nullval=cmdargs.nullval,
-        dopyramids=(not cmdargs.omitpyramids), creationoptions=cmdargs.co,
+        creationoptions=cmdargs.co,
         outprojepsg=cmdargs.outprojepsg, outprojwktfile=cmdargs.outprojwktfile,
         outXres=cmdargs.xres, outYres=cmdargs.yres,
         resamplemethod=cmdargs.resample)
@@ -107,7 +104,7 @@ def mainCmd():
 
 def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
-        dopyramids=True, creationoptions=None, outprojepsg=None,
+        creationoptions=None, outprojepsg=None,
         outprojwktfile=None, outprojwkt=None, outXres=None,
         outYres=None, resamplemethod=DFLT_RESAMPLEMETHOD):
     """
@@ -136,9 +133,6 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         Value to use as "no data" in input and output rasters. Default will
         be taken from the input files, but this can be used to over-ride
         that.
-    dopyramids : bool
-        If true, then calculate pyramid layers and statistics on the output
-        raster
     outprojepsg : int
         EPSG number of projection for output file. Default projection
         matches the input files
@@ -194,9 +188,13 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
     numBands = imgInfoDict[filelist[0]].numBands
 
     # Now do it all, using concurrent threads to read blocks into a queue
-    outDs = openOutfile(outfile, driver, outImgInfo, creationoptions)
+    (outDs, overviewLevels) = openOutfile(outfile, driver, outImgInfo,
+        creationoptions)
+    statsAccumList = []
     with monitors.timestamps.ctx("domosaic"):
         for bandNum in range(1, numBands + 1):
+            statsAccum = StatsAccumulator(nullval)
+            statsAccumList.append(statsAccum)
             with poolClass(max_workers=numthreads) as threadPool:
                 workerList = []
                 for i in range(numthreads):
@@ -205,17 +203,9 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
                             bandNum, outImgInfo.nullVal)
                     workerList.append(worker)
 
-                writeFunc(blockQ, outDs, outImgInfo, bandNum,
-                        blockList, filesForBlock, workerList, monitors)
-
-    outDs.SetGeoTransform(outImgInfo.transform)
-    outDs.SetProjection(outImgInfo.projection)
-    if dopyramids:
-        with monitors.timestamps.ctx("pyramids"):
-            outDs.BuildOverviews(overviewlist=[4, 8, 16, 32, 64,
-                    128, 256, 512])
-        with monitors.timestamps.ctx("stats"):
-            doStats(outDs)
+                writeFunc(blockQ, outDs, outImgInfo, bandNum, blockList,
+                    filesForBlock, workerList, overviewLevels, statsAccum,
+                    monitors)
 
     if tmpdir is not None:
         shutil.rmtree(tmpdir)
@@ -282,8 +272,8 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
         i += 1
 
 
-def writeFunc(blockQ, outDs, outImgInfo, bandNum,
-                    blockList, filesForBlock, workerList, monitors):
+def writeFunc(blockQ, outDs, outImgInfo, bandNum, blockList, filesForBlock,
+        workerList, overviewLevels, statsAccum, monitors):
     """
     Loop over all blocks of the output grid, and write them.
 
@@ -317,11 +307,16 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum,
     workerList : List of futures.Future
         List of worker threads, so we can continually check them for
         exceptions
+    overviewLevels: List of int
+        List of overview levels (as given to BuildOverviews()
+    statsAccum: StatsAccumulator
+        Object to manage incremental accumulators for single-pass statistics
     monitors : Monitoring
         A Monitoring object, mainly used to accumulate timing info
 
     """
     band = outDs.GetRasterBand(bandNum)
+    band.SetNoDataValue(outImgInfo.nullVal)
 
     # Cache of blocks available to write
     blockCache = structures.BlockCache()
@@ -340,6 +335,7 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum,
             arr = None
 
         outblock = blockList[i]
+        outArr = None
 
         if outblock not in filesForBlock:
             # This block does not intersect any input files, so
@@ -367,12 +363,23 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum,
                 # Proceed to the next output block
                 i += 1
 
+        if outArr is not None:
+            # We actually wrote this block, so do pyramids and stats
+            writeBlockPyramids(band, outArr, overviewLevels, outblock.left,
+                outblock.top)
+            statsAccum.doStatsAccum(outArr)
+
         checkReaderExceptions(workerList)
 
         monitors.minMaxBlockCacheSize.update(len(blockCache))
         monitors.minMaxBlockQueueSize.update(blockQ.qsize())
 
-    band.SetNoDataValue(outImgInfo.nullVal)
+    (minval, maxval, meanval, stddev, count) = statsAccum.finalStats()
+    if count > 0:
+        band.SetMetadataItem("STATISTICS_MINIMUM", str(minval))
+        band.SetMetadataItem("STATISTICS_MAXIMUM", str(maxval))
+        band.SetMetadataItem("STATISTICS_MEAN", str(meanval))
+        band.SetMetadataItem("STATISTICS_STDDEV", str(stddev))
 
 
 def checkReaderExceptions(workerList):
@@ -610,7 +617,25 @@ def openOutfile(outfile, driver, outImgInfo, creationoptions):
         drvr.Delete(outfile)
     ds = drvr.Create(outfile, ncols, nrows, numBands, datatype,
         creationoptions)
-    return ds
+    ds.SetGeoTransform(outImgInfo.transform)
+    ds.SetProjection(outImgInfo.projection)
+
+    # Work out a list of overview levels, starting with 4, until the raster
+    # size (in largest direction) is smaller then finalOutSize.
+    outSize = max(ds.RasterXSize, ds.RasterYSize)
+    finalOutSize = 1024
+    overviewLevels = []
+    i = 2
+    while ((outSize // (2 ** i)) >= finalOutSize):
+        overviewLevels.append(2 ** i)
+        i += 1
+
+    # Create the empty pyramid layers on the dataset. Currently only
+    # support NEAREST
+    aggType = "NEAREST"
+    ds.BuildOverviews(aggType, overviewLevels)
+
+    return (ds, overviewLevels)
 
 
 def mergeInputs(allInputsForBlock, outNullVal):
@@ -668,3 +693,80 @@ def doStats(outDs):
     finally:
         if not usingExceptions:
             gdal.DontUseExceptions()
+
+
+def writeBlockPyramids(band, arr, overviewLevels, xOff, yOff):
+    """
+    Calculate and write out the pyramid layers for one band of the block
+    given as arr. Uses nearest neighbour sampling to sub-sample the array.
+
+    """
+    nOverviews = len(overviewLevels)
+
+    for j in range(nOverviews):
+        band_ov = band.GetOverview(j)
+        lvl = overviewLevels[j]
+        # Offset from top-left edge
+        o = lvl // 2
+        # Sub-sample by taking every lvl-th pixel in each direction
+        arr_sub = arr[o::lvl, o::lvl]
+        # The xOff/yOff of the block within the sub-sampled raster
+        xOff_sub = xOff // lvl
+        yOff_sub = yOff // lvl
+        # The actual number of rows and cols to write, ensuring we
+        # do not go off the edges
+        nc = band_ov.XSize - xOff_sub
+        nr = band_ov.YSize - yOff_sub
+        arr_sub = arr_sub[:nr, :nc]
+        band_ov.WriteArray(arr_sub, xOff_sub, yOff_sub)
+
+
+class StatsAccumulator:
+    """
+    Accumulator for statistics for a single band.
+    """
+    def __init__(self, nullval):
+        self.nullval = nullval
+        self.minval = None
+        self.maxval = None
+        self.sum = 0
+        self.ssq = 0
+        self.count = 0
+
+    def doStatsAccum(self, arr):
+        """
+        Accumulate basic stats for the given array
+        """
+        if self.nullval is None:
+            values = arr.flatten()
+        elif numpy.isnan(self.nullval):
+            values = arr[~numpy.isnan(arr)]
+        else:
+            values = arr[arr != self.nullval]
+        if len(values) > 0:
+            self.sum += values.astype(numpy.float64).sum()
+            self.ssq += (values.astype(numpy.float64)**2).sum()
+            self.count += values.size
+            minval = values.min()
+            if self.minval is None or minval < self.minval:
+                self.minval = minval
+            maxval = values.max()
+            if self.maxval is None or maxval > self.maxval:
+                self.maxval = maxval
+
+    def finalStats(self):
+        """
+        Return the final values of the four basic statistics
+        (minval, maxval, mean, stddev)
+        """
+        meanval = None
+        stddev = None
+        if self.count > 0:
+            meanval = self.sum / self.count
+            variance = self.ssq / self.count - meanval ** 2
+            stddev = 0.0
+            # In case some rounding error made variance negative
+            if variance >= 0:
+                stddev = numpy.sqrt(variance)
+
+        return (self.minval, self.maxval, meanval, stddev, self.count)
