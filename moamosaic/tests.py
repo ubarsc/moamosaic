@@ -101,6 +101,7 @@ class Fulltest(unittest.TestCase):
         self.assertTrue((mosaicImg == trueMosaicImg).all())
 
         self.checkBasicStats(outfile, trueMosaicImg, nullval)
+        self.checkPyramidLayers(outfile, trueMosaicImg, nullval)
 
         self.deleteTempFiles([file1, file2, outfile])
 
@@ -129,6 +130,50 @@ class Fulltest(unittest.TestCase):
         self.assertEqual(trueMaxval, maxval, msg="Maxval mis-match")
         self.assertAlmostEqual(trueMeanval, meanval, msg="Meanval mis-match")
         self.assertAlmostEqual(trueStddev, stddev, msg="Stddev mis-match")
+
+    def checkPyramidLayers(self, outfile, trueMosaicImg, nullval):
+        """
+        Check that the pyramid layers have been correctly written
+        """
+        ds = gdal.Open(outfile)
+        band = ds.GetRasterBand(1)
+        numOverviews = band.GetOverviewCount()
+        # Get the overview Band objects
+        overviewBands = [band.GetOverview(i) for i in range(numOverviews)]
+
+        # Calculate the overview levels
+        overviewLevels = []
+        for ovBand in overviewBands:
+            lvl = band.XSize / ovBand.XSize
+            # Nearest power of 2
+            log2lvl = int(round(numpy.log(lvl) / numpy.log(2)))
+            lvl = 2 ** log2lvl
+            overviewLevels.append(lvl)
+
+        # For each level, sub-sample trueMosaicImg and compare
+        for i in range(numOverviews):
+            ovImg = overviewBands[i].ReadAsArray()
+            lvl = overviewLevels[i]
+            # Offset from top-left edge
+            o = lvl // 2
+            # Sub-sample by taking every lvl-th pixel in each direction
+            trueOvImg = trueMosaicImg[o::lvl, o::lvl]
+
+            # Various checks on the array shapes
+            self.assertLessEqual(ovImg.shape[0], trueOvImg.shape[0],
+                msg=f"Overview too many rows, lvl={lvl}")
+            self.assertLessEqual(trueOvImg.shape[0] - lvl, ovImg.shape[0],
+                msg=f"Overview too few rows, lvl={lvl}")
+            self.assertLessEqual(ovImg.shape[1], trueOvImg.shape[1],
+                msg=f"Overview too many cols, lvl={lvl}")
+            self.assertLessEqual(trueOvImg.shape[1] - lvl, ovImg.shape[1],
+                msg=f"Overview too few cols, lvl={lvl}")
+
+            # Check the content of the arrays, trimming to match sizes if required
+            (nrows, ncols) = ovImg.shape
+            trueOvImg = trueOvImg[:nrows, :ncols]
+            self.assertTrue((trueOvImg == ovImg).all(),
+                msg=f"Overview mis-match, lvl={lvl}")
 
 
 def mainCmd():
