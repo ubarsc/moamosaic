@@ -102,9 +102,16 @@ class Fulltest(unittest.TestCase):
 
         self.checkBasicStats(outfile, trueMosaicImg, nullval)
 
-        for fn in [file1, file2, outfile]:
+        self.deleteTempFiles([file1, file2, outfile])
+
+    def deleteTempFiles(self, filelist):
+        """
+        Delete temp GDAL files
+        """
+        for fn in filelist:
             if os.path.exists(fn):
-                os.remove(fn)
+                drvr = gdal.IdentifyDriver(fn)
+                drvr.Delete(fn)
 
     def checkBasicStats(self, outfile, trueMosaicImg, nullval):
         """
