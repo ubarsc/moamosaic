@@ -50,7 +50,8 @@ def main():
     cmdlineHelp = stdout
     # Substitute into the template
     cmdlineMdStr = templateStr.replace('$CMDLINEHELP', cmdlineHelp)
-    open(CMDLINE_MD, 'w').write(cmdlineMdStr)
+    cmdlineMdFile = os.path.join(docDir, CMDLINE_MD)
+    open(cmdlineMdFile, 'w').write(cmdlineMdStr)
 
 
 if __name__ == "__main__":
