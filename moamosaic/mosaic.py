@@ -316,6 +316,7 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum, blockList, filesForBlock,
 
     """
     band = outDs.GetRasterBand(bandNum)
+    band.SetNoDataValue(outImgInfo.nullVal)
 
     # Cache of blocks available to write
     blockCache = structures.BlockCache()
@@ -364,25 +365,21 @@ def writeFunc(blockQ, outDs, outImgInfo, bandNum, blockList, filesForBlock,
 
         if outArr is not None:
             # We actually wrote this block, so do pyramids and stats
-            with monitors.timestamps.ctx("pyramids"):
-                writeBlockPyramids(band, outArr, overviewLevels, outblock.left,
-                    outblock.top)
-            with monitors.timestamps.ctx("stats"):
-                statsAccum.doStatsAccum(outArr)
+            writeBlockPyramids(band, outArr, overviewLevels, outblock.left,
+                outblock.top)
+            statsAccum.doStatsAccum(outArr)
 
         checkReaderExceptions(workerList)
 
         monitors.minMaxBlockCacheSize.update(len(blockCache))
         monitors.minMaxBlockQueueSize.update(blockQ.qsize())
 
-    band.SetNoDataValue(outImgInfo.nullVal)
-    with monitors.timestamps.ctx("stats"):
-        (minval, maxval, meanval, stddev, count) = statsAccum.finalStats()
-        if count > 0:
-            band.SetMetadataItem("STATISTICS_MINIMUM", str(minval))
-            band.SetMetadataItem("STATISTICS_MAXIMUM", str(maxval))
-            band.SetMetadataItem("STATISTICS_MEAN", str(meanval))
-            band.SetMetadataItem("STATISTICS_STDDEV", str(stddev))
+    (minval, maxval, meanval, stddev, count) = statsAccum.finalStats()
+    if count > 0:
+        band.SetMetadataItem("STATISTICS_MINIMUM", str(minval))
+        band.SetMetadataItem("STATISTICS_MAXIMUM", str(maxval))
+        band.SetMetadataItem("STATISTICS_MEAN", str(meanval))
+        band.SetMetadataItem("STATISTICS_STDDEV", str(stddev))
 
 
 def checkReaderExceptions(workerList):
