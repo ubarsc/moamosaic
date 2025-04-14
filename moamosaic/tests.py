@@ -100,7 +100,16 @@ class Fulltest(unittest.TestCase):
 
         self.assertTrue((mosaicImg == trueMosaicImg).all())
 
-        # Check that the stats were correctly calculated
+        self.checkBasicStats(outfile, trueMosaicImg, nullval)
+
+        for fn in [file1, file2, outfile]:
+            if os.path.exists(fn):
+                os.remove(fn)
+
+    def checkBasicStats(self, outfile, trueMosaicImg, nullval):
+        """
+        Check that the basic statistics are calculated correctly
+        """
         nonnullMask = (trueMosaicImg != nullval)
         nonnullVals = trueMosaicImg[nonnullMask]
         trueMinval = int(nonnullVals.min())
@@ -113,10 +122,6 @@ class Fulltest(unittest.TestCase):
         self.assertAlmostEqual(trueMaxval, maxval, msg="Maxval mis-match")
         self.assertAlmostEqual(trueMeanval, meanval, msg="Meanval mis-match")
         self.assertAlmostEqual(trueStddev, stddev, msg="Stddev mis-match")
-
-        for fn in [file1, file2, outfile]:
-            if os.path.exists(fn):
-                os.remove(fn)
 
 
 def mainCmd():
