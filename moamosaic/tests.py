@@ -73,11 +73,11 @@ class Fulltest(unittest.TestCase):
         makeRaster(file2, imgArr, transform2, projection, nullval)
 
         # Set up what the true mosaiced array should be
-        trueMosaicImg = numpy.zeros((nrows, 2*ncols-2), dtype=imgArr.dtype)
+        trueMosaicImg = numpy.zeros((nrows, 2 * ncols - 2), dtype=imgArr.dtype)
         trueMosaicImg[:, :ncols] = imgArr
         # Note that the first column is null, and so should not over-write
         # the second-last column of the first array
-        trueMosaicImg[:, ncols-1:] = imgArr[:, 1:]
+        trueMosaicImg[:, ncols - 1:] = imgArr[:, 1:]
 
         outfile = 'outfile.kea'
         mosaic.doMosaic([file1, file2], outfile, driver=DFLT_DRIVER,
@@ -98,4 +98,3 @@ def mainCmd():
 
 if __name__ == "__main__":
     mainCmd()
-
