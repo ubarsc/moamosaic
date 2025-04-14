@@ -24,7 +24,7 @@ jobs:
           python-version: '3.13'
 
       - run: |
-            pip install pdoc
+            pip install numpy pdoc
             pip install -e .
       - run: python docs/buildDoc.py
 
