@@ -1,13 +1,13 @@
-# Command Line Script
+# Command line script
 The package is available from the command line with the `moamosaic` command. 
 Its usage is described below.
 
 ```bash
 usage: moamosaic [-h] [-i INFILELIST] [-n NUMTHREADS] [-b BLOCKSIZE]
                  [-d DRIVER] [-o OUTFILE] [--co CO] [--nullval NULLVAL]
-                 [--omitpyramids] [--monitorjson MONITORJSON]
-                 [--outprojepsg OUTPROJEPSG] [--outprojwktfile OUTPROJWKTFILE]
-                 [--xres XRES] [--yres YRES] [--resample RESAMPLE]
+                 [--monitorjson MONITORJSON] [--outprojepsg OUTPROJEPSG]
+                 [--outprojwktfile OUTPROJWKTFILE] [--xres XRES] [--yres YRES]
+                 [--resample RESAMPLE]
 
 options:
   -h, --help            show this help message and exit
@@ -26,8 +26,6 @@ options:
                         creation options for some drivers (GTiff,KEA,HFA), but
                         if this option is used, those are ignored.
   --nullval NULLVAL     Null value to use (default comes from input files)
-  --omitpyramids        Omit the pyramid layers (i.e. overviews) and
-                        statistics. These are included by default
   --monitorjson MONITORJSON
                         Output JSON file of monitoring info (optional)
 
