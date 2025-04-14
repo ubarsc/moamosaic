@@ -125,8 +125,8 @@ class Fulltest(unittest.TestCase):
         trueStddev = float(nonnullVals.std())
         (minval, maxval, meanval, stddev) = readStats(outfile)
 
-        self.assertAlmostEqual(trueMinval, minval, msg="Minval mis-match")
-        self.assertAlmostEqual(trueMaxval, maxval, msg="Maxval mis-match")
+        self.assertEqual(trueMinval, minval, msg="Minval mis-match")
+        self.assertEqual(trueMaxval, maxval, msg="Maxval mis-match")
         self.assertAlmostEqual(trueMeanval, meanval, msg="Meanval mis-match")
         self.assertAlmostEqual(trueStddev, stddev, msg="Stddev mis-match")
 
