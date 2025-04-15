@@ -19,6 +19,10 @@ class ImageInfo:
             self.dataType = band1.DataType
             self.numBands = ds.RasterCount
             self.nullVal = band1.GetNoDataValue()
+            self.layerType = []
+            for i in range(ds.RasterCount):
+                band = ds.GetRasterBand(i + 1)
+                self.layerType.append(band.GetMetadataItem('LAYER_TYPE'))
         else:
             self.nrows = None
             self.ncols = None
@@ -27,6 +31,7 @@ class ImageInfo:
             self.dataType = None
             self.numBands = None
             self.nullVal = None
+            self.layerType = None
 
     @property
     def xMin(self):
