@@ -438,6 +438,8 @@ def makeOutputGrid(filelist, imgInfoDict, nullval):
     outImgInfo.dataType = firstImgInfo.dataType
     outImgInfo.numBands = firstImgInfo.numBands
     outImgInfo.nullVal = firstImgInfo.nullVal
+    # Get thematic/athematic from first input
+    outImgInfo.layerType = [lyrType for lyrType in firstImgInfo.layerType]
     if nullval is not None:
         outImgInfo.nullVal = nullval
     return outImgInfo
@@ -619,6 +621,11 @@ def openOutfile(outfile, driver, outImgInfo, creationoptions):
         creationoptions)
     ds.SetGeoTransform(outImgInfo.transform)
     ds.SetProjection(outImgInfo.projection)
+    for i in range(numBands):
+        layerType = outImgInfo.layerType[i]
+        if layerType is not None:
+            band = ds.GetRasterBand(i + 1)
+            band.SetMetadataItem('LAYER_TYPE', layerType)
 
     # Work out a list of overview levels, starting with 4, until the raster
     # size (in largest direction) is smaller then finalOutSize.
