@@ -169,7 +169,8 @@ class Fulltest(unittest.TestCase):
             self.assertLessEqual(trueOvImg.shape[1] - lvl, ovImg.shape[1],
                 msg=f"Overview too few cols, lvl={lvl}")
 
-            # Check the content of the arrays, trimming to match sizes if required
+            # Check the content of the arrays, trimming to match sizes if
+            # required
             (nrows, ncols) = ovImg.shape
             trueOvImg = trueOvImg[:nrows, :ncols]
             self.assertTrue((trueOvImg == ovImg).all(),
