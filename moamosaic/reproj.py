@@ -5,11 +5,8 @@ import os
 import tempfile
 import math
 
-try:
-    from osgeo import gdal
-    from osgeo import osr
-except ImportError:
-    pass
+from osgeo import gdal
+from osgeo import osr
 
 from . import structures
 

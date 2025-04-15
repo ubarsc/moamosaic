@@ -13,11 +13,8 @@ import shutil
 from multiprocessing import cpu_count
 
 import numpy
-try:
-    from osgeo import gdal
-    from osgeo.gdal_array import GDALTypeCodeToNumericTypeCode
-except ImportError:
-    pass
+from osgeo import gdal
+from osgeo.gdal_array import GDALTypeCodeToNumericTypeCode
 
 from . import monitoring
 from . import structures

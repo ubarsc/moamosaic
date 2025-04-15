@@ -1,10 +1,7 @@
 """
 All major data structures for moamosaic
 """
-try:
-    from osgeo import gdal
-except ImportError:
-    pass
+from osgeo import gdal
 
 
 class ImageInfo:
