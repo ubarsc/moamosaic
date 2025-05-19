@@ -502,7 +502,7 @@ def findInputsPerBlock(blockList, outGeoTransform, filelist, imgInfoDict):
             imginfo = imgInfoDict[filename]
             (fileLeft, fileTop, fileRight, fileBottom) = (
                 block.transformToFilePixelCoords(outGeoTransform, imginfo))
-            intersects = ((fileRight + 1) >= 0 and (fileBottom + 1) >= 0 and
+            intersects = (fileRight >= 0 and fileBottom >= 0 and
                 fileLeft <= imginfo.ncols and fileTop <= imginfo.nrows)
 
             if intersects:
