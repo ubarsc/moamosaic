@@ -250,7 +250,7 @@ def readFunc(blocksToRead, blockQ, bandNum, outNullVal):
         xsize1 = right1 - left1
         bottom1 = min(top + ysize, ds.RasterYSize)
         ysize1 = bottom1 - top1
-        print(ds.GetDescription(), left, top, xsize, ysize, xsize1, ysize1)
+        print(ds.GetDescription(), left, top, xsize, ysize, left1, top1, xsize1, ysize1, ds.RasterYSize)
         arr = band.ReadAsArray(left1, top1, xsize1, ysize1)
 
         # Now slot this possibly smaller array back into a full array,
