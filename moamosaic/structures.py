@@ -78,8 +78,8 @@ class BlockSpec:
         pixel coordinates into world coordinates, assumed to be the same
         as those of the imginfo object (i.e. in the same projection).
 
-        Return a tuple (left, top, right, bottom). These values are floats,
-        but can be truncated to be integer pixel coords.
+        Return a tuple (left, top, right, bottom). These values are
+        rounded to be integer pixel coords.
 
         """
         # World coords of block outer bounds
