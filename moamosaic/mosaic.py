@@ -503,8 +503,8 @@ def findInputsPerBlock(blockList, outGeoTransform, filelist, imgInfoDict):
                 block.transformToFilePixelCoords(outGeoTransform, imginfo))
 
             # Any of the following conditions being False would mean the block
-            # is outside the extent of the file. If they are all True, then this
-            # block intersects with this file.
+            # is outside the extent of the file. If they are all True, then
+            # this block intersects with this file.
             intersects = (fileRight > 0 and fileBottom > 0 and
                 fileLeft < imginfo.ncols and fileTop < imginfo.nrows)
 
