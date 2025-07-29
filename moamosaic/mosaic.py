@@ -26,6 +26,7 @@ DFLT_NUMTHREADS = 4
 DFLT_BLOCKSIZE = 1024
 DFLT_DRIVER = "GTiff"
 DFLT_RESAMPLEMETHOD = "near"
+DFLT_MINOVERVIEWSIZE = 1024
 defaultCreationOptions = {
     'GTiff': ['COMPRESS=DEFLATE', 'TILED=YES', 'BIGTIFF=IF_SAFER',
         'INTERLEAVE=BAND'],
@@ -42,10 +43,14 @@ def getCmdargs():
 
     p = argparse.ArgumentParser()
     p.add_argument("-i", "--infilelist", help="Text file list of input images")
-    p.add_argument("-n", "--numthreads", type=int, default=4,
+    p.add_argument("-n", "--numthreads", type=int, default=DFLT_NUMTHREADS,
         help="Number of read threads to use (default=%(default)s)")
-    p.add_argument("-b", "--blocksize", type=int, default=1024,
+    p.add_argument("-b", "--blocksize", type=int, default=DFLT_BLOCKSIZE,
         help="Blocksize in pixels (default=%(default)s)")
+    p.add_argument("--minoverviewsize", type=int, default=DFLT_MINOVERVIEWSIZE,
+        help=("Minimum size of overview layers. Overview layers are always " +
+              "created, but the smallest one included will have at least " +
+              "one dimension of at least this size (default=%(default)s)"))
     p.add_argument("-d", "--driver", default="GTiff",
         help="GDAL driver to use for output file (default=%(default)s)")
     p.add_argument("-o", "--outfile", help="Name of output raster")
@@ -95,7 +100,8 @@ def mainCmd():
         creationoptions=cmdargs.co,
         outprojepsg=cmdargs.outprojepsg, outprojwktfile=cmdargs.outprojwktfile,
         outXres=cmdargs.xres, outYres=cmdargs.yres,
-        resamplemethod=cmdargs.resample)
+        resamplemethod=cmdargs.resample,
+        minOverviewSize=cmdargs.minoverviewsize)
 
     if cmdargs.monitorjson is not None:
         with open(cmdargs.monitorjson, 'w') as f:
@@ -106,7 +112,8 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         blocksize=DFLT_BLOCKSIZE, driver=DFLT_DRIVER, nullval=None,
         creationoptions=None, outprojepsg=None,
         outprojwktfile=None, outprojwkt=None, outXres=None,
-        outYres=None, resamplemethod=DFLT_RESAMPLEMETHOD):
+        outYres=None, resamplemethod=DFLT_RESAMPLEMETHOD,
+        minOverviewSize=DFLT_MINOVERVIEWSIZE):
     """
     From the given list of input raster files, create a single mosaic
     output raster.
@@ -145,6 +152,10 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
         size matches the input files
     resamplemethod : str
         GDAL name of resampling method to use, if any resampling is required
+    minOverviewSize : int
+        Minimum size of overview layers. Overview layers are always created,
+        but the smallest one included will have at least one dimension of at
+        least this size
 
 
     Returns
@@ -189,7 +200,7 @@ def doMosaic(filelist, outfile, *, numthreads=DFLT_NUMTHREADS,
 
     # Now do it all, using concurrent threads to read blocks into a queue
     (outDs, overviewLevels) = openOutfile(outfile, driver, outImgInfo,
-        creationoptions)
+        creationoptions, minOverviewSize)
     statsAccumList = []
     with monitors.timestamps.ctx("domosaic"):
         for bandNum in range(1, numBands + 1):
@@ -590,7 +601,7 @@ def getInputsForBlock(blockCache, outblock, filesForBlock):
     return allInputsForBlock
 
 
-def openOutfile(outfile, driver, outImgInfo, creationoptions):
+def openOutfile(outfile, driver, outImgInfo, creationoptions, minOverviewSize):
     """
     Open the output file.
 
@@ -600,6 +611,7 @@ def openOutfile(outfile, driver, outImgInfo, creationoptions):
     driver : str
     outImgInfo : ImageInfo
     creationoptions : List of str
+    minOverviewSize : int
 
     Returns
     -------
@@ -632,12 +644,11 @@ def openOutfile(outfile, driver, outImgInfo, creationoptions):
             band.SetMetadataItem('LAYER_TYPE', layerType)
 
     # Work out a list of overview levels, starting with 4, until the raster
-    # size (in largest direction) is smaller then finalOutSize.
+    # size (in largest direction) is smaller then minOverviewSize.
     outSize = max(ds.RasterXSize, ds.RasterYSize)
-    finalOutSize = 1024
     overviewLevels = []
     i = 2
-    while ((outSize // (2 ** i)) >= finalOutSize):
+    while ((outSize // (2 ** i)) >= minOverviewSize):
         overviewLevels.append(2 ** i)
         i += 1
 
