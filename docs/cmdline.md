@@ -4,10 +4,10 @@ Its usage is described below.
 
 ```bash
 usage: moamosaic [-h] [-i INFILELIST] [-n NUMTHREADS] [-b BLOCKSIZE]
-                 [-d DRIVER] [-o OUTFILE] [--co CO] [--nullval NULLVAL]
-                 [--monitorjson MONITORJSON] [--outprojepsg OUTPROJEPSG]
-                 [--outprojwktfile OUTPROJWKTFILE] [--xres XRES] [--yres YRES]
-                 [--resample RESAMPLE]
+                 [--minoverviewsize MINOVERVIEWSIZE] [-d DRIVER] [-o OUTFILE]
+                 [--co CO] [--nullval NULLVAL] [--monitorjson MONITORJSON]
+                 [--outprojepsg OUTPROJEPSG] [--outprojwktfile OUTPROJWKTFILE]
+                 [--xres XRES] [--yres YRES] [--resample RESAMPLE]
 
 options:
   -h, --help            show this help message and exit
@@ -17,6 +17,11 @@ options:
                         Number of read threads to use (default=4)
   -b BLOCKSIZE, --blocksize BLOCKSIZE
                         Blocksize in pixels (default=1024)
+  --minoverviewsize MINOVERVIEWSIZE
+                        Minimum size of overview layers. Overview layers are
+                        always created, but the smallest one included will
+                        have at least one dimension of at least this size
+                        (default=1024)
   -d DRIVER, --driver DRIVER
                         GDAL driver to use for output file (default=GTiff)
   -o OUTFILE, --outfile OUTFILE
