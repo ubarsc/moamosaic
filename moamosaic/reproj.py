@@ -80,10 +80,12 @@ def checkInputProjections(imgInfoDict):
     for (filename, imginfo) in imgInfoDict.items():
         if firstSRS is None:
             firstSRS = osr.SpatialReference(wkt=imginfo.projection)
+            preventGdal3axisSwap(firstSRS)
             firstFilename = filename
             firstTransform = imginfo.transform
 
         srs = osr.SpatialReference(wkt=imginfo.projection)
+        preventGdal3axisSwap(srs)
         if not srs.IsSame(firstSRS):
             msg = ("Projection mis-match for files {} and {}. " +
                 "Specify the output projection").format(
@@ -170,10 +172,12 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
         outSrs.ImportFromEPSG(outprojepsg)
     elif outprojwkt is not None:
         outSrs.ImportFromWkt(outprojwkt)
+    preventGdal3axisSwap(outSrs)
 
     firstSrs = osr.SpatialReference()
     firstImgInfo = imgInfoDict[filelist[0]]
     firstSrs.ImportFromWkt(firstImgInfo.projection)
+    preventGdal3axisSwap(firstSrs)
 
     # Work out default resolution
     if outXres is None or outYres is None:
@@ -195,6 +199,7 @@ def makeReprojVRTs(filelist, imgInfoDict, outprojepsg, outprojwktfile,
         inSrs = osr.SpatialReference()
         inInfo = imgInfoDict[filename]
         inSrs.ImportFromWkt(inInfo.projection)
+        preventGdal3axisSwap(inSrs)
         tr = osr.CoordinateTransformation(inSrs, outSrs)
         (xMin, xMax, yMin, yMax) = reprojCorners(tr, inInfo)
         (xMin, xMax, yMin, yMax) = alignGrid(xMin, xMax, yMin, yMax,
@@ -254,6 +259,16 @@ def snapValue(val, res, ceil):
         n = math.floor(n)
     snappedVal = res * n
     return snappedVal
+
+
+def preventGdal3axisSwap(sr):
+    """
+    Guard the given spatial reference object against axis swapping, when
+    running with GDAL 3. Does nothing if GDAL < 3. Modifies the
+    object in place.
+    """
+    if hasattr(sr, 'SetAxisMappingStrategy'):
+        sr.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
 
 
 class MoaProjectionError(Exception):
