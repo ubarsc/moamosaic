@@ -18,4 +18,4 @@ The main module in this package is `moamosaic.mosaic`.
 
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
