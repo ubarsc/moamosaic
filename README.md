@@ -4,10 +4,14 @@ A tool for using GDAL to make a mosaic of multiple input images. Its main advant
 that it reads the input files block-by-block with multiple threads. On systems where there is
 significant latency on reading, this allows the process to be significantly faster.
 
-It should be emphasized that on a system with all inputs on local disk, and a sensible
-operating system, this approach is unlikely to provide much benefit. It is difficult to
-perform better than the operating system's own caching and disk management. The benefits are mainly
-seen when the input data is stored somewhere like an S3 bucket.
+The benefits will mainly be apparent in the following situations:
+
+  * Inputs are on a disk array, so that parallel I/O will scale well
+  * Inputs are on high-latency, high-scalability storage such as S3
+  * Inputs are to be reprojected, and multiple CPU cores are available
+
+So, running with multiple read workers on a single-CPU machine with a single physical disk
+is unlikely to produce great benefits.
 
 This tool is similar in spirit to GDAL's own `gdal_merge.py`. The main differences
 are:
